@@ -766,6 +766,376 @@
             </div>
         </div>
 
+        <!-- MAP VIEW -->
+        <div id="view-map" class="view">
+            <div class="section-header" style="margin-top: 20px;">
+                <h2 class="section-title">Campus Map</h2>
+                <span class="section-action" onclick="resetMap()">Reset</span>
+            </div>
+            
+            <div class="card" style="padding: 20px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+                <div style="position: relative; background: white; border-radius: 16px; padding: 20px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);">
+                    <!-- Floor Plan -->
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+                        <!-- Entrance -->
+                        <div onclick="showLocationInfo('main-entrance')" style="grid-column: span 4; background: linear-gradient(135deg, #2A2760 0%, #3d3a7a 100%); color: white; padding: 12px; border-radius: 10px; text-align: center; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                            <i class="fas fa-door-open" style="font-size: 20px; margin-bottom: 4px;"></i>
+                            <div style="font-size: 11px; font-weight: 600;">Main Entrance</div>
+                        </div>
+                        
+                        <!-- Conference Room A -->
+                        <div onclick="showLocationInfo('conf-a')" style="grid-column: span 2; background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%); border: 2px solid #6366f1; padding: 16px; border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                            <i class="fas fa-users" style="font-size: 18px; color: #4338ca; margin-bottom: 4px;"></i>
+                            <div style="font-size: 11px; font-weight: 700; color: #3730a3;">Conference A</div>
+                        </div>
+                        
+                        <!-- Narrative Studio -->
+                        <div onclick="showLocationInfo('studio')" style="grid-column: span 2; background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); border: 2px solid #22c55e; padding: 16px; border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                            <i class="fas fa-microphone" style="font-size: 18px; color: #16a34a; margin-bottom: 4px;"></i>
+                            <div style="font-size: 11px; font-weight: 700; color: #15803d;">Studio</div>
+                        </div>
+                        
+                        <!-- Open Workspace -->
+                        <div onclick="showLocationInfo('workspace')" style="grid-column: span 3; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b; padding: 16px; border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                            <i class="fas fa-laptop" style="font-size: 18px; color: #d97706; margin-bottom: 4px;"></i>
+                            <div style="font-size: 11px; font-weight: 700; color: #b45309;">Open Workspace</div>
+                        </div>
+                        
+                        <!-- Restrooms -->
+                        <div onclick="showLocationInfo('restroom')" style="background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); border: 2px solid #9ca3af; padding: 16px; border-radius: 10px; text-align: center; cursor: pointer;">
+                            <i class="fas fa-restroom" style="font-size: 18px; color: #6b7280;"></i>
+                        </div>
+                        
+                        <!-- Startup Garden Atrium -->
+                        <div onclick="showLocationInfo('atrium')" style="grid-column: span 4; background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%); border: 2px solid #ec4899; padding: 20px; border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                            <i class="fas fa-seedling" style="font-size: 24px; color: #db2777; margin-bottom: 4px;"></i>
+                            <div style="font-size: 13px; font-weight: 700; color: #be185d;">Startup Garden Atrium</div>
+                            <div style="font-size: 10px; color: #9d174d;">Event Space • 50+ seats</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Parking Indicators -->
+                    <div style="margin-top: 16px; display: flex; gap: 8px; justify-content: center;">
+                        <div onclick="showLocationInfo('parking-front')" style="background: #dbeafe; border: 2px dashed #3b82f6; padding: 8px 16px; border-radius: 8px; cursor: pointer;">
+                            <i class="fas fa-car" style="color: #2563eb; margin-right: 6px;"></i>
+                            <span style="font-size: 11px; font-weight: 600; color: #1e40af;">Front Parking</span>
+                        </div>
+                        <div onclick="showLocationInfo('parking-rear')" style="background: #dbeafe; border: 2px dashed #3b82f6; padding: 8px 16px; border-radius: 8px; cursor: pointer;">
+                            <i class="fas fa-car" style="color: #2563eb; margin-right: 6px;"></i>
+                            <span style="font-size: 11px; font-weight: 600; color: #1e40af;">Rear Parking</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Location Details Card -->
+            <div id="location-details" class="card" style="display: none; margin-top: 16px; border-left: 4px solid #2A2760;">
+                <div style="display: flex; align-items: start; gap: 12px;">
+                    <div id="location-icon" style="width: 48px; height: 48px; border-radius: 12px; background: #f3f4f6; display: flex; align-items: center; justify-content: center; font-size: 20px;"></div>
+                    <div style="flex-grow: 1;">
+                        <h3 id="location-title" style="font-weight: 700; color: #1f2937; margin-bottom: 4px;"></h3>
+                        <p id="location-desc" style="font-size: 13px; color: #6b7280; margin-bottom: 8px;"></p>
+                        <button onclick="getDirections()" style="padding: 8px 16px; background: #2A2760; color: white; border-radius: 8px; font-size: 12px; font-weight: 600;">
+                            <i class="fas fa-directions mr-2"></i>Get Directions
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Legend -->
+            <div style="margin-top: 20px;">
+                <h3 style="font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 12px;">Map Legend</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #6b7280;">
+                        <div style="width: 12px; height: 12px; background: #6366f1; border-radius: 3px;"></div>
+                        Meeting Rooms
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #6b7280;">
+                        <div style="width: 12px; height: 12px; background: #22c55e; border-radius: 3px;"></div>
+                        Studios
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #6b7280;">
+                        <div style="width: 12px; height: 12px; background: #f59e0b; border-radius: 3px;"></div>
+                        Workspace
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #6b7280;">
+                        <div style="width: 12px; height: 12px; background: #ec4899; border-radius: 3px;"></div>
+                        Event Space
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- REQUEST VIEW -->
+        <div id="view-request" class="view">
+            <div class="section-header" style="margin-top: 20px;">
+                <h2 class="section-title">Request Support</h2>
+            </div>
+            
+            <p style="font-size: 14px; color: #6b7280; margin-bottom: 20px;">Let us know what you need. We'll connect you with the right resources.</p>
+            
+            <form onsubmit="submitRequest(event)" style="display: flex; flex-direction: column; gap: 16px;">
+                <div>
+                    <label style="display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px;">Request Type</label>
+                    <select id="request-type" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 14px; background: white;" onchange="updateRequestForm()">
+                        <option value="">Select a request type...</option>
+                        <option value="mentor">🎯 Mentor Introduction</option>
+                        <option value="funding">💰 Funding Opportunity</option>
+                        <option value="workspace">🏢 Workspace Need</option>
+                        <option value="partner"> Partnership Connection</option>
+                        <option value="other">📋 Other Request</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label style="display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px;">Your Name</label>
+                    <input type="text" id="request-name" placeholder="John Doe" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 14px;" required>
+                </div>
+                
+                <div>
+                    <label style="display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px;">Email</label>
+                    <input type="email" id="request-email" placeholder="john@startup.com" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 14px;" required>
+                </div>
+                
+                <div>
+                    <label style="display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px;">Company/Startup</label>
+                    <input type="text" id="request-company" placeholder="Your startup name" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 14px;">
+                </div>
+                
+                <div id="mentor-fields" style="display: none;">
+                    <label style="display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px;">Expertise Needed</label>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        <label style="display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: #f3f4f6; border-radius: 8px; cursor: pointer;">
+                            <input type="checkbox" name="expertise" value="fundraising"> Fundraising
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: #f3f4f6; border-radius: 8px; cursor: pointer;">
+                            <input type="checkbox" name="expertise" value="marketing"> Marketing
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: #f3f4f6; border-radius: 8px; cursor: pointer;">
+                            <input type="checkbox" name="expertise" value="product"> Product
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: #f3f4f6; border-radius: 8px; cursor: pointer;">
+                            <input type="checkbox" name="expertise" value="legal"> Legal
+                        </label>
+                    </div>
+                </div>
+                
+                <div>
+                    <label style="display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px;">Description</label>
+                    <textarea id="request-desc" rows="4" placeholder="Tell us more about what you need..." style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 14px; resize: vertical;" required></textarea>
+                </div>
+                
+                <div>
+                    <label style="display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px;">Urgency</label>
+                    <div style="display: flex; gap: 8px;">
+                        <label style="flex: 1; padding: 10px; text-align: center; border: 2px solid #d1d5db; border-radius: 8px; cursor: pointer;">
+                            <input type="radio" name="urgency" value="low" style="display: none;">
+                            <span style="font-size: 13px; color: #6b7280;">Low</span>
+                        </label>
+                        <label style="flex: 1; padding: 10px; text-align: center; border: 2px solid #d1d5db; border-radius: 8px; cursor: pointer;">
+                            <input type="radio" name="urgency" value="medium" style="display: none;">
+                            <span style="font-size: 13px; color: #6b7280;">Medium</span>
+                        </label>
+                        <label style="flex: 1; padding: 10px; text-align: center; border: 2px solid #ff6a6d; border-radius: 8px; cursor: pointer;">
+                            <input type="radio" name="urgency" value="high" checked style="display: none;">
+                            <span style="font-size: 13px; color: #ff6a6d; font-weight: 600;">High</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" style="padding: 14px; background: linear-gradient(135deg, #2A2760 0%, #3d3a7a 100%); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 8px;">
+                    <i class="fas fa-paper-plane mr-2"></i>Submit Request
+                </button>
+            </form>
+            
+            <!-- Previous Requests -->
+            <div style="margin-top: 32px;">
+                <h3 style="font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 12px;">Your Recent Requests</h3>
+                <div class="card" style="border-left: 4px solid #22c55e;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                        <div>
+                            <div style="font-weight: 600; color: #1f2937;">Mentor Introduction</div>
+                            <div style="font-size: 12px; color: #6b7280;">Submitted 2 days ago</div>
+                        </div>
+                        <span style="padding: 4px 10px; background: #dcfce7; color: #166534; border-radius: 20px; font-size: 11px; font-weight: 600;">Connected</span>
+                    </div>
+                    <p style="font-size: 13px; color: #6b7280;">Connected with Sarah from Keyhorse Capital</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- INFO VIEW -->
+        <div id="view-info" class="view">
+            <div class="section-header" style="margin-top: 20px;">
+                <h2 class="section-title">Quick Info</h2>
+            </div>
+            
+            <!-- WiFi Card -->
+            <div class="card" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border: 1px solid #93c5fd;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <div style="width: 40px; height: 40px; background: #2563eb; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <div>
+                        <h3 style="font-weight: 700; color: #1e40af;">WiFi Access</h3>
+                        <p style="font-size: 12px; color: #3b82f6;">Free high-speed internet</p>
+                    </div>
+                </div>
+                <div style="background: white; border-radius: 8px; padding: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="font-size: 13px; color: #6b7280;">Network:</span>
+                        <span style="font-size: 13px; font-weight: 600; color: #1f2937;">CREATE-Guest</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 13px; color: #6b7280;">Password:</span>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span id="wifi-password" style="font-size: 13px; font-weight: 600; color: #1f2937; font-family: monospace;">••••••••</span>
+                            <button onclick="toggleWifiPassword()" style="padding: 4px 8px; background: #2563eb; color: white; border: none; border-radius: 6px; font-size: 11px; cursor: pointer;">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hours Card -->
+            <div class="card">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <h3 style="font-weight: 700; color: #1f2937;">Operating Hours</h3>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-size: 13px; color: #6b7280;">Monday - Friday</span>
+                        <span style="font-size: 13px; font-weight: 600; color: #1f2937;">8:00 AM - 6:00 PM</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-size: 13px; color: #6b7280;">Saturday</span>
+                        <span style="font-size: 13px; font-weight: 600; color: #1f2937;">10:00 AM - 4:00 PM</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-size: 13px; color: #6b7280;">Sunday</span>
+                        <span style="font-size: 13px; font-weight: 600; color: #ef4444;">Closed</span>
+                    </div>
+                </div>
+                <div style="margin-top: 12px; padding: 10px; background: #fef3c7; border-radius: 8px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-key" style="color: #d97706;"></i>
+                        <span style="font-size: 12px; color: #92400e;">After-hours access available for members</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Parking Card -->
+            <div class="card">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #10b981 0%, #34d399 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div>
+                        <h3 style="font-weight: 700; color: #1f2937;">Parking</h3>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; align-items: start; gap: 10px;">
+                        <i class="fas fa-check-circle" style="color: #22c55e; margin-top: 2px;"></i>
+                        <div>
+                            <div style="font-size: 13px; font-weight: 600; color: #1f2937;">Free parking available</div>
+                            <div style="font-size: 12px; color: #6b7280;">Front and rear lots</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: start; gap: 10px;">
+                        <i class="fas fa-wheelchair" style="color: #2563eb; margin-top: 2px;"></i>
+                        <div>
+                            <div style="font-size: 13px; font-weight: 600; color: #1f2937;">Accessible parking</div>
+                            <div style="font-size: 12px; color: #6b7280;">Near main entrance</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: start; gap: 10px;">
+                        <i class="fas fa-bolt" style="color: #f59e0b; margin-top: 2px;"></i>
+                        <div>
+                            <div style="font-size: 13px; font-weight: 600; color: #1f2937;">EV charging stations</div>
+                            <div style="font-size: 12px; color: #6b7280;">4 ports in rear lot</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Emergency Contacts -->
+            <div class="card" style="background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border: 1px solid #fecaca;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <div style="width: 40px; height: 40px; background: #dc2626; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div>
+                        <h3 style="font-weight: 700; color: #991b1b;">Emergency Contacts</h3>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <a href="tel:911" style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: white; border-radius: 8px; text-decoration: none;">
+                        <div>
+                            <div style="font-size: 13px; font-weight: 600; color: #dc2626;">Emergency</div>
+                            <div style="font-size: 12px; color: #6b7280;">Police, Fire, Medical</div>
+                        </div>
+                        <span style="font-size: 16px; font-weight: 700; color: #dc2626;">911</span>
+                    </a>
+                    <a href="tel:270-745-0000" style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: white; border-radius: 8px; text-decoration: none;">
+                        <div>
+                            <div style="font-size: 13px; font-weight: 600; color: #1f2937;">WKU Police</div>
+                            <div style="font-size: 12px; color: #6b7280;">Campus security</div>
+                        </div>
+                        <span style="font-size: 14px; font-weight: 600; color: #2A2760;">(270) 745-0000</span>
+                    </a>
+                    <a href="tel:270-901-0000" style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: white; border-radius: 8px; text-decoration: none;">
+                        <div>
+                            <div style="font-size: 13px; font-weight: 600; color: #1f2937;">CREATE Admin</div>
+                            <div style="font-size: 12px; color: #6b7280;">Staff assistance</div>
+                        </div>
+                        <span style="font-size: 14px; font-weight: 600; color: #2A2760;">(270) 901-0000</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Nearby Food -->
+            <div class="card">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #f97316 0%, #fb923c 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div>
+                        <h3 style="font-weight: 700; color: #1f2937;">Nearby Food</h3>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-size: 13px; font-weight: 600; color: #1f2937;">The Bistro</div>
+                            <div style="font-size: 12px; color: #6b7280;">Sandwiches & Coffee • 0.2 mi</div>
+                        </div>
+                        <span style="padding: 4px 8px; background: #dcfce7; color: #166534; border-radius: 6px; font-size: 11px; font-weight: 600;">Open</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-size: 13px; font-weight: 600; color: #1f2937;">Manna Mediterranean</div>
+                            <div style="font-size: 12px; color: #6b7280;">Healthy bowls • 0.4 mi</div>
+                        </div>
+                        <span style="padding: 4px 8px; background: #dcfce7; color: #166534; border-radius: 6px; font-size: 11px; font-weight: 600;">Open</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-size: 13px; font-weight: 600; color: #1f2937;">Backyard Burgers</div>
+                            <div style="font-size: 12px; color: #6b7280;">American • 0.5 mi</div>
+                        </div>
+                        <span style="padding: 4px 8px; background: #dcfce7; color: #166534; border-radius: 6px; font-size: 11px; font-weight: 600;">Open</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- RESERVE VIEW -->
         <div id="view-reserve" class="view">
             <div class="section-header">
@@ -867,17 +1237,17 @@
             <i class="fas fa-home"></i>
             <span>Home</span>
         </div>
-        <div class="nav-item" onclick="switchView('comms')">
-            <i class="fas fa-comment-dots"></i>
-            <span>Comms</span>
+        <div class="nav-item" onclick="switchView('map')">
+            <i class="fas fa-map-marked-alt"></i>
+            <span>Map</span>
         </div>
-        <div class="nav-item" onclick="switchView('media')">
-            <i class="fas fa-images"></i>
-            <span>Media</span>
+        <div class="nav-item" onclick="switchView('request')">
+            <i class="fas fa-hand-holding-heart"></i>
+            <span>Request</span>
         </div>
-        <div class="nav-item" onclick="switchView('reserve')">
-            <i class="fas fa-calendar-check"></i>
-            <span>Reserve</span>
+        <div class="nav-item" onclick="switchView('info')">
+            <i class="fas fa-info-circle"></i>
+            <span>Info</span>
         </div>
     </nav>
 
@@ -913,10 +1283,60 @@
         
         // Update nav active state
         const navItems = document.querySelectorAll('.nav-item');
-        const viewMap = { 'home': 0, 'comms': 1, 'media': 2, 'reserve': 3 };
+        const viewMap = { 'home': 0, 'map': 1, 'request': 2, 'info': 3 };
         if (navItems[viewMap[viewName]]) {
             navItems[viewMap[viewName]].classList.add('active');
         }
+    }
+
+    function showLocationInfo(location) {
+        const details = {
+            'main-entrance': { icon: '🚪', title: 'Main Entrance', desc: 'Primary entry point with reception desk. Keycard access required after hours.' },
+            'conf-a': { icon: '🎯', title: 'Conference Room A', desc: 'Seats 12 people. Features 86" display, video conferencing, and whiteboard.' },
+            'studio': { icon: '🎙️', title: 'Narrative Network Studio', desc: 'Sound-dampened recording studio with podcast equipment. Seats 4.' },
+            'workspace': { icon: '💻', title: 'Open Workspace', desc: 'Collaborative hot-desking area with power outlets and high-speed WiFi.' },
+            'atrium': { icon: '🌱', title: 'Startup Garden Atrium', desc: 'Large event space for up to 50 people. Stage, A/V equipment, and catering area.' },
+            'restroom': { icon: '🚻', title: 'Restrooms', desc: 'Accessible facilities located near the main corridor.' },
+            'parking-front': { icon: '🅿️', title: 'Front Parking', desc: 'Visitor parking with 40 spaces. EV charging stations available.' },
+            'parking-rear': { icon: '🅿️', title: 'Rear Parking', desc: 'Staff and member parking with 80 spaces. Bike rack available.' }
+        };
+        
+        const info = details[location];
+        if (info) {
+            document.getElementById('location-icon').textContent = info.icon;
+            document.getElementById('location-title').textContent = info.title;
+            document.getElementById('location-desc').textContent = info.desc;
+            document.getElementById('location-details').style.display = 'block';
+        }
+    }
+
+    function resetMap() {
+        document.getElementById('location-details').style.display = 'none';
+    }
+
+    function getDirections() {
+        alert('📍 Opening directions in your maps app...\n\n2801 Coleman Rd\nBowling Green, KY 42104');
+    }
+
+    function updateRequestForm() {
+        const type = document.getElementById('request-type').value;
+        const mentorFields = document.getElementById('mentor-fields');
+        if (mentorFields) {
+            mentorFields.style.display = type === 'mentor' ? 'block' : 'none';
+        }
+    }
+
+    function submitRequest(e) {
+        e.preventDefault();
+        alert('✅ Request Submitted!\n\nWe\'ve received your request and will connect you with the right resources within 24-48 hours.\n\nYou\'ll receive an email confirmation shortly.');
+        document.querySelector('form').reset();
+        document.getElementById('location-details')?.style.display === 'none';
+    }
+
+    function toggleWifiPassword() {
+        const passwordEl = document.getElementById('wifi-password');
+        const isHidden = passwordEl.textContent === '••••••••';
+        passwordEl.textContent = isHidden ? 'Create2024!' : '••••••••';
     }
 
     function showNotifications() {
@@ -938,7 +1358,7 @@
     // Swipe detection for view switching
     let touchStartX = 0;
     let touchEndX = 0;
-    const views = ['home', 'comms', 'media', 'reserve'];
+    const views = ['home', 'map', 'request', 'info'];
     let currentViewIndex = 0;
 
     document.addEventListener('touchstart', e => {
