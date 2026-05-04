@@ -3,195 +3,764 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CREATE - Innovation Campus</title>
+    <meta name="theme-color" content="#2A2760">
+    <title>CREATE | Innovation Campus Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'create-navy': '#2A2760',
+                        'create-navy-dark': '#1e1c45',
+                        'create-coral': '#ff6a6d',
+                        'create-coral-dark': '#e55a5d',
+                        'create-teal': '#4ecdc4',
+                        'create-gold': '#f7b731',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body {
-            background-color: #f3f4f6;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        * {
             -webkit-tap-highlight-color: transparent;
         }
         
-        .app-container {
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        .app-frame {
             max-width: 480px;
             margin: 0 auto;
-            background-color: #f8f9fa;
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
             position: relative;
+            box-shadow: 0 0 40px rgba(42, 39, 96, 0.1);
         }
 
+        /* Splash Screen */
+        .splash-screen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #2A2760 0%, #3d3a7a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+
+        .splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .splash-logo {
+            width: 180px;
+            margin-bottom: 30px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+
+        .splash-tagline {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Header */
         .header {
-            background-color: #ffffff;
+            background: linear-gradient(135deg, #2A2760 0%, #3d3a7a 100%);
             padding: 16px 20px;
-            border-bottom: 1px solid #e5e7eb;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 50;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 20px rgba(42, 39, 96, 0.3);
         }
 
-        .logo-img {
+        .header-logo {
+            height: 36px;
+            filter: brightness(0) invert(1);
+        }
+
+        .header-action {
+            width: 40px;
             height: 40px;
-            object-fit: contain;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.2s;
         }
 
-        .content-area {
+        .header-action:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 18px;
+            height: 18px;
+            background: #ff6a6d;
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #2A2760;
+        }
+
+        /* Content */
+        .content-scroll {
             flex-grow: 1;
-            padding: 20px;
-            padding-bottom: 80px; /* Space for bottom nav */
             overflow-y: auto;
+            padding: 20px;
+            padding-bottom: 100px;
+            scroll-behavior: smooth;
         }
 
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, #ff6a6d 0%, #ff8a8d 100%);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .welcome-time {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+
+        .welcome-name {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .welcome-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .quick-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .quick-action-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .quick-action:hover .quick-action-icon {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+        }
+
+        .quick-action-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #4b5563;
+            text-align: center;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        .section-action {
+            font-size: 13px;
+            font-weight: 600;
+            color: #ff6a6d;
+            cursor: pointer;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #f3f4f6;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:active {
+            transform: scale(0.98);
+        }
+
+        .card-highlight {
+            border-left: 4px solid #ff6a6d;
+        }
+
+        /* Announcement Card */
+        .announcement-card {
+            display: flex;
+            gap: 14px;
+        }
+
+        .announcement-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #2A2760 0%, #4ecdc4 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .announcement-content {
+            flex-grow: 1;
+        }
+
+        .announcement-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .announcement-author {
+            font-weight: 700;
+            color: #1f2937;
+            font-size: 14px;
+        }
+
+        .announcement-time {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        .announcement-text {
+            color: #4b5563;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .announcement-tag {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 10px;
+            background: #fef3f2;
+            color: #ff6a6d;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 20px;
+        }
+
+        /* Room Cards */
+        .room-card {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .room-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .room-info {
+            flex-grow: 1;
+        }
+
+        .room-name {
+            font-weight: 700;
+            color: #1f2937;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .room-details {
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .room-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-available {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-busy {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .room-book-btn {
+            padding: 10px 20px;
+            background: #2A2760;
+            color: white;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .room-book-btn:hover {
+            background: #3d3a7a;
+        }
+
+        /* Media Gallery */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .media-item {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .media-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .media-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .media-item.featured {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        /* Bottom Navigation */
         .bottom-nav {
-            position: sticky;
+            position: fixed;
             bottom: 0;
-            background-color: #2A2760; /* CREATE official deep blue */
-            border-top: 1px solid #1a1840;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            border-top: 1px solid #e5e7eb;
             display: flex;
             justify-content: space-around;
-            padding: 12px 0;
-            padding-bottom: calc(12px + env(safe-area-inset-bottom));
-            z-index: 50;
+            padding: 12px 0 20px;
+            z-index: 100;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
         }
 
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #8f8ba8;
+            gap: 4px;
+            color: #9ca3af;
             font-size: 11px;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
-            transition: color 0.2s;
-            width: 33%;
+            padding: 8px 16px;
+            border-radius: 12px;
+            transition: all 0.2s;
         }
 
         .nav-item i {
-            font-size: 20px;
-            margin-bottom: 4px;
+            font-size: 22px;
         }
 
         .nav-item.active {
-            color: #ff6a6d; /* CREATE official accent coral */
+            color: #ff6a6d;
+            background: #fef3f2;
         }
 
         /* Views */
         .view {
             display: none;
-            animation: fadeIn 0.3s ease;
+            animation: slideUp 0.3s ease;
         }
 
         .view.active {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Cards */
-        .card {
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            border-left: 4px solid #ff6a6d;
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 90px;
+            right: calc(50% - 200px);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6a6d 0%, #ff8a8d 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 16px rgba(255, 106, 109, 0.4);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            z-index: 90;
         }
 
-        .status-badge {
-            font-size: 10px;
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 106, 109, 0.5);
+        }
+
+        /* Pull to refresh hint */
+        .pull-hint {
+            text-align: center;
+            padding: 20px;
+            color: #9ca3af;
+            font-size: 13px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .empty-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 16px;
+            background: #f3f4f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #9ca3af;
+        }
+
+        .empty-title {
             font-weight: 700;
-            padding: 4px 8px;
-            border-radius: 99px;
-            text-transform: uppercase;
+            color: #374151;
+            margin-bottom: 8px;
         }
-        .status-open { background: #dcfce7; color: #166534; }
-        .status-booked { background: #fee2e2; color: #991b1b; }
 
+        .empty-text {
+            color: #6b7280;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
 
-<div class="app-container">
+<!-- Splash Screen -->
+<div class="splash-screen" id="splash">
+    <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_3x.png" alt="CREATE" class="splash-logo">
+    <div class="splash-tagline">Central Region Ecosystem</div>
+</div>
+
+<!-- Main App -->
+<div class="app-frame">
     
     <!-- Header -->
     <header class="header">
-        <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_3x.png" alt="CREATE Innovation Campus" class="logo-img">
-        <button class="text-gray-500 hover:text-gray-800">
-            <i class="fas fa-bell text-xl"></i>
-        </button>
+        <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_3x.png" alt="CREATE" class="header-logo">
+        <div class="header-action" onclick="showNotifications()">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+        </div>
     </header>
 
-    <!-- Main Content Area -->
-    <main class="content-area">
+    <!-- Content -->
+    <main class="content-scroll">
         
-        <!-- COMMS VIEW -->
-        <div id="view-comms" class="view active">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Announcements</h2>
+        <!-- HOME VIEW -->
+        <div id="view-home" class="view active">
             
-            <div class="card">
-                <div class="flex items-center gap-3 mb-3">
-                    <div class="w-10 h-10 rounded-full bg-[#f5f5fc] flex items-center justify-center text-[#2A2760] font-bold">IC</div>
-                    <div>
-                        <div class="font-bold text-gray-800 text-sm">Innovation Campus Admin</div>
-                        <div class="text-xs text-gray-500">2 hours ago</div>
+            <!-- Welcome Banner -->
+            <div class="welcome-banner">
+                <div class="welcome-time" id="current-time">Monday, January 15</div>
+                <div class="welcome-name">Good Afternoon!</div>
+                <div class="welcome-subtitle">Welcome to the Innovation Campus</div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <div class="quick-action" onclick="switchView('reserve')">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #2A2760 0%, #4ecdc4 100%);">
+                        <i class="fas fa-calendar-plus"></i>
+                    </div>
+                    <span class="quick-action-label">Book Room</span>
+                </div>
+                <div class="quick-action" onclick="switchView('media')">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #ff6a6d 0%, #ff8a8d 100%);">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <span class="quick-action-label">Upload</span>
+                </div>
+                <div class="quick-action" onclick="showDirectory()">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #f7b731 0%, #f9d56e 100%);">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span class="quick-action-label">Directory</span>
+                </div>
+                <div class="quick-action" onclick="showEvents()">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #4ecdc4 0%, #6ee7de 100%);">
+                        <i class="fas fa-calendar-star"></i>
+                    </div>
+                    <span class="quick-action-label">Events</span>
+                </div>
+            </div>
+
+            <!-- Latest Announcements -->
+            <div class="section-header">
+                <h2 class="section-title">Latest Updates</h2>
+                <span class="section-action" onclick="switchView('comms')">View All</span>
+            </div>
+
+            <div class="card card-highlight">
+                <div class="announcement-card">
+                    <div class="announcement-avatar">IC</div>
+                    <div class="announcement-content">
+                        <div class="announcement-meta">
+                            <span class="announcement-author">Innovation Campus</span>
+                            <span class="announcement-time">2h ago</span>
+                        </div>
+                        <p class="announcement-text">Welcome to the new CREATE mobile hub! 🚀 Streamline your workspace experience with instant room booking and community updates.</p>
+                        <span class="announcement-tag">Announcement</span>
                     </div>
                 </div>
-                <p class="text-gray-700 text-sm leading-relaxed">
-                    Welcome to the new CREATE mobile hub! We're rolling out this platform to streamline communications, media sharing, and room reservations across the facility. Stay tuned for updates! 🚀
-                </p>
             </div>
 
             <div class="card">
-                <div class="flex items-center gap-3 mb-3">
-                    <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold">EW</div>
-                    <div>
-                        <div class="font-bold text-gray-800 text-sm">Events Workshop</div>
-                        <div class="text-xs text-gray-500">Yesterday</div>
+                <div class="announcement-card">
+                    <div class="announcement-avatar" style="background: linear-gradient(135deg, #ff6a6d 0%, #ff8a8d 100%);">EW</div>
+                    <div class="announcement-content">
+                        <div class="announcement-meta">
+                            <span class="announcement-author">Events Workshop</span>
+                            <span class="announcement-time">5h ago</span>
+                        </div>
+                        <p class="announcement-text">Tech networking mixer tomorrow at 5:00 PM in the Main Atrium. Food and drinks provided!</p>
+                        <span class="announcement-tag" style="background: #ede9fe; color: #7c3aed;">Event</span>
                     </div>
                 </div>
-                <p class="text-gray-700 text-sm leading-relaxed mb-3">
-                    Reminder: The regional tech networking mixer starts tomorrow at 5:00 PM in the Main Atrium. Food and drinks provided. Don't forget your badges!
-                </p>
             </div>
-            
-            <!-- Compose FAB -->
-            <button class="fixed bottom-24 right-6 w-14 h-14 bg-[#ff6a6d] rounded-full shadow-lg flex items-center justify-center text-white hover:bg-[#e05b5e] transition">
-                <i class="fas fa-plus text-xl"></i>
-            </button>
+
+            <!-- Featured Spaces -->
+            <div class="section-header" style="margin-top: 28px;">
+                <h2 class="section-title">Available Now</h2>
+                <span class="section-action" onclick="switchView('reserve')">See All</span>
+            </div>
+
+            <div class="card">
+                <div class="room-card">
+                    <div class="room-image">🎯</div>
+                    <div class="room-info">
+                        <div class="room-name">Conference Room A</div>
+                        <div class="room-details">Seats 12 • Screen • Whiteboard</div>
+                        <span class="room-status status-available">
+                            <i class="fas fa-circle" style="font-size: 8px;"></i> Available Now
+                        </span>
+                    </div>
+                    <button class="room-book-btn" onclick="switchView('reserve')">Book</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- COMMS VIEW -->
+        <div id="view-comms" class="view">
+            <div class="section-header">
+                <h2 class="section-title">Community Feed</h2>
+                <span class="section-action">Filter</span>
+            </div>
+
+            <div class="card card-highlight">
+                <div class="announcement-card">
+                    <div class="announcement-avatar">IC</div>
+                    <div class="announcement-content">
+                        <div class="announcement-meta">
+                            <span class="announcement-author">Innovation Campus</span>
+                            <span class="announcement-time">2h ago</span>
+                        </div>
+                        <p class="announcement-text">Welcome to the new CREATE mobile hub! 🚀 We're rolling out this platform to streamline communications, media sharing, and room reservations across the facility. Stay tuned for updates!</p>
+                        <div style="margin-top: 12px; display: flex; gap: 12px;">
+                            <button style="padding: 8px 16px; background: #f3f4f6; border-radius: 8px; font-size: 13px; font-weight: 600; color: #4b5563;">
+                                <i class="fas fa-heart" style="color: #ff6a6d; margin-right: 6px;"></i>24
+                            </button>
+                            <button style="padding: 8px 16px; background: #f3f4f6; border-radius: 8px; font-size: 13px; font-weight: 600; color: #4b5563;">
+                                <i class="fas fa-comment" style="margin-right: 6px;"></i>8
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="announcement-card">
+                    <div class="announcement-avatar" style="background: linear-gradient(135deg, #4ecdc4 0%, #6ee7de 100%);">SM</div>
+                    <div class="announcement-content">
+                        <div class="announcement-meta">
+                            <span class="announcement-author">Sarah Miller</span>
+                            <span class="announcement-time">4h ago</span>
+                        </div>
+                        <p class="announcement-text">Looking for a cofounder for a fintech startup idea. Anyone with backend experience interested in grabbing coffee this week? ☕️</p>
+                        <span class="announcement-tag" style="background: #ede9fe; color: #7c3aed;">Networking</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="announcement-card">
+                    <div class="announcement-avatar" style="background: linear-gradient(135deg, #f7b731 0%, #f9d56e 100%);">TC</div>
+                    <div class="announcement-content">
+                        <div class="announcement-meta">
+                            <span class="announcement-author">Tech Collective</span>
+                            <span class="announcement-time">1d ago</span>
+                        </div>
+                        <p class="announcement-text">Monthly demo day is coming up! If you've been working on a project and want to showcase it to investors, sign up by Friday.</p>
+                        <span class="announcement-tag" style="background: #dcfce7; color: #166534;">Opportunity</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- MEDIA VIEW -->
         <div id="view-media" class="view">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Media Gallery</h2>
-            
-            <div class="grid grid-cols-2 gap-3">
-                <div class="aspect-square rounded-xl bg-gray-200 overflow-hidden relative group cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" class="w-full h-full object-cover" alt="Workspace">
+            <div class="section-header">
+                <h2 class="section-title">Media Gallery</h2>
+                <span class="section-action">My Uploads</span>
+            </div>
+
+            <div class="media-grid">
+                <div class="media-item featured">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400" alt="Workspace">
                 </div>
-                <div class="aspect-square rounded-xl bg-gray-200 overflow-hidden relative group cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" class="w-full h-full object-cover" alt="Meeting">
+                <div class="media-item">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32b7?w=200" alt="Meeting">
                 </div>
-                <div class="aspect-square rounded-xl bg-gray-200 overflow-hidden relative group cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" class="w-full h-full object-cover" alt="Team">
+                <div class="media-item">
+                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=200" alt="Team">
                 </div>
-                <div class="aspect-square rounded-xl bg-gray-200 overflow-hidden relative group cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" class="w-full h-full object-cover" alt="Presentation">
+                <div class="media-item">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=200" alt="Presentation">
                 </div>
-                <div class="aspect-square rounded-xl bg-gray-200 overflow-hidden flex items-center justify-center border-2 border-dashed border-gray-300 text-gray-400 cursor-pointer hover:bg-gray-50">
-                    <div class="text-center">
-                        <i class="fas fa-cloud-upload-alt text-2xl mb-2"></i>
-                        <div class="text-xs font-medium">Upload Media</div>
+                <div class="media-item">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=200" alt="Office">
+                </div>
+                <div class="media-item" style="background: #f3f4f6; display: flex; align-items: center; justify-content: center; color: #9ca3af;">
+                    <i class="fas fa-plus" style="font-size: 24px;"></i>
+                </div>
+            </div>
+
+            <div style="margin-top: 24px;">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Events</h2>
+                </div>
+                <div class="card">
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <div style="width: 60px; height: 60px; border-radius: 12px; background: linear-gradient(135deg, #2A2760 0%, #4ecdc4 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 700; color: #1f2937;">Launch Week 2024</div>
+                            <div style="font-size: 13px; color: #6b7280;">124 photos • Jan 8-12</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -199,71 +768,114 @@
 
         <!-- RESERVE VIEW -->
         <div id="view-reserve" class="view">
-            <h2 class="text-2xl font-bold text-gray-800 mb-2">Reserve Space</h2>
-            <p class="text-gray-500 text-sm mb-6">Book conference rooms and work pods.</p>
-            
-            <div class="mb-4">
-                <input type="date" class="w-full border border-gray-300 rounded-lg p-3 text-sm text-gray-700 bg-gray-50 outline-none focus:border-[#ff6a6d]">
+            <div class="section-header">
+                <h2 class="section-title">Reserve Space</h2>
+                <span class="section-action">My Bookings</span>
             </div>
 
-            <!-- Room 1 -->
-            <div class="card">
-                <div class="flex justify-between items-start mb-2">
-                    <div>
-                        <h3 class="font-bold text-gray-800">Conference Room A</h3>
-                        <p class="text-xs text-gray-500"><i class="fas fa-users mr-1"></i> Seats 12 • Screen • Whiteboard</p>
-                    </div>
-                    <span class="status-badge status-open">Available</span>
+            <!-- Date Selector -->
+            <div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 16px; margin-bottom: 8px;">
+                <div style="flex-shrink: 0; padding: 12px 16px; background: #2A2760; color: white; border-radius: 12px; text-align: center; min-width: 60px;">
+                    <div style="font-size: 11px; opacity: 0.8;">MON</div>
+                    <div style="font-size: 20px; font-weight: 700;">15</div>
                 </div>
-                <div class="flex gap-2 mt-4 overflow-x-auto pb-2">
-                    <button class="flex-shrink-0 px-4 py-2 border border-[#2A2760] text-[#2A2760] rounded-lg text-xs font-bold hover:bg-[#f5f5fc]">1:00 PM</button>
-                    <button class="flex-shrink-0 px-4 py-2 border border-[#2A2760] text-[#2A2760] rounded-lg text-xs font-bold hover:bg-[#f5f5fc]">2:00 PM</button>
-                    <button class="flex-shrink-0 px-4 py-2 border border-[#2A2760] text-[#2A2760] rounded-lg text-xs font-bold hover:bg-[#f5f5fc]">3:30 PM</button>
+                <div style="flex-shrink: 0; padding: 12px 16px; background: white; border: 1px solid #e5e7eb; color: #4b5563; border-radius: 12px; text-align: center; min-width: 60px;">
+                    <div style="font-size: 11px;">TUE</div>
+                    <div style="font-size: 20px; font-weight: 700;">16</div>
+                </div>
+                <div style="flex-shrink: 0; padding: 12px 16px; background: white; border: 1px solid #e5e7eb; color: #4b5563; border-radius: 12px; text-align: center; min-width: 60px;">
+                    <div style="font-size: 11px;">WED</div>
+                    <div style="font-size: 20px; font-weight: 700;">17</div>
+                </div>
+                <div style="flex-shrink: 0; padding: 12px 16px; background: white; border: 1px solid #e5e7eb; color: #4b5563; border-radius: 12px; text-align: center; min-width: 60px;">
+                    <div style="font-size: 11px;">THU</div>
+                    <div style="font-size: 20px; font-weight: 700;">18</div>
+                </div>
+                <div style="flex-shrink: 0; padding: 12px 16px; background: white; border: 1px solid #e5e7eb; color: #4b5563; border-radius: 12px; text-align: center; min-width: 60px;">
+                    <div style="font-size: 11px;">FRI</div>
+                    <div style="font-size: 20px; font-weight: 700;">19</div>
                 </div>
             </div>
 
-            <!-- Room 2 -->
+            <!-- Room Cards -->
             <div class="card">
-                <div class="flex justify-between items-start mb-2">
-                    <div>
-                        <h3 class="font-bold text-gray-800">Creative Pod 1</h3>
-                        <p class="text-xs text-gray-500"><i class="fas fa-users mr-1"></i> Seats 4 • Quiet Space</p>
+                <div class="room-card">
+                    <div class="room-image" style="background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%); color: #7c3aed;">🎯</div>
+                    <div class="room-info">
+                        <div class="room-name">Conference Room A</div>
+                        <div class="room-details">Seats 12 • 86" Screen • Whiteboard</div>
+                        <div style="display: flex; gap: 6px; margin-top: 8px;">
+                            <span class="room-status status-available">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i> Available
+                            </span>
+                        </div>
                     </div>
-                    <span class="status-badge status-booked">Booked (Next 2 hrs)</span>
                 </div>
-                <div class="flex gap-2 mt-4 overflow-x-auto pb-2">
-                    <button class="flex-shrink-0 px-4 py-2 bg-gray-100 text-gray-400 rounded-lg text-xs font-bold cursor-not-allowed">1:00 PM</button>
-                    <button class="flex-shrink-0 px-4 py-2 bg-gray-100 text-gray-400 rounded-lg text-xs font-bold cursor-not-allowed">2:00 PM</button>
-                    <button class="flex-shrink-0 px-4 py-2 border border-[#2A2760] text-[#2A2760] rounded-lg text-xs font-bold hover:bg-[#f5f5fc]">4:00 PM</button>
+                <div style="display: flex; gap: 8px; margin-top: 16px; overflow-x: auto;">
+                    <button style="flex-shrink: 0; padding: 8px 16px; background: #2A2760; color: white; border-radius: 8px; font-size: 13px; font-weight: 600;">1:00 PM</button>
+                    <button style="flex-shrink: 0; padding: 8px 16px; background: #2A2760; color: white; border-radius: 8px; font-size: 13px; font-weight: 600;">2:00 PM</button>
+                    <button style="flex-shrink: 0; padding: 8px 16px; background: #2A2760; color: white; border-radius: 8px; font-size: 13px; font-weight: 600;">3:30 PM</button>
+                    <button style="flex-shrink: 0; padding: 8px 16px; background: white; border: 1px solid #2A2760; color: #2A2760; border-radius: 8px; font-size: 13px; font-weight: 600;">+ More</button>
                 </div>
             </div>
-            
-            <!-- Room 3 -->
+
             <div class="card">
-                <div class="flex justify-between items-start mb-2">
-                    <div>
-                        <h3 class="font-bold text-gray-800">Main Atrium</h3>
-                        <p class="text-xs text-gray-500"><i class="fas fa-users mr-1"></i> Seats 50+ • Event Space</p>
+                <div class="room-card">
+                    <div class="room-image" style="background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); color: #166534;">🎨</div>
+                    <div class="room-info">
+                        <div class="room-name">Creative Pod 1</div>
+                        <div class="room-details">Seats 4 • Quiet Space • Natural Light</div>
+                        <span class="room-status status-busy">
+                            <i class="fas fa-circle" style="font-size: 6px;"></i> Booked until 4pm
+                        </span>
                     </div>
-                    <span class="status-badge status-open">Available</span>
                 </div>
-                <button class="w-full mt-3 py-2 bg-[#ff6a6d] text-white rounded-lg text-sm font-bold hover:bg-[#e05b5e] transition">Request Event Booking</button>
+                <div style="display: flex; gap: 8px; margin-top: 16px; overflow-x: auto;">
+                    <button style="flex-shrink: 0; padding: 8px 16px; background: #f3f4f6; color: #9ca3af; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: not-allowed;">1:00 PM</button>
+                    <button style="flex-shrink: 0; padding: 8px 16px; background: #f3f4f6; color: #9ca3af; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: not-allowed;">2:00 PM</button>
+                    <button style="flex-shrink: 0; padding: 8px 16px; background: #2A2760; color: white; border-radius: 8px; font-size: 13px; font-weight: 600;">4:00 PM</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="room-card">
+                    <div class="room-image" style="background: linear-gradient(135deg, #fef3f2 0%, #fecaca 100%); color: #dc2626;">🏢</div>
+                    <div class="room-info">
+                        <div class="room-name">Main Atrium</div>
+                        <div class="room-details">Seats 50+ • Event Space • Stage</div>
+                        <span class="room-status status-available">
+                            <i class="fas fa-circle" style="font-size: 6px;"></i> Available
+                        </span>
+                    </div>
+                </div>
+                <button style="width: 100%; margin-top: 16px; padding: 12px; background: linear-gradient(135deg, #2A2760 0%, #3d3a7a 100%); color: white; border-radius: 10px; font-size: 14px; font-weight: 600;">
+                    Request Event Booking
+                </button>
             </div>
         </div>
 
     </main>
 
+    <!-- Floating Action Button -->
+    <div class="fab" onclick="showNewPost()">
+        <i class="fas fa-plus"></i>
+    </div>
+
     <!-- Bottom Navigation -->
     <nav class="bottom-nav">
-        <div class="nav-item active" onclick="switchView('comms', this)">
-            <i class="fas fa-comment-alt"></i>
+        <div class="nav-item active" onclick="switchView('home')">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </div>
+        <div class="nav-item" onclick="switchView('comms')">
+            <i class="fas fa-comment-dots"></i>
             <span>Comms</span>
         </div>
-        <div class="nav-item" onclick="switchView('media', this)">
-            <i class="fas fa-photo-video"></i>
+        <div class="nav-item" onclick="switchView('media')">
+            <i class="fas fa-images"></i>
             <span>Media</span>
         </div>
-        <div class="nav-item" onclick="switchView('reserve', this)">
+        <div class="nav-item" onclick="switchView('reserve')">
             <i class="fas fa-calendar-check"></i>
             <span>Reserve</span>
         </div>
@@ -272,31 +884,83 @@
 </div>
 
 <script>
-    function switchView(viewName, navElement) {
-        // Hide all views
-        document.querySelectorAll('.view').forEach(view => {
-            view.classList.remove('active');
-        });
+    // Splash screen
+    setTimeout(() => {
+        document.getElementById('splash').classList.add('hidden');
+    }, 2500);
+
+    // Update time
+    function updateTime() {
+        const now = new Date();
+        const options = { weekday: 'long', month: 'long', day: 'numeric' };
+        const timeStr = now.toLocaleDateString('en-US', options);
+        const hour = now.getHours();
+        let greeting = 'Good Morning!';
+        if (hour >= 12 && hour < 17) greeting = 'Good Afternoon!';
+        if (hour >= 17) greeting = 'Good Evening!';
         
-        // Remove active class from all nav items
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.classList.remove('active');
-        });
+        document.getElementById('current-time').textContent = timeStr;
+        document.querySelector('.welcome-name').textContent = greeting;
+    }
+    updateTime();
+
+    // View switching
+    function switchView(viewName) {
+        document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
         
-        // Show target view
         document.getElementById('view-' + viewName).classList.add('active');
         
-        // Set active class on clicked nav item
-        navElement.classList.add('active');
-    }
-    
-    // Set today's date in the date picker by default
-    document.addEventListener('DOMContentLoaded', () => {
-        const dateInput = document.querySelector('input[type="date"]');
-        if (dateInput) {
-            dateInput.valueAsDate = new Date();
+        // Update nav active state
+        const navItems = document.querySelectorAll('.nav-item');
+        const viewMap = { 'home': 0, 'comms': 1, 'media': 2, 'reserve': 3 };
+        if (navItems[viewMap[viewName]]) {
+            navItems[viewMap[viewName]].classList.add('active');
         }
+    }
+
+    function showNotifications() {
+        alert('Notifications: 3 new updates\n\n• New room booking confirmed\n• Tech mixer tomorrow\n• Sarah Miller replied to your message');
+    }
+
+    function showDirectory() {
+        alert('Member Directory\n\nComing soon: Browse and connect with innovators, entrepreneurs, and creators at the Innovation Campus.');
+    }
+
+    function showEvents() {
+        alert('Upcoming Events\n\n• Tech Mixer - Tomorrow 5PM\n• Startup Pitch Night - Jan 20\n• Workshop: Design Thinking - Jan 25');
+    }
+
+    function showNewPost() {
+        alert('Create New Post\n\nShare updates, ask questions, or post opportunities with the CREATE community.');
+    }
+
+    // Swipe detection for view switching
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const views = ['home', 'comms', 'media', 'reserve'];
+    let currentViewIndex = 0;
+
+    document.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
     });
+
+    document.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        const threshold = 100;
+        if (touchStartX - touchEndX > threshold && currentViewIndex < views.length - 1) {
+            currentViewIndex++;
+            switchView(views[currentViewIndex]);
+        }
+        if (touchEndX - touchStartX > threshold && currentViewIndex > 0) {
+            currentViewIndex--;
+            switchView(views[currentViewIndex]);
+        }
+    }
 </script>
 
 </body>
