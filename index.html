@@ -550,8 +550,12 @@
 
 <!-- Splash Screen -->
 <div class="splash-screen" id="splash">
-    <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_3x.png" alt="CREATE" class="splash-logo">
-    <div class="splash-tagline">Central Region Ecosystem</div>
+    <img src="https://create-c.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_3x.png" alt="CREATE" class="splash-logo" style="filter: brightness(0) invert(1); width: 200px;">
+    <div style="text-align: center; margin-top: 20px;">
+        <div style="color: white; font-size: 24px; font-weight: 800; letter-spacing: 4px; margin-bottom: 8px;">CREATE</div>
+        <div style="color: rgba(255,255,255,0.7); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; max-width: 280px; line-height: 1.6;">Central Region Ecosystem for Arts, Technology & Entrepreneurship</div>
+    </div>
+    <div style="position: absolute; bottom: 60px; color: rgba(255,255,255,0.4); font-size: 12px;">WKU Innovation Campus</div>
 </div>
 
 <!-- Main App -->
@@ -572,35 +576,53 @@
         <!-- HOME VIEW -->
         <div id="view-home" class="view active">
             
-            <!-- Welcome Banner -->
-            <div class="welcome-banner">
-                <div class="welcome-time" id="current-time">Monday, January 15</div>
-                <div class="welcome-name">Good Afternoon!</div>
-                <div class="welcome-subtitle">Welcome to the Innovation Campus</div>
+            <!-- CREATE Branded Hero -->
+            <div style="background: linear-gradient(135deg, #2A2760 0%, #3d3a7a 50%, #ff6a6d 100%); border-radius: 24px; padding: 28px; margin: 20px 0 24px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: -20px; right: -20px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(255,106,109,0.3) 0%, transparent 70%);"></div>
+                <div style="position: relative; z-index: 1;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                        <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 40px; filter: brightness(0) invert(1);">
+                        <div>
+                            <div style="color: rgba(255,255,255,0.8); font-size: 10px; letter-spacing: 2px; text-transform: uppercase;">Innovation Campus</div>
+                            <div style="color: white; font-size: 20px; font-weight: 800; letter-spacing: 3px;">CREATE</div>
+                        </div>
+                    </div>
+                    <div style="color: rgba(255,255,255,0.9); font-size: 13px; margin-bottom: 4px;" id="current-time">Monday, January 15</div>
+                    <div style="color: white; font-size: 22px; font-weight: 700; margin-bottom: 8px;">Good Afternoon!</div>
+                    <div style="color: rgba(255,255,255,0.7); font-size: 12px; line-height: 1.5;">Where innovation meets opportunity in South Central Kentucky</div>
+                </div>
+            </div>
+
+            <!-- CREATE Mission Statement -->
+            <div style="background: linear-gradient(90deg, #2A2760 0%, #3d3a7a 100%); border-radius: 16px; padding: 20px; margin-bottom: 24px; border-left: 4px solid #ff6a6d;">
+                <div style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.6; font-style: italic;">
+                    "CREATE exists to help entrepreneurs, technologists, and creatives start, grow, and stay in Kentucky."
+                </div>
+                <div style="color: #ff6a6d; font-size: 11px; margin-top: 8px; font-weight: 600;">— Central Region Ecosystem Mission</div>
             </div>
 
             <!-- Quick Actions -->
             <div class="quick-actions">
-                <div class="quick-action" onclick="switchView('reserve')">
-                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #2A2760 0%, #4ecdc4 100%);">
-                        <i class="fas fa-calendar-plus"></i>
+                <div class="quick-action" onclick="switchView('map')">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #2A2760 0%, #3d3a7a 100%); border: 2px solid #2A2760;">
+                        <i class="fas fa-map-marked-alt"></i>
                     </div>
-                    <span class="quick-action-label">Book Room</span>
+                    <span class="quick-action-label">Campus Map</span>
                 </div>
-                <div class="quick-action" onclick="switchView('media')">
-                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #ff6a6d 0%, #ff8a8d 100%);">
-                        <i class="fas fa-camera"></i>
+                <div class="quick-action" onclick="switchView('request')">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #ff6a6d 0%, #ff8a8d 100%); border: 2px solid #ff6a6d;">
+                        <i class="fas fa-hand-holding-heart"></i>
                     </div>
-                    <span class="quick-action-label">Upload</span>
+                    <span class="quick-action-label">Get Support</span>
                 </div>
                 <div class="quick-action" onclick="showDirectory()">
-                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #f7b731 0%, #f9d56e 100%);">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #2A2760 0%, #ff6a6d 100%); border: 2px solid #2A2760;">
                         <i class="fas fa-users"></i>
                     </div>
                     <span class="quick-action-label">Directory</span>
                 </div>
                 <div class="quick-action" onclick="showEvents()">
-                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #4ecdc4 0%, #6ee7de 100%);">
+                    <div class="quick-action-icon" style="background: white; border: 2px solid #2A2760; color: #2A2760;">
                         <i class="fas fa-calendar-star"></i>
                     </div>
                     <span class="quick-action-label">Events</span>
@@ -768,10 +790,14 @@
 
         <!-- MAP VIEW -->
         <div id="view-map" class="view">
-            <div class="section-header" style="margin-top: 20px;">
-                <h2 class="section-title">Campus Map</h2>
-                <span class="section-action" onclick="resetMap()">Reset</span>
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 32px;">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">Campus Map</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Navigate the Innovation Campus</div>
+                </div>
             </div>
+            <span class="section-action" onclick="resetMap()" style="position: absolute; right: 20px; top: 28px;">Reset</span>
             
             <div class="card" style="padding: 20px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
                 <div style="position: relative; background: white; border-radius: 16px; padding: 20px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);">
@@ -868,11 +894,15 @@
 
         <!-- REQUEST VIEW -->
         <div id="view-request" class="view">
-            <div class="section-header" style="margin-top: 20px;">
-                <h2 class="section-title">Request Support</h2>
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 32px;">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">Request Support</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Connect with CREATE resources</div>
+                </div>
             </div>
             
-            <p style="font-size: 14px; color: #6b7280; margin-bottom: 20px;">Let us know what you need. We'll connect you with the right resources.</p>
+            <p style="font-size: 14px; color: #6b7280; margin-bottom: 20px;">Let us know what you need. Our team will connect you with mentors, funding opportunities, and workspace resources within 24-48 hours.</p>
             
             <form onsubmit="submitRequest(event)" style="display: flex; flex-direction: column; gap: 16px;">
                 <div>
@@ -943,8 +973,8 @@
                     </div>
                 </div>
                 
-                <button type="submit" style="padding: 14px; background: linear-gradient(135deg, #2A2760 0%, #3d3a7a 100%); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 8px;">
-                    <i class="fas fa-paper-plane mr-2"></i>Submit Request
+                <button type="submit" style="padding: 16px; background: linear-gradient(135deg, #ff6a6d 0%, #ff8a8d 100%); color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 8px; box-shadow: 0 4px 15px rgba(255,106,109,0.3);">
+                    <i class="fas fa-paper-plane mr-2"></i>Submit to CREATE
                 </button>
             </form>
             
@@ -966,8 +996,12 @@
 
         <!-- INFO VIEW -->
         <div id="view-info" class="view">
-            <div class="section-header" style="margin-top: 20px;">
-                <h2 class="section-title">Quick Info</h2>
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 32px;">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">Quick Info</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Everything you need to know</div>
+                </div>
             </div>
             
             <!-- WiFi Card -->
@@ -1231,8 +1265,15 @@
         <i class="fas fa-plus"></i>
     </div>
 
+    <!-- CREATE Branded Footer -->
+    <div style="padding: 20px; text-align: center; border-top: 1px solid #e5e7eb; margin-bottom: 80px;">
+        <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 24px; opacity: 0.6; margin-bottom: 8px;">
+        <div style="font-size: 10px; color: #9ca3af; text-transform: uppercase; letter-spacing: 1px;">Central Region Ecosystem</div>
+        <div style="font-size: 9px; color: #d1d5db; margin-top: 4px;">© 2024 CREATE at WKU Innovation Campus</div>
+    </div>
+
     <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
+    <nav class="bottom-nav" style="border-top: 2px solid #2A2760;">
         <div class="nav-item active" onclick="switchView('home')">
             <i class="fas fa-home"></i>
             <span>Home</span>
