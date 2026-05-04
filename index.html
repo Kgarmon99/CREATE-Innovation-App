@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CREATE - Innovation Campus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f3f4f6;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .app-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .logo-img {
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .content-area {
+            flex-grow: 1;
+            padding: 20px;
+            padding-bottom: 80px; /* Space for bottom nav */
+            overflow-y: auto;
+        }
+
+        .bottom-nav {
+            position: sticky;
+            bottom: 0;
+            background-color: #ffffff;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            padding-bottom: calc(12px + env(safe-area-inset-bottom));
+            z-index: 50;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6b7280;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s;
+            width: 33%;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item.active {
+            color: #0369a1; /* A nice tech blue */
+        }
+
+        /* Views */
+        .view {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .status-badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 99px;
+            text-transform: uppercase;
+        }
+        .status-open { background: #dcfce7; color: #166534; }
+        .status-booked { background: #fee2e2; color: #991b1b; }
+
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    
+    <!-- Header -->
+    <header class="header">
+        <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_3x.png" alt="CREATE Innovation Campus" class="logo-img">
+        <button class="text-gray-500 hover:text-gray-800">
+            <i class="fas fa-bell text-xl"></i>
+        </button>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="content-area">
+        
+        <!-- COMMS VIEW -->
+        <div id="view-comms" class="view active">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Announcements</h2>
+            
+            <div class="card">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">IC</div>
+                    <div>
+                        <div class="font-bold text-gray-800 text-sm">Innovation Campus Admin</div>
+                        <div class="text-xs text-gray-500">2 hours ago</div>
+                    </div>
+                </div>
+                <p class="text-gray-700 text-sm leading-relaxed">
+                    Welcome to the new CREATE mobile hub! We're rolling out this platform to streamline communications, media sharing, and room reservations across the facility. Stay tuned for updates! 🚀
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold">EW</div>
+                    <div>
+                        <div class="font-bold text-gray-800 text-sm">Events Workshop</div>
+                        <div class="text-xs text-gray-500">Yesterday</div>
+                    </div>
+                </div>
+                <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                    Reminder: The regional tech networking mixer starts tomorrow at 5:00 PM in the Main Atrium. Food and drinks provided. Don't forget your badges!
+                </p>
+            </div>
+            
+            <!-- Compose FAB -->
+            <button class="fixed bottom-24 right-6 w-14 h-14 bg-blue-600 rounded-full shadow-lg flex items-center justify-center text-white hover:bg-blue-700 transition">
+                <i class="fas fa-plus text-xl"></i>
+            </button>
+        </div>
+
+        <!-- MEDIA VIEW -->
+        <div id="view-media" class="view">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Media Gallery</h2>
+            
+            <div class="grid grid-cols-2 gap-3">
+                <div class="aspect-square rounded-xl bg-gray-200 overflow-hidden relative group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" class="w-full h-full object-cover" alt="Workspace">
+                </div>
+                <div class="aspect-square rounded-xl bg-gray-200 overflow-hidden relative group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" class="w-full h-full object-cover" alt="Meeting">
+                </div>
+                <div class="aspect-square rounded-xl bg-gray-200 overflow-hidden relative group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" class="w-full h-full object-cover" alt="Team">
+                </div>
+                <div class="aspect-square rounded-xl bg-gray-200 overflow-hidden relative group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" class="w-full h-full object-cover" alt="Presentation">
+                </div>
+                <div class="aspect-square rounded-xl bg-gray-200 overflow-hidden flex items-center justify-center border-2 border-dashed border-gray-300 text-gray-400 cursor-pointer hover:bg-gray-50">
+                    <div class="text-center">
+                        <i class="fas fa-cloud-upload-alt text-2xl mb-2"></i>
+                        <div class="text-xs font-medium">Upload Media</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESERVE VIEW -->
+        <div id="view-reserve" class="view">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Reserve Space</h2>
+            <p class="text-gray-500 text-sm mb-6">Book conference rooms and work pods.</p>
+            
+            <div class="mb-4">
+                <input type="date" class="w-full border border-gray-300 rounded-lg p-3 text-sm text-gray-700 bg-gray-50 outline-none focus:border-blue-500">
+            </div>
+
+            <!-- Room 1 -->
+            <div class="card">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h3 class="font-bold text-gray-800">Conference Room A</h3>
+                        <p class="text-xs text-gray-500"><i class="fas fa-users mr-1"></i> Seats 12 • Screen • Whiteboard</p>
+                    </div>
+                    <span class="status-badge status-open">Available</span>
+                </div>
+                <div class="flex gap-2 mt-4 overflow-x-auto pb-2">
+                    <button class="flex-shrink-0 px-4 py-2 border border-blue-600 text-blue-600 rounded-lg text-xs font-bold hover:bg-blue-50">1:00 PM</button>
+                    <button class="flex-shrink-0 px-4 py-2 border border-blue-600 text-blue-600 rounded-lg text-xs font-bold hover:bg-blue-50">2:00 PM</button>
+                    <button class="flex-shrink-0 px-4 py-2 border border-blue-600 text-blue-600 rounded-lg text-xs font-bold hover:bg-blue-50">3:30 PM</button>
+                </div>
+            </div>
+
+            <!-- Room 2 -->
+            <div class="card">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h3 class="font-bold text-gray-800">Creative Pod 1</h3>
+                        <p class="text-xs text-gray-500"><i class="fas fa-users mr-1"></i> Seats 4 • Quiet Space</p>
+                    </div>
+                    <span class="status-badge status-booked">Booked (Next 2 hrs)</span>
+                </div>
+                <div class="flex gap-2 mt-4 overflow-x-auto pb-2">
+                    <button class="flex-shrink-0 px-4 py-2 bg-gray-100 text-gray-400 rounded-lg text-xs font-bold cursor-not-allowed">1:00 PM</button>
+                    <button class="flex-shrink-0 px-4 py-2 bg-gray-100 text-gray-400 rounded-lg text-xs font-bold cursor-not-allowed">2:00 PM</button>
+                    <button class="flex-shrink-0 px-4 py-2 border border-blue-600 text-blue-600 rounded-lg text-xs font-bold hover:bg-blue-50">4:00 PM</button>
+                </div>
+            </div>
+            
+            <!-- Room 3 -->
+            <div class="card">
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h3 class="font-bold text-gray-800">Main Atrium</h3>
+                        <p class="text-xs text-gray-500"><i class="fas fa-users mr-1"></i> Seats 50+ • Event Space</p>
+                    </div>
+                    <span class="status-badge status-open">Available</span>
+                </div>
+                <button class="w-full mt-3 py-2 bg-blue-600 text-white rounded-lg text-sm font-bold hover:bg-blue-700 transition">Request Event Booking</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="switchView('comms', this)">
+            <i class="fas fa-comment-alt"></i>
+            <span>Comms</span>
+        </div>
+        <div class="nav-item" onclick="switchView('media', this)">
+            <i class="fas fa-photo-video"></i>
+            <span>Media</span>
+        </div>
+        <div class="nav-item" onclick="switchView('reserve', this)">
+            <i class="fas fa-calendar-check"></i>
+            <span>Reserve</span>
+        </div>
+    </nav>
+
+</div>
+
+<script>
+    function switchView(viewName, navElement) {
+        // Hide all views
+        document.querySelectorAll('.view').forEach(view => {
+            view.classList.remove('active');
+        });
+        
+        // Remove active class from all nav items
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        
+        // Show target view
+        document.getElementById('view-' + viewName).classList.add('active');
+        
+        // Set active class on clicked nav item
+        navElement.classList.add('active');
+    }
+    
+    // Set today's date in the date picker by default
+    document.addEventListener('DOMContentLoaded', () => {
+        const dateInput = document.querySelector('input[type="date"]');
+        if (dateInput) {
+            dateInput.valueAsDate = new Date();
+        }
+    });
+</script>
+
+</body>
+</html>
