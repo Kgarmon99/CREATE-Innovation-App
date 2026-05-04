@@ -3,30 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#1a1a2e">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#2A2760">
     <title>CREATE | Innovation Campus Hub</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'create-dark': '#0f0f1a',
-                        'create-navy': '#1a1a2e',
-                        'create-purple': '#16213e',
-                        'create-accent': '#e94560',
-                        'create-coral': '#ff6b6b',
+                        'create-navy': '#2A2760',
+                        'create-navy-dark': '#1e1c45',
+                        'create-coral': '#ff6a6d',
+                        'create-coral-dark': '#e55a5d',
                         'create-teal': '#4ecdc4',
-                        'create-gold': '#f9ca24',
+                        'create-gold': '#f7b731',
                     },
                     fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
                     }
                 }
             }
@@ -35,180 +30,159 @@
     <style>
         * {
             -webkit-tap-highlight-color: transparent;
-            box-sizing: border-box;
         }
         
         body {
-            font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
-            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
-            color: #ffffff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f3f4f6;
             overflow-x: hidden;
-            min-height: 100vh;
         }
 
-        .app-container {
-            max-width: 430px;
+        .app-frame {
+            max-width: 480px;
             margin: 0 auto;
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
             min-height: 100vh;
-            background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
             position: relative;
-            overflow-x: hidden;
+            box-shadow: 0 0 40px rgba(42, 39, 96, 0.1);
         }
 
-        /* Glassmorphism Cards */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-        }
-
-        .glass-card-hover:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(233, 69, 96, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* Gradient Text */
-        .gradient-text {
-            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 50%, #f9ca24 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Header */
-        .app-header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(15, 15, 26, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 16px 20px;
-        }
-
-        /* Navigation */
-        .bottom-nav {
+        /* Splash Screen */
+        .splash-screen {
             position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 430px;
-            background: rgba(15, 15, 26, 0.98);
-            backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 12px 24px 24px;
-            z-index: 100;
-        }
-
-        .nav-item {
+            inset: 0;
+            background: linear-gradient(135deg, #2A2760 0%, #3d3a7a 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 11px;
-            font-weight: 600;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+
+        .splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .splash-logo {
+            width: 180px;
+            margin-bottom: 30px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+
+        .splash-tagline {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2A2760 0%, #3d3a7a 100%);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 4px 20px rgba(42, 39, 96, 0.3);
+        }
+
+        .header-logo {
+            height: 36px;
+            filter: brightness(0) invert(1);
+        }
+
+        .header-action {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
             cursor: pointer;
-            transition: all 0.3s ease;
-            padding: 8px 16px;
-            border-radius: 16px;
+            transition: background 0.2s;
         }
 
-        .nav-item i {
-            font-size: 22px;
-            transition: transform 0.3s ease;
+        .header-action:hover {
+            background: rgba(255,255,255,0.25);
         }
 
-        .nav-item.active {
-            color: #e94560;
+        .notification-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 18px;
+            height: 18px;
+            background: #ff6a6d;
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #2A2760;
         }
 
-        .nav-item.active i {
-            transform: scale(1.1);
+        /* Content */
+        .content-scroll {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px;
+            padding-bottom: 100px;
+            scroll-behavior: smooth;
         }
 
-        /* Content Views */
-        .view {
-            display: none;
-            animation: fadeSlideUp 0.4s ease;
-            padding: 0 20px 120px;
-        }
-
-        .view.active {
-            display: block;
-        }
-
-        @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, rgba(233, 69, 96, 0.15) 0%, rgba(78, 205, 196, 0.1) 100%);
-            border: 1px solid rgba(233, 69, 96, 0.2);
-            border-radius: 24px;
-            padding: 28px;
-            margin: 20px 0 24px;
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, #ff6a6d 0%, #ff8a8d 100%);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+            color: white;
             position: relative;
             overflow: hidden;
         }
 
-        .hero-section::before {
+        .welcome-banner::before {
             content: '';
             position: absolute;
             top: -50%;
-            right: -30%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(233, 69, 96, 0.2) 0%, transparent 70%);
-            animation: pulse-glow 4s ease-in-out infinite;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
         }
 
-        @keyframes pulse-glow {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
+        .welcome-time {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-bottom: 4px;
         }
 
-        /* Stat Cards */
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(233, 69, 96, 0.3);
-        }
-
-        .stat-number {
-            font-size: 32px;
+        .welcome-name {
+            font-size: 24px;
             font-weight: 800;
-            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1;
+            margin-bottom: 8px;
         }
 
-        .stat-label {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.5);
-            margin-top: 6px;
-            font-weight: 500;
+        .welcome-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
         }
 
         /* Quick Actions */
@@ -235,110 +209,21 @@
             align-items: center;
             justify-content: center;
             font-size: 22px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .quick-action:hover .quick-action-icon {
-            background: rgba(233, 69, 96, 0.2);
-            border-color: rgba(233, 69, 96, 0.5);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
         }
 
         .quick-action-label {
             font-size: 11px;
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Feature Cards */
-        .feature-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 16px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .feature-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(233, 69, 96, 0.3);
-        }
-
-        .feature-header {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 12px;
-        }
-
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            background: linear-gradient(135deg, rgba(233, 69, 96, 0.2) 0%, rgba(78, 205, 196, 0.2) 100%);
-            border: 1px solid rgba(233, 69, 96, 0.3);
-        }
-
-        .feature-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        .feature-desc {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
-            line-height: 1.5;
-        }
-
-        .feature-meta {
-            display: flex;
-            gap: 12px;
-            margin-top: 12px;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        /* MoneyBot Banner */
-        .moneybot-banner {
-            background: linear-gradient(135deg, rgba(249, 202, 36, 0.15) 0%, rgba(233, 69, 96, 0.1) 100%);
-            border: 1px solid rgba(249, 202, 36, 0.3);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 24px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .moneybot-banner::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(249, 202, 36, 0.2) 0%, transparent 70%);
-        }
-
-        .moneybot-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #f9ca24 0%, #f0932b 100%);
-            color: #0f0f1a;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
+            color: #4b5563;
+            text-align: center;
         }
 
         /* Section Headers */
@@ -347,569 +232,633 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 16px;
-            margin-top: 28px;
         }
 
         .section-title {
-            font-size: 20px;
-            font-weight: 800;
-            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
         }
 
         .section-action {
             font-size: 13px;
             font-weight: 600;
-            color: #e94560;
+            color: #ff6a6d;
             cursor: pointer;
         }
 
-        /* Resource Cards */
-        .resource-card {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+        /* Cards */
+        .card {
+            background: white;
             border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 12px;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #f3f4f6;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .resource-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(78, 205, 196, 0.3);
+        .card:active {
+            transform: scale(0.98);
         }
 
-        .resource-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+        .card-highlight {
+            border-left: 4px solid #ff6a6d;
+        }
+
+        /* Announcement Card */
+        .announcement-card {
+            display: flex;
+            gap: 14px;
+        }
+
+        .announcement-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #2A2760 0%, #4ecdc4 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
             flex-shrink: 0;
         }
 
-        .resource-info {
+        .announcement-content {
             flex-grow: 1;
         }
 
-        .resource-name {
-            font-weight: 700;
-            font-size: 15px;
-            color: #ffffff;
-            margin-bottom: 2px;
-        }
-
-        .resource-type {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        .resource-arrow {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 14px;
-        }
-
-        /* Event Cards */
-        .event-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .event-date {
-            display: inline-block;
-            background: rgba(233, 69, 96, 0.2);
-            color: #e94560;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .event-title {
-            font-size: 17px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 8px;
-            line-height: 1.3;
-        }
-
-        .event-desc {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
-            line-height: 1.5;
-            margin-bottom: 16px;
-        }
-
-        .event-footer {
+        .announcement-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 6px;
         }
 
-        .event-location {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        .event-btn {
-            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 10px;
-            font-size: 12px;
+        .announcement-author {
             font-weight: 700;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            color: #1f2937;
+            font-size: 14px;
         }
 
-        .event-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 20px rgba(233, 69, 96, 0.4);
+        .announcement-time {
+            font-size: 12px;
+            color: #9ca3af;
         }
 
-        /* Notification Badge */
-        .notification-dot {
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            width: 18px;
-            height: 18px;
-            background: #e94560;
-            border-radius: 50%;
-            border: 3px solid #0f0f1a;
+        .announcement-text {
+            color: #4b5563;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .announcement-tag {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 10px;
+            background: #fef3f2;
+            color: #ff6a6d;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 20px;
+        }
+
+        /* Room Cards */
+        .room-card {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .room-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 9px;
-            font-weight: 800;
+            font-size: 28px;
+            flex-shrink: 0;
         }
 
-        /* Tab Bar Animation */
-        .nav-indicator {
-            position: absolute;
+        .room-info {
+            flex-grow: 1;
+        }
+
+        .room-name {
+            font-weight: 700;
+            color: #1f2937;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .room-details {
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .room-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-available {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-busy {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .room-book-btn {
+            padding: 10px 20px;
+            background: #2A2760;
+            color: white;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .room-book-btn:hover {
+            background: #3d3a7a;
+        }
+
+        /* Media Gallery */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .media-item {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .media-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .media-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .media-item.featured {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
             bottom: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #e94560, #ff6b6b);
-            border-radius: 3px 3px 0 0;
-            transition: all 0.3s ease;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0 20px;
+            z-index: 100;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #9ca3af;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+
+        .nav-item i {
+            font-size: 22px;
+        }
+
+        .nav-item.active {
+            color: #ff6a6d;
+            background: #fef3f2;
+        }
+
+        /* Views */
+        .view {
+            display: none;
+            animation: slideUp 0.3s ease;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 90px;
+            right: calc(50% - 200px);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6a6d 0%, #ff8a8d 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 16px rgba(255, 106, 109, 0.4);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            z-index: 90;
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 106, 109, 0.5);
+        }
+
+        /* Pull to refresh hint */
+        .pull-hint {
+            text-align: center;
+            padding: 20px;
+            color: #9ca3af;
+            font-size: 13px;
         }
 
         /* Empty State */
         .empty-state {
             text-align: center;
-            padding: 60px 20px;
+            padding: 40px 20px;
         }
 
         .empty-icon {
             width: 80px;
             height: 80px;
-            margin: 0 auto 20px;
-            background: rgba(255, 255, 255, 0.05);
+            margin: 0 auto 16px;
+            background: #f3f4f6;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 32px;
-            color: rgba(255, 255, 255, 0.2);
+            color: #9ca3af;
+        }
+
+        .empty-title {
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .empty-text {
+            color: #6b7280;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 
-<div class="app-container">
+<!-- Splash Screen -->
+<div class="splash-screen" id="splash">
+    <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_3x.png" alt="CREATE" class="splash-logo">
+    <div class="splash-tagline">Central Region Ecosystem</div>
+</div>
+
+<!-- Main App -->
+<div class="app-frame">
     
     <!-- Header -->
-    <header class="app-header">
-        <div class="flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_3x.png" alt="CREATE" class="h-8">
-                <div class="text-white/40 text-sm font-medium">Innovation Campus</div>
-            </div>
-            <button class="relative p-2" onclick="showNotifications()">
-                <i class="fas fa-bell text-xl text-white/60"></i>
-                <span class="notification-dot">3</span>
-            </button>
+    <header class="header">
+        <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_3x.png" alt="CREATE" class="header-logo">
+        <div class="header-action" onclick="showNotifications()">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
         </div>
     </header>
 
-    <!-- HOME VIEW -->
-    <div id="view-home" class="view active">
+    <!-- Content -->
+    <main class="content-scroll">
         
-        <!-- Hero -->
-        <div class="hero-section">
-            <div class="relative z-10">
-                <div class="text-white/60 text-sm font-medium mb-2">Monday, January 15</div>
-                <h1 class="text-2xl font-bold mb-1">Welcome to <span class="gradient-text">CREATE</span></h1>
-                <p class="text-white/50 text-sm">Central Region Ecosystem for Arts, Technology & Entrepreneurship</p>
+        <!-- HOME VIEW -->
+        <div id="view-home" class="view active">
+            
+            <!-- Welcome Banner -->
+            <div class="welcome-banner">
+                <div class="welcome-time" id="current-time">Monday, January 15</div>
+                <div class="welcome-name">Good Afternoon!</div>
+                <div class="welcome-subtitle">Welcome to the Innovation Campus</div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <div class="quick-action" onclick="switchView('reserve')">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #2A2760 0%, #4ecdc4 100%);">
+                        <i class="fas fa-calendar-plus"></i>
+                    </div>
+                    <span class="quick-action-label">Book Room</span>
+                </div>
+                <div class="quick-action" onclick="switchView('media')">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #ff6a6d 0%, #ff8a8d 100%);">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <span class="quick-action-label">Upload</span>
+                </div>
+                <div class="quick-action" onclick="showDirectory()">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #f7b731 0%, #f9d56e 100%);">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <span class="quick-action-label">Directory</span>
+                </div>
+                <div class="quick-action" onclick="showEvents()">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #4ecdc4 0%, #6ee7de 100%);">
+                        <i class="fas fa-calendar-star"></i>
+                    </div>
+                    <span class="quick-action-label">Events</span>
+                </div>
+            </div>
+
+            <!-- Latest Announcements -->
+            <div class="section-header">
+                <h2 class="section-title">Latest Updates</h2>
+                <span class="section-action" onclick="switchView('comms')">View All</span>
+            </div>
+
+            <div class="card card-highlight">
+                <div class="announcement-card">
+                    <div class="announcement-avatar">IC</div>
+                    <div class="announcement-content">
+                        <div class="announcement-meta">
+                            <span class="announcement-author">Innovation Campus</span>
+                            <span class="announcement-time">2h ago</span>
+                        </div>
+                        <p class="announcement-text">Applications for the Launch Kentucky: Idea Challenge are officially open! Innovators from Warren, Barren, Simpson and 9 other counties + WKU students can apply now. Let's build momentum! 🚀</p>
+                        <span class="announcement-tag">Announcement</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="announcement-card">
+                    <div class="announcement-avatar" style="background: linear-gradient(135deg, #ff6a6d 0%, #ff8a8d 100%);">EW</div>
+                    <div class="announcement-content">
+                        <div class="announcement-meta">
+                            <span class="announcement-author">Penny Hughes</span>
+                            <span class="announcement-time">5h ago</span>
+                        </div>
+                        <p class="announcement-text">The 4th Annual Small Business Summit and Expo is next week! We're expecting hundreds of entrepreneurs, investors, and local leaders. Make sure to reserve a demo booth if you haven't yet.</p>
+                        <span class="announcement-tag" style="background: #ede9fe; color: #7c3aed;">Event</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Spaces -->
+            <div class="section-header" style="margin-top: 28px;">
+                <h2 class="section-title">Available Now</h2>
+                <span class="section-action" onclick="switchView('reserve')">See All</span>
+            </div>
+
+            <div class="card">
+                <div class="room-card">
+                    <div class="room-image">🎯</div>
+                    <div class="room-info">
+                        <div class="room-name">Launch Blue Boardroom</div>
+                        <div class="room-details">Seats 12 • Screen • Whiteboard</div>
+                        <span class="room-status status-available">
+                            <i class="fas fa-circle" style="font-size: 8px;"></i> Available Now
+                        </span>
+                    </div>
+                    <button class="room-book-btn" onclick="switchView('reserve')">Book</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- COMMS VIEW -->
+        <div id="view-comms" class="view">
+            <div class="section-header">
+                <h2 class="section-title">Community Feed</h2>
+                <span class="section-action">Filter</span>
+            </div>
+
+            <div class="card card-highlight">
+                <div class="announcement-card">
+                    <div class="announcement-avatar">IC</div>
+                    <div class="announcement-content">
+                        <div class="announcement-meta">
+                            <span class="announcement-author">Innovation Campus</span>
+                            <span class="announcement-time">2h ago</span>
+                        </div>
+                        <p class="announcement-text">Welcome to the new CREATE mobile hub! 🚀 We're rolling out this platform to streamline communications, media sharing, and room reservations across the facility. Stay tuned for updates!</p>
+                        <div style="margin-top: 12px; display: flex; gap: 12px;">
+                            <button style="padding: 8px 16px; background: #f3f4f6; border-radius: 8px; font-size: 13px; font-weight: 600; color: #4b5563;">
+                                <i class="fas fa-heart" style="color: #ff6a6d; margin-right: 6px;"></i>24
+                            </button>
+                            <button style="padding: 8px 16px; background: #f3f4f6; border-radius: 8px; font-size: 13px; font-weight: 600; color: #4b5563;">
+                                <i class="fas fa-comment" style="margin-right: 6px;"></i>8
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="announcement-card">
+                    <div class="announcement-avatar" style="background: linear-gradient(135deg, #4ecdc4 0%, #6ee7de 100%);">SM</div>
+                    <div class="announcement-content">
+                        <div class="announcement-meta">
+                            <span class="announcement-author">AccelerateKY Partner</span>
+                            <span class="announcement-time">4h ago</span>
+                        </div>
+                        <p class="announcement-text">Massive congratulations to Jeremy Jacobs and the UnDesked team for landing a $3M investment! 🍾 Proof that the ecosystem we're building right here in Bowling Green can compete on a national stage.</p>
+                        <span class="announcement-tag" style="background: #ede9fe; color: #7c3aed;">Networking</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="announcement-card">
+                    <div class="announcement-avatar" style="background: linear-gradient(135deg, #2A2760 0%, #4ecdc4 100%);">CR</div>
+                    <div class="announcement-content">
+                        <div class="announcement-meta">
+                            <span class="announcement-author">CREATE Admin</span>
+                            <span class="announcement-time">1d ago</span>
+                        </div>
+                        <p class="announcement-text">Calling ALL Entrepreneur Support Organizations across KY! 🚀 Join us for the KY Innovation Startup Resource Series. We’ll hear from Launch Blue and Keyhorse Capital about the new Invest Blue capital program.</p>
+                        <span class="announcement-tag" style="background: #dcfce7; color: #166534;">Opportunity</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Stats -->
-        <div class="stat-grid">
-            <div class="stat-card">
-                <div class="stat-number">500+</div>
-                <div class="stat-label">Startups Served</div>
+        <!-- MEDIA VIEW -->
+        <div id="view-media" class="view">
+            <div class="section-header">
+                <h2 class="section-title">Media Gallery</h2>
+                <span class="section-action">My Uploads</span>
             </div>
-            <div class="stat-card">
-                <div class="stat-number">$1B+</div>
-                <div class="stat-label">Revenue Generated</div>
+
+            <div class="media-grid">
+                <div class="media-item featured">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400" alt="Workspace">
+                </div>
+                <div class="media-item">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32b7?w=200" alt="Meeting">
+                </div>
+                <div class="media-item">
+                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=200" alt="Team">
+                </div>
+                <div class="media-item">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=200" alt="Presentation">
+                </div>
+                <div class="media-item">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=200" alt="Office">
+                </div>
+                <div class="media-item" style="background: #f3f4f6; display: flex; align-items: center; justify-content: center; color: #9ca3af;">
+                    <i class="fas fa-plus" style="font-size: 24px;"></i>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-number">5K+</div>
-                <div class="stat-label">Jobs Created</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">28</div>
-                <div class="stat-label">Partner Resources</div>
+
+            <div style="margin-top: 24px;">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Events</h2>
+                </div>
+                <div class="card">
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <div style="width: 60px; height: 60px; border-radius: 12px; background: linear-gradient(135deg, #2A2760 0%, #4ecdc4 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 700; color: #1f2937;">Children's Entrepreneur Market</div>
+                            <div style="font-size: 13px; color: #6b7280;">124 photos • Jan 8-12</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Quick Actions -->
-        <div class="quick-actions">
-            <div class="quick-action" onclick="switchView('spaces')">
-                <div class="quick-action-icon text-create-coral">
-                    <i class="fas fa-door-open"></i>
-                </div>
-                <span class="quick-action-label">Book Space</span>
+        <!-- RESERVE VIEW -->
+        <div id="view-reserve" class="view">
+            <div class="section-header">
+                <h2 class="section-title">Reserve Space</h2>
+                <span class="section-action">My Bookings</span>
             </div>
-            <div class="quick-action" onclick="switchView('resources')">
-                <div class="quick-action-icon text-create-teal">
-                    <i class="fas fa-hands-helping"></i>
-                </div>
-                <span class="quick-action-label">Resources</span>
-            </div>
-            <div class="quick-action" onclick="switchView('events')">
-                <div class="quick-action-icon text-create-gold">
-                    <i class="fas fa-calendar-star"></i>
-                </div>
-                <span class="quick-action-label">Events</span>
-            </div>
-            <div class="quick-action" onclick="showDirectory()">
-                <div class="quick-action-icon text-white/60">
-                    <i class="fas fa-users"></i>
-                </div>
-                <span class="quick-action-label">Directory</span>
-            </div>
-        </div>
 
-        <!-- MoneyBot Launch Banner -->
-        <div class="moneybot-banner">
-            <div class="relative z-10">
-                <span class="moneybot-badge">Now Available</span>
-                <h3 class="text-lg font-bold mb-2">Financial Tools for Founders</h3>
-                <p class="text-white/60 text-sm mb-4">Powered by MoneyBot. Track expenses, forecast runway, and manage startup finances—all in one place.</p>
-                <button class="bg-gradient-to-r from-create-gold to-orange-500 text-create-dark font-bold py-3 px-6 rounded-xl text-sm" onclick="launchMoneyBot()">
-                    Explore MoneyBot <i class="fas fa-arrow-right ml-2"></i>
+            <!-- Date Selector -->
+            <div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 16px; margin-bottom: 8px;">
+                <div style="flex-shrink: 0; padding: 12px 16px; background: #2A2760; color: white; border-radius: 12px; text-align: center; min-width: 60px;">
+                    <div style="font-size: 11px; opacity: 0.8;">MON</div>
+                    <div style="font-size: 20px; font-weight: 700;">15</div>
+                </div>
+                <div style="flex-shrink: 0; padding: 12px 16px; background: white; border: 1px solid #e5e7eb; color: #4b5563; border-radius: 12px; text-align: center; min-width: 60px;">
+                    <div style="font-size: 11px;">TUE</div>
+                    <div style="font-size: 20px; font-weight: 700;">16</div>
+                </div>
+                <div style="flex-shrink: 0; padding: 12px 16px; background: white; border: 1px solid #e5e7eb; color: #4b5563; border-radius: 12px; text-align: center; min-width: 60px;">
+                    <div style="font-size: 11px;">WED</div>
+                    <div style="font-size: 20px; font-weight: 700;">17</div>
+                </div>
+                <div style="flex-shrink: 0; padding: 12px 16px; background: white; border: 1px solid #e5e7eb; color: #4b5563; border-radius: 12px; text-align: center; min-width: 60px;">
+                    <div style="font-size: 11px;">THU</div>
+                    <div style="font-size: 20px; font-weight: 700;">18</div>
+                </div>
+                <div style="flex-shrink: 0; padding: 12px 16px; background: white; border: 1px solid #e5e7eb; color: #4b5563; border-radius: 12px; text-align: center; min-width: 60px;">
+                    <div style="font-size: 11px;">FRI</div>
+                    <div style="font-size: 20px; font-weight: 700;">19</div>
+                </div>
+            </div>
+
+            <!-- Room Cards -->
+            <div class="card">
+                <div class="room-card">
+                    <div class="room-image" style="background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%); color: #7c3aed;">🎯</div>
+                    <div class="room-info">
+                        <div class="room-name">Conference Room A</div>
+                        <div class="room-details">Seats 12 • 86" Screen • Whiteboard</div>
+                        <div style="display: flex; gap: 6px; margin-top: 8px;">
+                            <span class="room-status status-available">
+                                <i class="fas fa-circle" style="font-size: 6px;"></i> Available
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 8px; margin-top: 16px; overflow-x: auto;">
+                    <button style="flex-shrink: 0; padding: 8px 16px; background: #2A2760; color: white; border-radius: 8px; font-size: 13px; font-weight: 600;">1:00 PM</button>
+                    <button style="flex-shrink: 0; padding: 8px 16px; background: #2A2760; color: white; border-radius: 8px; font-size: 13px; font-weight: 600;">2:00 PM</button>
+                    <button style="flex-shrink: 0; padding: 8px 16px; background: #2A2760; color: white; border-radius: 8px; font-size: 13px; font-weight: 600;">3:30 PM</button>
+                    <button style="flex-shrink: 0; padding: 8px 16px; background: white; border: 1px solid #2A2760; color: #2A2760; border-radius: 8px; font-size: 13px; font-weight: 600;">+ More</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="room-card">
+                    <div class="room-image" style="background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); color: #166534;">🎨</div>
+                    <div class="room-info">
+                        <div class="room-name">Narrative Network Studio</div>
+                        <div class="room-details">Seats 4 • Quiet Space • Natural Light</div>
+                        <span class="room-status status-busy">
+                            <i class="fas fa-circle" style="font-size: 6px;"></i> Booked until 4pm
+                        </span>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 8px; margin-top: 16px; overflow-x: auto;">
+                    <button style="flex-shrink: 0; padding: 8px 16px; background: #f3f4f6; color: #9ca3af; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: not-allowed;">1:00 PM</button>
+                    <button style="flex-shrink: 0; padding: 8px 16px; background: #f3f4f6; color: #9ca3af; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: not-allowed;">2:00 PM</button>
+                    <button style="flex-shrink: 0; padding: 8px 16px; background: #2A2760; color: white; border-radius: 8px; font-size: 13px; font-weight: 600;">4:00 PM</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="room-card">
+                    <div class="room-image" style="background: linear-gradient(135deg, #fef3f2 0%, #fecaca 100%); color: #dc2626;">🏢</div>
+                    <div class="room-info">
+                        <div class="room-name">Startup Garden Atrium</div>
+                        <div class="room-details">Seats 50+ • Event Space • Stage</div>
+                        <span class="room-status status-available">
+                            <i class="fas fa-circle" style="font-size: 6px;"></i> Available
+                        </span>
+                    </div>
+                </div>
+                <button style="width: 100%; margin-top: 16px; padding: 12px; background: linear-gradient(135deg, #2A2760 0%, #3d3a7a 100%); color: white; border-radius: 10px; font-size: 14px; font-weight: 600;">
+                    Request Event Booking
                 </button>
             </div>
         </div>
 
-        <!-- Featured Event -->
-        <div class="section-header">
-            <h2 class="section-title">Featured Event</h2>
-            <span class="section-action" onclick="switchView('events')">All Events</span>
-        </div>
+    </main>
 
-        <div class="event-card">
-            <span class="event-date">NOV 15-16 • 2024</span>
-            <h3 class="event-title">4th Annual Small Business Summit & Expo</h3>
-            <p class="event-desc">Join entrepreneurs, business owners, and industry leaders for a dynamic day of connection, learning, and growth. Keynote speakers, workshops, and networking.</p>
-            <div class="event-footer">
-                <span class="event-location"><i class="fas fa-map-marker-alt mr-2"></i>WKU Innovation Campus</span>
-                <button class="event-btn">Register</button>
-            </div>
-        </div>
-
-        <!-- Latest Updates -->
-        <div class="section-header">
-            <h2 class="section-title">Community Updates</h2>
-            <span class="section-action">View All</span>
-        </div>
-
-        <div class="feature-card">
-            <div class="feature-header">
-                <div class="feature-icon">🚀</div>
-                <div>
-                    <div class="feature-title">Launch Kentucky: Idea Challenge</div>
-                    <div class="text-white/40 text-xs mt-1">Applications Open • 12 Counties</div>
-                </div>
-            </div>
-            <p class="feature-desc">Calling all innovators from Allen, Barren, Butler, Edmonson, Hancock, Hart, Logan, Metcalfe, Monroe, Ohio, Simpson, and Warren counties!</p>
-            <div class="feature-meta">
-                <span><i class="fas fa-user mr-1"></i> Penny Hughes</span>
-                <span><i class="fas fa-clock mr-1"></i> 2h ago</span>
-            </div>
-        </div>
-
-        <div class="feature-card">
-            <div class="feature-header">
-                <div class="feature-icon" style="background: linear-gradient(135deg, rgba(249, 202, 36, 0.2) 0%, rgba(233, 69, 96, 0.2) 100%); border-color: rgba(249, 202, 36, 0.3);">💰</div>
-                <div>
-                    <div class="feature-title">UnDesked Lands $3M Investment</div>
-                    <div class="text-white/40 text-xs mt-1">Major Win for Local Startup</div>
-                </div>
-            </div>
-            <p class="feature-desc">Jeremy Jacobs and team secure major funding. Proof that the ecosystem we're building in Bowling Green competes on a national stage.</p>
-            <div class="feature-meta">
-                <span><i class="fas fa-user mr-1"></i> AccelerateKY</span>
-                <span><i class="fas fa-fire mr-1"></i> Trending</span>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- SPACES VIEW -->
-    <div id="view-spaces" class="view">
-        <div class="section-header" style="margin-top: 20px;">
-            <h2 class="section-title">Reserve Space</h2>
-            <span class="section-action">My Bookings</span>
-        </div>
-
-        <div class="glass-card p-4 mb-6">
-            <div class="flex gap-3 overflow-x-auto pb-2">
-                <div class="flex-shrink-0 px-5 py-3 bg-create-accent/20 border border-create-accent/30 rounded-2xl text-center min-w-[70px]">
-                    <div class="text-white/60 text-xs">MON</div>
-                    <div class="text-xl font-bold text-create-accent">15</div>
-                </div>
-                <div class="flex-shrink-0 px-5 py-3 bg-white/5 border border-white/10 rounded-2xl text-center min-w-[70px]">
-                    <div class="text-white/40 text-xs">TUE</div>
-                    <div class="text-xl font-bold text-white/80">16</div>
-                </div>
-                <div class="flex-shrink-0 px-5 py-3 bg-white/5 border border-white/10 rounded-2xl text-center min-w-[70px]">
-                    <div class="text-white/40 text-xs">WED</div>
-                    <div class="text-xl font-bold text-white/80">17</div>
-                </div>
-                <div class="flex-shrink-0 px-5 py-3 bg-white/5 border border-white/10 rounded-2xl text-center min-w-[70px]">
-                    <div class="text-white/40 text-xs">THU</div>
-                    <div class="text-xl font-bold text-white/80">18</div>
-                </div>
-                <div class="flex-shrink-0 px-5 py-3 bg-white/5 border border-white/10 rounded-2xl text-center min-w-[70px]">
-                    <div class="text-white/40 text-xs">FRI</div>
-                    <div class="text-xl font-bold text-white/80">19</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-card p-5 mb-4">
-            <div class="flex items-start gap-4">
-                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 border border-purple-500/30 flex items-center justify-center text-2xl flex-shrink-0">🎯</div>
-                <div class="flex-grow">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="font-bold text-lg">Launch Blue Boardroom</h3>
-                        <span class="px-3 py-1 bg-green-500/20 text-green-400 text-xs font-bold rounded-full">Available</span>
-                    </div>
-                    <p class="text-white/50 text-sm mb-4">Seats 12 • 86" Display • Video Conf • Whiteboard</p>
-                    <div class="flex gap-2 flex-wrap">
-                        <button class="px-4 py-2 bg-create-accent text-white rounded-xl text-sm font-semibold">1:00 PM</button>
-                        <button class="px-4 py-2 bg-create-accent text-white rounded-xl text-sm font-semibold">2:00 PM</button>
-                        <button class="px-4 py-2 bg-create-accent text-white rounded-xl text-sm font-semibold">3:30 PM</button>
-                        <button class="px-4 py-2 bg-white/10 text-white/60 rounded-xl text-sm font-semibold">+ More</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-card p-5 mb-4">
-            <div class="flex items-start gap-4">
-                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500/20 to-teal-500/20 border border-green-500/30 flex items-center justify-center text-2xl flex-shrink-0">🎨</div>
-                <div class="flex-grow">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="font-bold text-lg">Narrative Network Studio</h3>
-                        <span class="px-3 py-1 bg-red-500/20 text-red-400 text-xs font-bold rounded-full">Booked</span>
-                    </div>
-                    <p class="text-white/50 text-sm mb-4">Seats 4 • Podcast Setup • Natural Light • Sound Dampened</p>
-                    <div class="flex gap-2 flex-wrap">
-                        <button class="px-4 py-2 bg-white/5 text-white/30 rounded-xl text-sm font-semibold cursor-not-allowed">1:00 PM</button>
-                        <button class="px-4 py-2 bg-white/5 text-white/30 rounded-xl text-sm font-semibold cursor-not-allowed">2:00 PM</button>
-                        <button class="px-4 py-2 bg-create-accent text-white rounded-xl text-sm font-semibold">4:00 PM</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass-card p-5">
-            <div class="flex items-start gap-4">
-                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500/20 to-red-500/20 border border-orange-500/30 flex items-center justify-center text-2xl flex-shrink-0">🏢</div>
-                <div class="flex-grow">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="font-bold text-lg">Startup Garden Atrium</h3>
-                        <span class="px-3 py-1 bg-green-500/20 text-green-400 text-xs font-bold rounded-full">Available</span>
-                    </div>
-                    <p class="text-white/50 text-sm mb-4">Seats 50+ • Event Space • Stage • A/V Equipment</p>
-                    <button class="w-full py-3 bg-gradient-to-r from-create-accent to-orange-500 text-white rounded-xl font-bold text-sm">Request Event Booking</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- RESOURCES VIEW -->
-    <div id="view-resources" class="view">
-        <div class="section-header" style="margin-top: 20px;">
-            <h2 class="section-title">Ecosystem Resources</h2>
-        </div>
-
-        <p class="text-white/50 text-sm mb-6">Connect with 28+ partners and resources to help you start, grow, and stay in Kentucky.</p>
-
-        <div class="resource-card">
-            <div class="resource-icon bg-blue-500/20 text-blue-400">
-                <i class="fas fa-rocket"></i>
-            </div>
-            <div class="resource-info">
-                <div class="resource-name">KY Innovation</div>
-                <div class="resource-type">Statewide Startup Support</div>
-            </div>
-            <i class="fas fa-chevron-right resource-arrow"></i>
-        </div>
-
-        <div class="resource-card">
-            <div class="resource-icon bg-green-500/20 text-green-400">
-                <i class="fas fa-briefcase"></i>
-            </div>
-            <div class="resource-info">
-                <div class="resource-name">KY Small Business Development Center</div>
-                <div class="resource-type">Business Consulting</div>
-            </div>
-            <i class="fas fa-chevron-right resource-arrow"></i>
-        </div>
-
-        <div class="resource-card">
-            <div class="resource-icon bg-purple-500/20 text-purple-400">
-                <i class="fas fa-handshake"></i>
-            </div>
-            <div class="resource-info">
-                <div class="resource-name">Advantage Kentucky Alliance</div>
-                <div class="resource-type">Business Growth</div>
-            </div>
-            <i class="fas fa-chevron-right resource-arrow"></i>
-        </div>
-
-        <div class="resource-card">
-            <div class="resource-icon bg-yellow-500/20 text-yellow-400">
-                <i class="fas fa-dollar-sign"></i>
-            </div>
-            <div class="resource-info">
-                <div class="resource-name">Launch Blue</div>
-                <div class="resource-type">University of Kentucky</div>
-            </div>
-            <i class="fas fa-chevron-right resource-arrow"></i>
-        </div>
-
-        <div class="resource-card">
-            <div class="resource-icon bg-red-500/20 text-red-400">
-                <i class="fas fa-chart-line"></i>
-            </div>
-            <div class="resource-info">
-                <div class="resource-name">Keyhorse Capital</div>
-                <div class="resource-type">Early-Stage Investment</div>
-            </div>
-            <i class="fas fa-chevron-right resource-arrow"></i>
-        </div>
-
-        <div class="resource-card">
-            <div class="resource-icon bg-teal-500/20 text-teal-400">
-                <i class="fas fa-tachometer-alt"></i>
-            </div>
-            <div class="resource-info">
-                <div class="resource-name">AccelerateKY</div>
-                <div class="resource-type">Entrepreneur Support</div>
-            </div>
-            <i class="fas fa-chevron-right resource-arrow"></i>
-        </div>
-
-        <div class="section-header" style="margin-top: 32px;">
-            <h2 class="section-title">Financial Tools</h2>
-        </div>
-
-        <div class="moneybot-banner">
-            <div class="relative z-10">
-                <div class="flex items-center gap-3 mb-3">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-create-gold to-orange-500 flex items-center justify-center text-2xl">🤖</div>
-                    <div>
-                        <div class="font-bold text-lg">MoneyBot</div>
-                        <div class="text-white/50 text-sm">Startup Financial Intelligence</div>
-                    </div>
-                </div>
-                <p class="text-white/60 text-sm mb-4">Track expenses, forecast runway, manage cap tables, and get AI-powered financial insights tailored for Kentucky founders.</p>
-                <div class="flex gap-3">
-                    <button class="flex-1 py-3 bg-gradient-to-r from-create-gold to-orange-500 text-create-dark font-bold rounded-xl text-sm" onclick="launchMoneyBot()">
-                        Open MoneyBot
-                    </button>
-                    <button class="px-4 py-3 bg-white/10 text-white rounded-xl text-sm font-semibold">
-                        <i class="fas fa-info-circle"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- EVENTS VIEW -->
-    <div id="view-events" class="view">
-        <div class="section-header" style="margin-top: 20px;">
-            <h2 class="section-title">Upcoming Events</h2>
-            <span class="section-action">Calendar</span>
-        </div>
-
-        <div class="event-card">
-            <span class="event-date">NOV 15-16 • 2024</span>
-            <h3 class="event-title">4th Annual Small Business Summit & Expo</h3>
-            <p class="event-desc">Join entrepreneurs, business owners, and industry leaders for a dynamic day of connection, learning, and growth.</p>
-            <div class="event-footer">
-                <span class="event-location"><i class="fas fa-map-marker-alt mr-2"></i>WKU Innovation Campus</span>
-                <button class="event-btn">Register</button>
-            </div>
-        </div>
-
-        <div class="event-card">
-            <span class="event-date" style="background: rgba(249, 202, 36, 0.2); color: #f9ca24;">FEB 20 • 2024</span>
-            <h3 class="event-title">KY Innovation Startup Resource Series</h3>
-            <p class="event-desc">Hear from Launch Blue and Keyhorse Capital about the new Invest Blue capital program. Virtual event open to all KY entrepreneurs.</p>
-            <div class="event-footer">
-                <span class="event-location"><i class="fas fa-video mr-2"></i>Virtual Event</span>
-                <button class="event-btn" style="background: linear-gradient(135deg, #f9ca24 0%, #f0932b 100%); color: #0f0f1a;">Join</button>
-            </div>
-        </div>
-
-        <div class="event-card">
-            <span class="event-date">MAR 15 • 2024</span>
-            <h3 class="event-title">Startup Garden: Tech Economy Growth</h3>
-            <p class="event-desc">An event focused on sparking long-term economic development in South Central Kentucky. Connect with investors and mentors.</p>
-            <div class="event-footer">
-                <span class="event-location"><i class="fas fa-map-marker-alt mr-2"></i>CREATE Innovation Campus</span>
-                <button class="event-btn">RSVP</button>
-            </div>
-        </div>
-
-        <div class="event-card">
-            <span class="event-date" style="background: rgba(78, 205, 196, 0.2); color: #4ecdc4;">MAY 18 • 2024</span>
-            <h3 class="event-title">Children's Entrepreneur Market</h3>
-            <p class="event-desc">A special market for aspiring business owners aged 5-17. In partnership with Community Farmers Market and Warren County Library.</p>
-            <div class="event-footer">
-                <span class="event-location"><i class="fas fa-map-marker-alt mr-2"></i>Community Farmers Market</span>
-                <button class="event-btn" style="background: linear-gradient(135deg, #4ecdc4 0%, #44a3aa 100%);">Details</button>
-            </div>
-        </div>
-
-        <div class="event-card">
-            <span class="event-date">ONGOING</span>
-            <h3 class="event-title">Launch Kentucky: Idea Challenge</h3>
-            <p class="event-desc">Accepting applications from innovators in 12 counties. Win funding, mentorship, and resources to launch your idea.</p>
-            <div class="event-footer">
-                <span class="event-location"><i class="fas fa-globe mr-2"></i>12 Counties + WKU</span>
-                <button class="event-btn">Apply Now</button>
-            </div>
-        </div>
+    <!-- Floating Action Button -->
+    <div class="fab" onclick="showNewPost()">
+        <i class="fas fa-plus"></i>
     </div>
 
     <!-- Bottom Navigation -->
@@ -918,46 +867,99 @@
             <i class="fas fa-home"></i>
             <span>Home</span>
         </div>
-        <div class="nav-item" onclick="switchView('spaces')">
-            <i class="fas fa-door-open"></i>
-            <span>Spaces</span>
+        <div class="nav-item" onclick="switchView('comms')">
+            <i class="fas fa-comment-dots"></i>
+            <span>Comms</span>
         </div>
-        <div class="nav-item" onclick="switchView('resources')">
-            <i class="fas fa-hands-helping"></i>
-            <span>Resources</span>
+        <div class="nav-item" onclick="switchView('media')">
+            <i class="fas fa-images"></i>
+            <span>Media</span>
         </div>
-        <div class="nav-item" onclick="switchView('events')">
-            <i class="fas fa-calendar-star"></i>
-            <span>Events</span>
+        <div class="nav-item" onclick="switchView('reserve')">
+            <i class="fas fa-calendar-check"></i>
+            <span>Reserve</span>
         </div>
     </nav>
 
 </div>
 
 <script>
+    // Splash screen
+    setTimeout(() => {
+        document.getElementById('splash').classList.add('hidden');
+    }, 2500);
+
+    // Update time
+    function updateTime() {
+        const now = new Date();
+        const options = { weekday: 'long', month: 'long', day: 'numeric' };
+        const timeStr = now.toLocaleDateString('en-US', options);
+        const hour = now.getHours();
+        let greeting = 'Good Morning!';
+        if (hour >= 12 && hour < 17) greeting = 'Good Afternoon!';
+        if (hour >= 17) greeting = 'Good Evening!';
+        
+        document.getElementById('current-time').textContent = timeStr;
+        document.querySelector('.welcome-name').textContent = greeting;
+    }
+    updateTime();
+
+    // View switching
     function switchView(viewName) {
         document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
         document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
         
         document.getElementById('view-' + viewName).classList.add('active');
         
+        // Update nav active state
         const navItems = document.querySelectorAll('.nav-item');
-        const viewMap = { 'home': 0, 'spaces': 1, 'resources': 2, 'events': 3 };
+        const viewMap = { 'home': 0, 'comms': 1, 'media': 2, 'reserve': 3 };
         if (navItems[viewMap[viewName]]) {
             navItems[viewMap[viewName]].classList.add('active');
         }
     }
 
     function showNotifications() {
-        alert('🔔 Notifications\n\n• UnDesked just hit $3M investment milestone!\n• Small Business Summit registration opens tomorrow\n• New MoneyBot financial tools now available');
+        alert('Notifications: 3 new updates\n\n• New room booking confirmed\n• Tech mixer tomorrow\n• Sarah Miller replied to your message');
     }
 
     function showDirectory() {
-        alert('👥 Member Directory\n\nComing soon: Browse the Collaborative SmartSpace members, connect with founders, mentors, and investors in the CREATE ecosystem.');
+        alert('Member Directory\n\nComing soon: Browse and connect with innovators, entrepreneurs, and creators at the Innovation Campus.');
     }
 
-    function launchMoneyBot() {
-        alert('🤖 Launching MoneyBot\n\nFinancial tools for Kentucky founders:\n• Expense tracking\n• Runway forecasting\n• Cap table management\n• AI financial insights\n\nComing Q1 2024!');
+    function showEvents() {
+        alert('Upcoming WKU Innovation Campus Events\n\n• Launch Kentucky: Idea Challenge Deadline\n• 4th Annual Small Business Summit and Expo\n• Children\'s Entrepreneur Market (Ages 5-17)\n• Narrative Network Regional Meetup');
+    }
+
+    function showNewPost() {
+        alert('Create New Post\n\nShare updates, ask questions, or post opportunities with the CREATE community.');
+    }
+
+    // Swipe detection for view switching
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const views = ['home', 'comms', 'media', 'reserve'];
+    let currentViewIndex = 0;
+
+    document.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        const threshold = 100;
+        if (touchStartX - touchEndX > threshold && currentViewIndex < views.length - 1) {
+            currentViewIndex++;
+            switchView(views[currentViewIndex]);
+        }
+        if (touchEndX - touchStartX > threshold && currentViewIndex > 0) {
+            currentViewIndex--;
+            switchView(views[currentViewIndex]);
+        }
     }
 </script>
 
