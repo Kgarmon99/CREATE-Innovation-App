@@ -1258,6 +1258,146 @@
             </div>
         </div>
 
+        <!-- DIRECTORY VIEW -->
+        <div id="view-directory" class="view">
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 32px;">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">Member Directory</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Connect with the ecosystem</div>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div style="position: relative; margin-bottom: 20px;">
+                <i class="fas fa-search" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #9ca3af;"></i>
+                <input type="text" id="directory-search" placeholder="Search members, companies, expertise..." 
+                    style="width: 100%; padding: 14px 16px 14px 44px; border: 2px solid #e5e7eb; border-radius: 12px; font-size: 14px; outline: none; transition: border-color 0.2s;"
+                    onfocus="this.style.borderColor='#2A2760'" onblur="this.style.borderColor='#e5e7eb'">
+            </div>
+
+            <!-- Filter Tabs -->
+            <div style="display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 4px;">
+                <button onclick="filterDirectory('all')" class="directory-filter active" data-filter="all" 
+                    style="padding: 8px 16px; background: #2A2760; color: white; border-radius: 20px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; white-space: nowrap;">All</button>
+                <button onclick="filterDirectory('founders')" class="directory-filter" data-filter="founders" 
+                    style="padding: 8px 16px; background: white; color: #6b7280; border: 1px solid #e5e7eb; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap;">Founders</button>
+                <button onclick="filterDirectory('mentors')" class="directory-filter" data-filter="mentors" 
+                    style="padding: 8px 16px; background: white; color: #6b7280; border: 1px solid #e5e7eb; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap;">Mentors</button>
+                <button onclick="filterDirectory('startups')" class="directory-filter" data-filter="startups" 
+                    style="padding: 8px 16px; background: white; color: #6b7280; border: 1px solid #e5e7eb; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap;">Startups</button>
+            </div>
+
+            <!-- Member Cards -->
+            <div id="directory-list">
+                <!-- Featured Member -->
+                <div class="directory-card" data-category="founders startups" style="background: #fef3f2; border: 2px solid #ff6a6d;">
+                    <div style="display: flex; gap: 14px; align-items: start;">
+                        <div style="width: 60px; height: 60px; background: #ff6a6d; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: 700; flex-shrink: 0;">JJ</div>
+                        <div style="flex-grow: 1;">
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <div>
+                                    <div style="font-weight: 700; color: #1f2937; font-size: 16px;">Jeremy Jacobs</div>
+                                    <div style="font-size: 13px; color: #ff6a6d; font-weight: 600;">Founder & CEO</div>
+                                    <div style="font-size: 14px; color: #6b7280; margin-top: 2px;">UnDesked</div>
+                                </div>
+                                <span style="padding: 4px 10px; background: #ff6a6d; color: white; border-radius: 12px; font-size: 10px; font-weight: 700;">FEATURED</span>
+                            </div>
+                            <div style="display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap;">
+                                <span style="padding: 4px 10px; background: white; border-radius: 12px; font-size: 11px; color: #6b7280;">PropTech</span>
+                                <span style="padding: 4px 10px; background: white; border-radius: 12px; font-size: 11px; color: #6b7280;">$3M Raised</span>
+                            </div>
+                            <p style="font-size: 12px; color: #6b7280; margin-top: 10px; line-height: 1.5;">Workspace optimization platform. Recently closed Series A.</p>
+                            <button onclick="requestConnection('Jeremy Jacobs', 'UnDesked')" style="margin-top: 12px; padding: 10px 20px; background: #2A2760; color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;">
+                                <i class="fas fa-handshake mr-2"></i>Connect
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="directory-card" data-category="mentors" style="background: white; border: 1px solid #e5e7eb; border-radius: 16px; padding: 16px; margin-bottom: 12px;">
+                    <div style="display: flex; gap: 14px; align-items: start;">
+                        <div style="width: 56px; height: 56px; background: #2A2760; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: 700; flex-shrink: 0;">PH</div>
+                        <div style="flex-grow: 1;">
+                            <div style="font-weight: 700; color: #1f2937; font-size: 15px;">Penny Hughes</div>
+                            <div style="font-size: 12px; color: #2A2760; font-weight: 600;">Program & Event Manager</div>
+                            <div style="font-size: 13px; color: #6b7280; margin-top: 2px;">CREATE</div>
+                            <div style="display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap;">
+                                <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 12px; font-size: 11px; color: #6b7280;">Events</span>
+                                <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 12px; font-size: 11px; color: #6b7280;">Community</span>
+                            </div>
+                            <button onclick="requestConnection('Penny Hughes', 'CREATE')" style="margin-top: 10px; padding: 8px 16px; background: white; border: 2px solid #2A2760; color: #2A2760; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer;">
+                                <i class="fas fa-calendar mr-2"></i>Schedule Meeting
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="directory-card" data-category="mentors" style="background: white; border: 1px solid #e5e7eb; border-radius: 16px; padding: 16px; margin-bottom: 12px;">
+                    <div style="display: flex; gap: 14px; align-items: start;">
+                        <div style="width: 56px; height: 56px; background: #4ecdc4; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: 700; flex-shrink: 0;">MK</div>
+                        <div style="flex-grow: 1;">
+                            <div style="font-weight: 700; color: #1f2937; font-size: 15px;">Mike K.</div>
+                            <div style="font-size: 12px; color: #4ecdc4; font-weight: 600;">Managing Partner</div>
+                            <div style="font-size: 13px; color: #6b7280; margin-top: 2px;">Keyhorse Capital</div>
+                            <div style="display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap;">
+                                <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 12px; font-size: 11px; color: #6b7280;">Venture Capital</span>
+                                <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 12px; font-size: 11px; color: #6b7280;">Investing</span>
+                            </div>
+                            <button onclick="requestConnection('Mike K.', 'Keyhorse Capital')" style="margin-top: 10px; padding: 8px 16px; background: white; border: 2px solid #2A2760; color: #2A2760; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer;">
+                                <i class="fas fa-coffee mr-2"></i>Coffee Chat
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="directory-card" data-category="startups" style="background: white; border: 1px solid #e5e7eb; border-radius: 16px; padding: 16px; margin-bottom: 12px;">
+                    <div style="display: flex; gap: 14px; align-items: start;">
+                        <div style="width: 56px; height: 56px; background: #f7b731; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: 700; flex-shrink: 0;">NN</div>
+                        <div style="flex-grow: 1;">
+                            <div style="font-weight: 700; color: #1f2937; font-size: 15px;">Sarah Chen</div>
+                            <div style="font-size: 12px; color: #f7b731; font-weight: 600;">Co-Founder</div>
+                            <div style="font-size: 13px; color: #6b7280; margin-top: 2px;">Narrative Network</div>
+                            <div style="display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap;">
+                                <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 12px; font-size: 11px; color: #6b7280;">Media</span>
+                                <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 12px; font-size: 11px; color: #6b7280;">Storytelling</span>
+                            </div>
+                            <button onclick="requestConnection('Sarah Chen', 'Narrative Network')" style="margin-top: 10px; padding: 8px 16px; background: white; border: 2px solid #2A2760; color: #2A2760; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer;">
+                                <i class="fas fa-handshake mr-2"></i>Connect
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="directory-card" data-category="founders" style="background: white; border: 1px solid #e5e7eb; border-radius: 16px; padding: 16px; margin-bottom: 12px;">
+                    <div style="display: flex; gap: 14px; align-items: start;">
+                        <div style="width: 56px; height: 56px; background: #8b5cf6; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: 700; flex-shrink: 0;">AL</div>
+                        <div style="flex-grow: 1;">
+                            <div style="font-weight: 700; color: #1f2937; font-size: 15px;">Alex Li</div>
+                            <div style="font-size: 12px; color: #8b5cf6; font-weight: 600;">Solo Founder</div>
+                            <div style="font-size: 13px; color: #6b7280; margin-top: 2px;">Looking for CTO</div>
+                            <div style="display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap;">
+                                <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 12px; font-size: 11px; color: #6b7280;">FinTech</span>
+                                <span style="padding: 4px 10px; background: #dcfce7; border-radius: 12px; font-size: 11px; color: #166534;">Hiring</span>
+                            </div>
+                            <button onclick="requestConnection('Alex Li', 'Startup Idea')" style="margin-top: 10px; padding: 8px 16px; background: white; border: 2px solid #2A2760; color: #2A2760; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer;">
+                                <i class="fas fa-handshake mr-2"></i>Connect
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State (hidden by default) -->
+            <div id="directory-empty" style="display: none; text-align: center; padding: 40px 20px;">
+                <div style="width: 80px; height: 80px; background: #f3f4f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 32px; color: #9ca3af;">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div style="font-weight: 700; color: #374151; margin-bottom: 8px;">No results found</div>
+                <div style="font-size: 14px; color: #6b7280;">Try adjusting your search terms</div>
+            </div>
+        </div>
+
     </main>
 
     <!-- Floating Action Button -->
@@ -1282,9 +1422,9 @@
             <i class="fas fa-map-marked-alt"></i>
             <span>Map</span>
         </div>
-        <div class="nav-item" onclick="switchView('request')">
-            <i class="fas fa-hand-holding-heart"></i>
-            <span>Request</span>
+        <div class="nav-item" onclick="switchView('directory')">
+            <i class="fas fa-users"></i>
+            <span>Directory</span>
         </div>
         <div class="nav-item" onclick="switchView('info')">
             <i class="fas fa-info-circle"></i>
@@ -1324,11 +1464,66 @@
         
         // Update nav active state
         const navItems = document.querySelectorAll('.nav-item');
-        const viewMap = { 'home': 0, 'map': 1, 'request': 2, 'info': 3 };
+        const viewMap = { 'home': 0, 'map': 1, 'directory': 2, 'info': 3 };
         if (navItems[viewMap[viewName]]) {
             navItems[viewMap[viewName]].classList.add('active');
         }
     }
+
+    function filterDirectory(category) {
+        // Update filter buttons
+        document.querySelectorAll('.directory-filter').forEach(btn => {
+            btn.style.background = 'white';
+            btn.style.color = '#6b7280';
+            btn.style.border = '1px solid #e5e7eb';
+        });
+        document.querySelector(`.directory-filter[data-filter="${category}"]`).style.background = '#2A2760';
+        document.querySelector(`.directory-filter[data-filter="${category}"]`).style.color = 'white';
+        document.querySelector(`.directory-filter[data-filter="${category}"]`).style.border = 'none';
+
+        // Filter cards
+        const cards = document.querySelectorAll('.directory-card');
+        let visibleCount = 0;
+        cards.forEach(card => {
+            if (category === 'all' || card.dataset.category.includes(category)) {
+                card.style.display = 'block';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Show/hide empty state
+        document.getElementById('directory-empty').style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    function requestConnection(name, company) {
+        alert(`📩 Connection Request Sent!\n\nYour request to connect with ${name} from ${company} has been sent. They'll be notified and can accept or decline.\n\nYou'll receive an email when they respond.`);
+    }
+
+    // Directory search functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('directory-search');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                const cards = document.querySelectorAll('.directory-card');
+                let visibleCount = 0;
+
+                cards.forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    if (text.includes(query)) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                document.getElementById('directory-empty').style.display = visibleCount === 0 ? 'block' : 'none';
+            });
+        }
+    });
 
     function showLocationInfo(location) {
         const details = {
@@ -1399,7 +1594,7 @@
     // Swipe detection for view switching
     let touchStartX = 0;
     let touchEndX = 0;
-    const views = ['home', 'map', 'request', 'info'];
+    const views = ['home', 'map', 'directory', 'info'];
     let currentViewIndex = 0;
 
     document.addEventListener('touchstart', e => {
