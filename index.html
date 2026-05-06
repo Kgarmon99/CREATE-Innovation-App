@@ -732,6 +732,30 @@
                     </div>
                     <span class="quick-action-label">Resources</span>
                 </div>
+                <div class="quick-action" onclick="switchView('analytics')">
+                    <div class="quick-action-icon" style="background: #6366f1; border: 2px solid #6366f1;">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <span class="quick-action-label">Analytics</span>
+                </div>
+                <div class="quick-action" onclick="switchView('qa')">
+                    <div class="quick-action-icon" style="background: #f97316; border: 2px solid #f97316;">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <span class="quick-action-label">Q&A</span>
+                </div>
+                <div class="quick-action" onclick="switchView('groups')">
+                    <div class="quick-action-icon" style="background: #84cc16; border: 2px solid #84cc16;">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <span class="quick-action-label">Groups</span>
+                </div>
+                <div class="quick-action" onclick="switchView('jobtracker')">
+                    <div class="quick-action-icon" style="background: #06b6d4; border: 2px solid #06b6d4;">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <span class="quick-action-label">Tracker</span>
+                </div>
             </div>
 
             <!-- Latest Announcements -->
@@ -3199,6 +3223,542 @@
             </div>
         </div>
 
+        <!-- ANALYTICS DASHBOARD VIEW -->
+        <div id="view-analytics" class="view">
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 32px;">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">Ecosystem Analytics</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Impact & activity metrics</div>
+                </div>
+            </div>
+
+            <!-- Key Metrics -->
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px;">
+                <div class="card" style="background: linear-gradient(135deg, #2A2760, #1e1c45); color: white;">
+                    <div style="font-size: 32px; font-weight: 800; margin-bottom: 4px;">$12.4M</div>
+                    <div style="font-size: 13px; opacity: 0.9;">Funding Raised</div>
+                    <div style="font-size: 11px; opacity: 0.7; margin-top: 4px;">↑ 24% this year</div>
+                </div>
+                <div class="card" style="background: linear-gradient(135deg, #ff6a6d, #e55a5d); color: white;">
+                    <div style="font-size: 32px; font-weight: 800; margin-bottom: 4px;">147</div>
+                    <div style="font-size: 13px; opacity: 0.9;">Jobs Created</div>
+                    <div style="font-size: 11px; opacity: 0.7; margin-top: 4px;">↑ 18% this year</div>
+                </div>
+                <div class="card" style="background: linear-gradient(135deg, #4ecdc4, #3dbbb4); color: white;">
+                    <div style="font-size: 32px; font-weight: 800; margin-bottom: 4px;">28</div>
+                    <div style="font-size: 13px; opacity: 0.9;">Active Startups</div>
+                    <div style="font-size: 11px; opacity: 0.7; margin-top: 4px;">3 new this month</div>
+                </div>
+                <div class="card" style="background: linear-gradient(135deg, #f7b731, #e5a52e); color: white;">
+                    <div style="font-size: 32px; font-weight: 800; margin-bottom: 4px;">856</div>
+                    <div style="font-size: 13px; opacity: 0.9;">Community Members</div>
+                    <div style="font-size: 11px; opacity: 0.7; margin-top: 4px;">↑ 12% this year</div>
+                </div>
+            </div>
+
+            <!-- Monthly Activity Chart -->
+            <div class="card" style="margin-bottom: 20px;">
+                <h3 style="font-weight: 700; margin-bottom: 16px;">Monthly Activity</h3>
+                <div style="display: flex; align-items: end; gap: 8px; height: 150px; padding-bottom: 30px; border-bottom: 1px solid #e5e7eb; position: relative;">
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                        <div style="width: 100%; background: #dbeafe; border-radius: 4px 4px 0 0; height: 60px;"></div>
+                        <div style="width: 100%; background: #2A2760; border-radius: 4px 4px 0 0; height: 40px;"></div>
+                        <span style="font-size: 10px; color: #6b7280; position: absolute; bottom: 8px;">Jan</span>
+                    </div>
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                        <div style="width: 100%; background: #dbeafe; border-radius: 4px 4px 0 0; height: 80px;"></div>
+                        <div style="width: 100%; background: #2A2760; border-radius: 4px 4px 0 0; height: 50px;"></div>
+                        <span style="font-size: 10px; color: #6b7280; position: absolute; bottom: 8px;">Feb</span>
+                    </div>
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                        <div style="width: 100%; background: #dbeafe; border-radius: 4px 4px 0 0; height: 100px;"></div>
+                        <div style="width: 100%; background: #2A2760; border-radius: 4px 4px 0 0; height: 70px;"></div>
+                        <span style="font-size: 10px; color: #6b7280; position: absolute; bottom: 8px;">Mar</span>
+                    </div>
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                        <div style="width: 100%; background: #dbeafe; border-radius: 4px 4px 0 0; height: 90px;"></div>
+                        <div style="width: 100%; background: #2A2760; border-radius: 4px 4px 0 0; height: 60px;"></div>
+                        <span style="font-size: 10px; color: #6b7280; position: absolute; bottom: 8px;">Apr</span>
+                    </div>
+                    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                        <div style="width: 100%; background: #dbeafe; border-radius: 4px 4px 0 0; height: 120px;"></div>
+                        <div style="width: 100%; background: #2A2760; border-radius: 4px 4px 0 0; height: 85px;"></div>
+                        <span style="font-size: 10px; color: #6b7280; position: absolute; bottom: 8px;">May</span>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 16px; margin-top: 12px; justify-content: center;">
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <div style="width: 12px; height: 12px; background: #2A2760; border-radius: 2px;"></div>
+                        <span style="font-size: 12px; color: #6b7280;">Events</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <div style="width: 12px; height: 12px; background: #dbeafe; border-radius: 2px;"></div>
+                        <span style="font-size: 12px; color: #6b7280;">Connections</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Contributors -->
+            <div class="card" style="margin-bottom: 20px;">
+                <h3 style="font-weight: 700; margin-bottom: 16px;">Top Contributors</h3>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #2A2760, #ff6a6d); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">JJ</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #1f2937;">Jeremy Jacobs</div>
+                            <div style="font-size: 12px; color: #6b7280;">24 connections made</div>
+                        </div>
+                        <span style="padding: 4px 10px; background: #fef3c7; border-radius: 12px; font-size: 11px; color: #92400e; font-weight: 600;">🏆 #1</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #0891b2, #4ecdc4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">SF</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #1f2937;">Sam Ford</div>
+                            <div style="font-size: 12px; color: #6b7280;">18 events hosted</div>
+                        </div>
+                        <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 12px; font-size: 11px; color: #4b5563; font-weight: 600;">#2</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #dc2626, #f59e0b); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">BD</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #1f2937;">Brittanie Dawson</div>
+                            <div style="font-size: 12px; color: #6b7280;">15 SBDC consultations</div>
+                        </div>
+                        <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 12px; font-size: 11px; color: #4b5563; font-weight: 600;">#3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Popular Resources -->
+            <div class="card">
+                <h3 style="font-weight: 700; margin-bottom: 16px;">Most Downloaded Resources</h3>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-weight: 600; color: #1f2937;">Business Plan Template</div>
+                            <div style="font-size: 12px; color: #6b7280;">234 downloads</div>
+                        </div>
+                        <div style="width: 80px; height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden;">
+                            <div style="width: 85%; height: 100%; background: #2A2760; border-radius: 3px;"></div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-weight: 600; color: #1f2937;">Pitch Deck Template</div>
+                            <div style="font-size: 12px; color: #6b7280;">189 downloads</div>
+                        </div>
+                        <div style="width: 80px; height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden;">
+                            <div style="width: 70%; height: 100%; background: #2A2760; border-radius: 3px;"></div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-weight: 600; color: #1f2937;">Financial Model</div>
+                            <div style="font-size: 12px; color: #6b7280;">156 downloads</div>
+                        </div>
+                        <div style="width: 80px; height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden;">
+                            <div style="width: 55%; height: 100%; background: #2A2760; border-radius: 3px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Q&A COMMUNITY VIEW -->
+        <div id="view-qa" class="view">
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 32px;">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">Ask the Community</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Q&A board for entrepreneurs</div>
+                </div>
+            </div>
+
+            <!-- Ask Question -->
+            <div class="card" style="margin-bottom: 20px;">
+                <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #2A2760; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">KG</div>
+                    <input type="text" placeholder="Ask a question..." style="flex: 1; border: 1px solid #e5e7eb; border-radius: 20px; padding: 10px 16px; font-size: 14px;">
+                </div>
+                <div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px;">
+                    <span style="padding: 6px 12px; background: #dbeafe; border-radius: 16px; font-size: 12px; color: #1e40af; cursor: pointer;">+ Fundraising</span>
+                    <span style="padding: 6px 12px; background: #dcfce7; border-radius: 16px; font-size: 12px; color: #166534; cursor: pointer;">+ Marketing</span>
+                    <span style="padding: 6px 12px; background: #fef3c7; border-radius: 16px; font-size: 12px; color: #92400e; cursor: pointer;">+ Legal</span>
+                    <span style="padding: 6px 12px; background: #ede9fe; border-radius: 16px; font-size: 12px; color: #7c3aed; cursor: pointer;">+ Tech</span>
+                </div>
+                <button style="width: 100%; margin-top: 12px; padding: 12px; background: #ff6a6d; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">Post Question</button>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div style="display: flex; gap: 8px; margin-bottom: 20px; background: #f3f4f6; padding: 4px; border-radius: 12px;">
+                <button onclick="switchQATab('recent')" id="qa-tab-recent" style="flex: 1; padding: 10px; background: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; color: #2A2760; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Recent</button>
+                <button onclick="switchQATab('popular')" id="qa-tab-popular" style="flex: 1; padding: 10px; background: transparent; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; color: #6b7280; cursor: pointer;">Popular</button>
+                <button onclick="switchQATab('unanswered')" id="qa-tab-unanswered" style="flex: 1; padding: 10px; background: transparent; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; color: #6b7280; cursor: pointer;">Unanswered</button>
+            </div>
+
+            <!-- Questions -->
+            <div id="qa-recent">
+                <div class="card" style="margin-bottom: 16px; cursor: pointer;" onclick="showQuestionDetail('q1')">
+                    <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+                        <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #2A2760, #4ecdc4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px;">AL</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #1f2937; margin-bottom: 2px;">Alex Lawson</div>
+                            <div style="font-size: 11px; color: #6b7280;">2 hours ago</div>
+                        </div>
+                    </div>
+                    <h3 style="font-weight: 700; font-size: 16px; color: #1f2937; margin-bottom: 8px;">What's the typical equity split for a technical co-founder?</h3>
+                    <p style="font-size: 14px; color: #6b7280; line-height: 1.5; margin-bottom: 12px;">I'm a non-technical founder with the business idea and some initial traction. What's a fair equity split when bringing on a technical co-founder?</p>
+                    <div style="display: flex; gap: 6px; margin-bottom: 12px;">
+                        <span style="padding: 3px 8px; background: #dbeafe; border-radius: 8px; font-size: 10px; color: #1e40af;">Fundraising</span>
+                        <span style="padding: 3px 8px; background: #dbeafe; border-radius: 8px; font-size: 10px; color: #1e40af;">Legal</span>
+                    </div>
+                    <div style="display: flex; gap: 16px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+                        <span style="font-size: 13px; color: #6b7280;"><i class="far fa-comment"></i> 12 answers</span>
+                        <span style="font-size: 13px; color: #6b7280;"><i class="far fa-eye"></i> 156 views</span>
+                        <span style="font-size: 13px; color: #6b7280;"><i class="far fa-thumbs-up"></i> 8 upvotes</span>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 16px; cursor: pointer;" onclick="showQuestionDetail('q2')">
+                    <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+                        <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #dc2626, #f59e0b); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px;">MP</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #1f2937; margin-bottom: 2px;">Maria Patel</div>
+                            <div style="font-size: 11px; color: #6b7280;">5 hours ago</div>
+                        </div>
+                    </div>
+                    <h3 style="font-weight: 700; font-size: 16px; color: #1f2937; margin-bottom: 8px;">Best practices for HIPAA compliance in a healthcare startup?</h3>
+                    <p style="font-size: 14px; color: #6b7280; line-height: 1.5; margin-bottom: 12px;">Building a patient scheduling app. What do I need to know about HIPAA compliance from day one?</p>
+                    <div style="display: flex; gap: 6px; margin-bottom: 12px;">
+                        <span style="padding: 3px 8px; background: #dcfce7; border-radius: 8px; font-size: 10px; color: #166534;">Tech</span>
+                        <span style="padding: 3px 8px; background: #dcfce7; border-radius: 8px; font-size: 10px; color: #166534;">Legal</span>
+                    </div>
+                    <div style="display: flex; gap: 16px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+                        <span style="font-size: 13px; color: #6b7280;"><i class="far fa-comment"></i> 7 answers</span>
+                        <span style="font-size: 13px; color: #6b7280;"><i class="far fa-eye"></i> 89 views</span>
+                        <span style="font-size: 13px; color: #6b7280;"><i class="far fa-thumbs-up"></i> 5 upvotes</span>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 16px; cursor: pointer;" onclick="showQuestionDetail('q3')">
+                    <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+                        <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #0891b2, #4ecdc4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px;">DJ</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #1f2937; margin-bottom: 2px;">David Johnson</div>
+                            <div style="font-size: 11px; color: #6b7280;">1 day ago</div>
+                        </div>
+                    </div>
+                    <h3 style="font-weight: 700; font-size: 16px; color: #1f2937; margin-bottom: 8px;">How to validate a B2B idea before building?</h3>
+                    <p style="font-size: 14px; color: #6b7280; line-height: 1.5; margin-bottom: 12px;">I have an idea for manufacturing software but don't want to build before validating. What's the best approach?</p>
+                    <div style="display: flex; gap: 6px; margin-bottom: 12px;">
+                        <span style="padding: 3px 8px; background: #fef3c7; border-radius: 8px; font-size: 10px; color: #92400e;">Marketing</span>
+                        <span style="padding: 3px 8px; background: #fef3c7; border-radius: 8px; font-size: 10px; color: #92400e;">B2B</span>
+                    </div>
+                    <div style="display: flex; gap: 16px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+                        <span style="font-size: 13px; color: #6b7280;"><i class="far fa-comment"></i> 15 answers</span>
+                        <span style="font-size: 13px; color: #6b7280;"><i class="far fa-eye"></i> 234 views</span>
+                        <span style="font-size: 13px; color: #6b7280;"><i class="far fa-thumbs-up"></i> 12 upvotes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INTEREST GROUPS VIEW -->
+        <div id="view-groups" class="view">
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 32px;">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">Interest Groups</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Connect with like-minded innovators</div>
+                </div>
+            </div>
+
+            <!-- My Groups -->
+            <h3 style="font-weight: 700; margin: 0 0 12px;">My Groups</h3>
+            <div class="card" style="padding: 0; margin-bottom: 20px;">
+                <div style="display: flex; gap: 12px; padding: 16px; border-bottom: 1px solid #e5e7eb; cursor: pointer;">
+                    <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #2A2760, #4ecdc4); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; color: #1f2937;">AgTech Innovators</div>
+                        <div style="font-size: 13px; color: #6b7280;">127 members • 3 new posts today</div>
+                    </div>
+                    <div style="width: 10px; height: 10px; background: #ff6a6d; border-radius: 50%; align-self: center;"></div>
+                </div>
+                <div style="display: flex; gap: 12px; padding: 16px; cursor: pointer;">
+                    <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #f7b731, #ff6a6d); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; color: #1f2937;">HealthTech KY</div>
+                        <div style="font-size: 13px; color: #6b7280;">89 members • 1 new post today</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Discover Groups -->
+            <h3 style="font-weight: 700; margin: 0 0 12px;">Discover</h3>
+            <div class="card" style="margin-bottom: 16px;">
+                <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                    <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #dc2626, #991b1b); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; color: #1f2937; margin-bottom: 2px;">Manufacturing Tech</div>
+                        <div style="font-size: 13px; color: #6b7280; margin-bottom: 8px;">156 members</div>
+                        <p style="font-size: 13px; color: #6b7280; line-height: 1.5;">For founders building in manufacturing, Industry 4.0, and supply chain innovation.</p>
+                    </div>
+                </div>
+                <button style="width: 100%; padding: 10px; background: #2A2760; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Join Group</button>
+            </div>
+
+            <div class="card" style="margin-bottom: 16px;">
+                <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                    <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #8b5cf6, #ec4899); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; color: #1f2937; margin-bottom: 2px;">EdTech Founders</div>
+                        <div style="font-size: 13px; color: #6b7280; margin-bottom: 8px;">94 members</div>
+                        <p style="font-size: 13px; color: #6b7280; line-height: 1.5;">Connect with education technology entrepreneurs and innovators.</p>
+                    </div>
+                </div>
+                <button style="width: 100%; padding: 10px; background: #2A2760; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Join Group</button>
+            </div>
+
+            <div class="card" style="margin-bottom: 16px;">
+                <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                    <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #059669, #10b981); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; color: #1f2937; margin-bottom: 2px;">CleanTech & Sustainability</div>
+                        <div style="font-size: 13px; color: #6b7280; margin-bottom: 8px;">112 members</div>
+                        <p style="font-size: 13px; color: #6b7280; line-height: 1.5;">For founders building sustainable solutions and clean technologies.</p>
+                    </div>
+                </div>
+                <button style="width: 100%; padding: 10px; background: #2A2760; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Join Group</button>
+            </div>
+
+            <div class="card" style="margin-bottom: 16px;">
+                <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                    <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #0891b2, #4ecdc4); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; color: #1f2937; margin-bottom: 2px;">AI & Machine Learning</div>
+                        <div style="font-size: 13px; color: #6b7280; margin-bottom: 8px;">178 members</div>
+                        <p style="font-size: 13px; color: #6b7280; line-height: 1.5;">Discuss AI applications, share resources, and collaborate on ML projects.</p>
+                    </div>
+                </div>
+                <button style="width: 100%; padding: 10px; background: #2A2760; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Join Group</button>
+            </div>
+
+            <button style="width: 100%; padding: 14px; background: #ff6a6d; color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; margin-top: 20px;">
+                <i class="fas fa-plus"></i> Create New Group
+            </button>
+        </div>
+
+        <!-- JOB TRACKER VIEW -->
+        <div id="view-jobtracker" class="view">
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 32px;">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">Job Application Tracker</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Manage your job search</div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 20px;">
+                <div class="card" style="text-align: center; padding: 16px 8px;">
+                    <div style="font-size: 24px; font-weight: 800; color: #2A2760;">12</div>
+                    <div style="font-size: 11px; color: #6b7280;">Applied</div>
+                </div>
+                <div class="card" style="text-align: center; padding: 16px 8px;">
+                    <div style="font-size: 24px; font-weight: 800; color: #f7b731;">3</div>
+                    <div style="font-size: 11px; color: #6b7280;">Interview</div>
+                </div>
+                <div class="card" style="text-align: center; padding: 16px 8px;">
+                    <div style="font-size: 24px; font-weight: 800; color: #4ecdc4;">2</div>
+                    <div style="font-size: 11px; color: #6b7280;">Offer</div>
+                </div>
+                <div class="card" style="text-align: center; padding: 16px 8px;">
+                    <div style="font-size: 24px; font-weight: 800; color: #6b7280;">7</div>
+                    <div style="font-size: 11px; color: #6b7280;">Pending</div>
+                </div>
+            </div>
+
+            <!-- Applications List -->
+            <h3 style="font-weight: 700; margin: 0 0 12px;">My Applications</h3>
+
+            <div class="card" style="margin-bottom: 16px; border-left: 4px solid #f7b731;">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                    <div>
+                        <div style="font-weight: 700; color: #1f2937;">R&D Engineer</div>
+                        <div style="font-size: 13px; color: #6b7280;">Holley Performance Products</div>
+                    </div>
+                    <span style="padding: 4px 10px; background: #fef3c7; border-radius: 12px; font-size: 11px; color: #92400e; font-weight: 600;">Interview</span>
+                </div>
+                <div style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">Applied: May 1 • $75K-$95K</div>
+                <div style="display: flex; gap: 8px;">
+                    <button style="flex: 1; padding: 8px; background: #2A2760; color: white; border: none; border-radius: 6px; font-size: 12px; cursor: pointer;">View Details</button>
+                    <button style="padding: 8px 12px; background: #f3f4f6; border: none; border-radius: 6px; cursor: pointer;"><i class="fas fa-edit"></i></button>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 16px; border-left: 4px solid #4ecdc4;">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                    <div>
+                        <div style="font-weight: 700; color: #1f2937;">Marketing Intern</div>
+                        <div style="font-size: 13px; color: #6b7280;">CREATE</div>
+                    </div>
+                    <span style="padding: 4px 10px; background: #d1fae5; border-radius: 12px; font-size: 11px; color: #065f46; font-weight: 600;">Offer</span>
+                </div>
+                <div style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">Applied: Apr 28 • $15/hr</div>
+                <div style="display: flex; gap: 8px;">
+                    <button style="flex: 1; padding: 8px; background: #4ecdc4; color: white; border: none; border-radius: 6px; font-size: 12px; cursor: pointer;">Accept Offer</button>
+                    <button style="padding: 8px 12px; background: #f3f4f6; border: none; border-radius: 6px; cursor: pointer;"><i class="fas fa-edit"></i></button>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 16px; border-left: 4px solid #6b7280;">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                    <div>
+                        <div style="font-weight: 700; color: #1f2937;">Program Coordinator</div>
+                        <div style="font-size: 13px; color: #6b7280;">Metals Innovation Initiative</div>
+                    </div>
+                    <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 12px; font-size: 11px; color: #4b5563; font-weight: 600;">Applied</span>
+                </div>
+                <div style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">Applied: Apr 25 • $55K-$70K</div>
+                <div style="display: flex; gap: 8px;">
+                    <button style="flex: 1; padding: 8px; background: #2A2760; color: white; border: none; border-radius: 6px; font-size: 12px; cursor: pointer;">View Details</button>
+                    <button style="padding: 8px 12px; background: #f3f4f6; border: none; border-radius: 6px; cursor: pointer;"><i class="fas fa-edit"></i></button>
+                </div>
+            </div>
+
+            <button style="width: 100%; padding: 14px; background: #ff6a6d; color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; margin-top: 20px;">
+                <i class="fas fa-plus"></i> Add Application
+            </button>
+        </div>
+
+        <!-- EVENT DETAIL VIEW -->
+        <div id="view-eventdetail" class="view">
+            <div style="height: 200px; background: linear-gradient(135deg, #2A2760, #ff6a6d); display: flex; align-items: center; justify-content: center; color: white; margin: -20px -20px 20px; position: relative;">
+                <i class="fas fa-rocket" style="font-size: 64px;"></i>
+                <button onclick="switchView('events')" style="position: absolute; top: 20px; left: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.2); border: none; border-radius: 50%; color: white; cursor: pointer;">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 20px;">
+                <span style="display: inline-block; padding: 6px 16px; background: #ff6a6d; color: white; border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 12px;">MAR 15 DEADLINE</span>
+                <h1 style="font-weight: 800; font-size: 24px; color: #1f2937; margin-bottom: 8px;">Launch Kentucky: Idea Challenge</h1>
+                <div style="display: flex; justify-content: center; gap: 16px; font-size: 14px; color: #6b7280;">
+                    <span><i class="fas fa-clock"></i> 11:59 PM</span>
+                    <span><i class="fas fa-laptop"></i> Virtual</span>
+                    <span><i class="fas fa-trophy"></i> $10,000</span>
+                </div>
+            </div>
+
+            <!-- QR Check-in -->
+            <div class="card" style="background: linear-gradient(135deg, #2A2760, #1e1c45); color: white; margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <h3 style="font-weight: 700;">📱 Your Check-in QR Code</h3>
+                    <span style="padding: 4px 10px; background: rgba(255,255,255,0.2); border-radius: 12px; font-size: 12px;">Registered</span>
+                </div>
+                <div style="display: flex; gap: 16px; align-items: center;">
+                    <div style="width: 100px; height: 100px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #1f2937; font-size: 48px;">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <div>
+                        <p style="font-size: 14px; opacity: 0.9; margin-bottom: 8px;">Show this QR code at the event entrance for quick check-in.</p>
+                        <button style="padding: 8px 16px; background: white; color: #2A2760; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer;">Download</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Details -->
+            <div class="card" style="margin-bottom: 20px;">
+                <h3 style="font-weight: 700; margin-bottom: 12px;">About This Event</h3>
+                <p style="font-size: 14px; color: #6b7280; line-height: 1.7; margin-bottom: 16px;">The Launch Kentucky Idea Challenge is open to innovators from 13 counties in South Central Kentucky plus WKU students. Submit your innovative business idea for a chance to win $10,000 in funding and gain access to mentorship from the CREATE network.</p>
+                
+                <h4 style="font-weight: 600; margin-bottom: 8px;">Eligibility:</h4>
+                <ul style="font-size: 14px; color: #6b7280; line-height: 1.7; margin-bottom: 16px; padding-left: 20px;">
+                    <li>Must reside in one of 13 eligible counties OR be a current WKU student</li>
+                    <li>Early-stage ideas (pre-revenue or early revenue)</li>
+                    <li>Solo founders or teams up to 4 people</li>
+                </ul>
+
+                <h4 style="font-weight: 600; margin-bottom: 8px;">Judging Criteria:</h4>
+                <ul style="font-size: 14px; color: #6b7280; line-height: 1.7; padding-left: 20px;">
+                    <li>Innovation and creativity (30%)</li>
+                    <li>Market opportunity (25%)</li>
+                    <li>Feasibility (25%)</li>
+                    <li>Team capability (20%)</li>
+                </ul>
+            </div>
+
+            <!-- Live Chat -->
+            <div class="card" style="margin-bottom: 20px;">
+                <h3 style="font-weight: 700; margin-bottom: 12px;">💬 Live Event Chat</h3>
+                <div style="height: 200px; overflow-y: auto; background: #f9fafb; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+                    <div style="margin-bottom: 12px;">
+                        <span style="font-weight: 600; font-size: 13px; color: #2A2760;">Penny Hughes:</span>
+                        <span style="font-size: 13px; color: #374151;"> Excited to see all the submissions coming in! Don't forget the deadline is March 15th at midnight.</span>
+                        <div style="font-size: 11px; color: #9ca3af; margin-top: 2px;">2 hours ago</div>
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <span style="font-weight: 600; font-size: 13px; color: #0891b2;">Alex M.:</span>
+                        <span style="font-size: 13px; color: #374151;"> Question - can we submit more than one idea?</span>
+                        <div style="font-size: 11px; color: #9ca3af; margin-top: 2px;">1 hour ago</div>
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <span style="font-weight: 600; font-size: 13px; color: #2A2760;">Penny Hughes:</span>
+                        <span style="font-size: 13px; color: #374151;"> Yes! You can submit up to 3 ideas per person.</span>
+                        <div style="font-size: 11px; color: #9ca3af; margin-top: 2px;">45 min ago</div>
+                    </div>
+                    <div>
+                        <span style="font-weight: 600; font-size: 13px; color: #dc2626;">Sarah K.:</span>
+                        <span style="font-size: 13px; color: #374151;"> Working on my submission now! The template is really helpful.</span>
+                        <div style="font-size: 11px; color: #9ca3af; margin-top: 2px;">10 min ago</div>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" placeholder="Join the conversation..." style="flex: 1; border: 1px solid #e5e7eb; border-radius: 20px; padding: 10px 16px; font-size: 14px;">
+                    <button style="padding: 10px 20px; background: #2A2760; color: white; border: none; border-radius: 20px; font-weight: 600; cursor: pointer;">Send</button>
+                </div>
+            </div>
+
+            <!-- Attendees -->
+            <div class="card" style="margin-bottom: 20px;">
+                <h3 style="font-weight: 700; margin-bottom: 12px;">Attendees (234)</h3>
+                <div style="display: flex; gap: -8px; margin-bottom: 12px;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #2A2760, #ff6a6d); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px; border: 2px solid white; margin-left: 0;">JJ</div>
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #0891b2, #4ecdc4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px; border: 2px solid white; margin-left: -12px;">SF</div>
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #dc2626, #f59e0b); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px; border: 2px solid white; margin-left: -12px;">BD</div>
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #e5e7eb; display: flex; align-items: center; justify-content: center; color: #6b7280; font-weight: 700; font-size: 12px; border: 2px solid white; margin-left: -12px;">+231</div>
+                </div>
+                <button style="width: 100%; padding: 10px; background: white; color: #2A2760; border: 2px solid #2A2760; border-radius: 8px; font-weight: 600; cursor: pointer;">View All Attendees</button>
+            </div>
+
+            <!-- Add to Calendar -->
+            <div style="display: flex; gap: 8px; margin-bottom: 20px;">
+                <button style="flex: 1; padding: 12px; background: #2A2760; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">
+                    <i class="fab fa-google"></i> Google Calendar
+                </button>
+                <button style="flex: 1; padding: 12px; background: white; color: #2A2760; border: 2px solid #2A2760; border-radius: 10px; font-weight: 600; cursor: pointer;">
+                    <i class="fab fa-apple"></i> Apple Calendar
+                </button>
+            </div>
+
+            <button style="width: 100%; padding: 16px; background: #ff6a6d; color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer;">
+                Register for Event
+            </button>
+        </div>
+
     </main>
 
     <!-- Floating Action Button -->
@@ -3539,6 +4099,23 @@
         document.getElementById('resource-templates').style.display = tab === 'templates' ? 'block' : 'none';
         document.getElementById('resource-funding').style.display = tab === 'funding' ? 'block' : 'none';
         document.getElementById('resource-media').style.display = tab === 'media' ? 'block' : 'none';
+    }
+
+    // Q&A Functions
+    function switchQATab(tab) {
+        // Update tab buttons
+        document.querySelectorAll('[id^="qa-tab-"]').forEach(btn => {
+            btn.style.background = 'transparent';
+            btn.style.color = '#6b7280';
+            btn.style.boxShadow = 'none';
+        });
+        document.getElementById('qa-tab-' + tab).style.background = 'white';
+        document.getElementById('qa-tab-' + tab).style.color = '#2A2760';
+        document.getElementById('qa-tab-' + tab).style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+    }
+
+    function showQuestionDetail(questionId) {
+        alert('📄 Opening question details...');
     }
 
     // Swipe detection for view switching
