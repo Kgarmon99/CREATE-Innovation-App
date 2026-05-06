@@ -185,10 +185,62 @@
             opacity: 0.9;
         }
 
+        /* Dark Mode */
+        :root {
+            --bg-primary: #f3f4f6;
+            --bg-secondary: #ffffff;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+            --card-bg: #ffffff;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --border-color: #2d2d2d;
+            --card-bg: #1a1a1a;
+        }
+
+        [data-theme="dark"] body {
+            background-color: var(--bg-primary);
+        }
+
+        [data-theme="dark"] .app-frame {
+            background: var(--bg-secondary);
+        }
+
+        [data-theme="dark"] .card {
+            background: var(--card-bg);
+            border-color: var(--border-color);
+        }
+
+        [data-theme="dark"] .section-title,
+        [data-theme="dark"] .welcome-name {
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .quick-action-label {
+            color: var(--text-secondary);
+        }
+
+        [data-theme="dark"] .directory-card {
+            background: var(--card-bg);
+            border-color: var(--border-color);
+        }
+
+        [data-theme="dark"] .form-input {
+            background: #2d2d2d;
+            border-color: #3d3d3d;
+            color: var(--text-primary);
+        }
+
         /* Quick Actions */
         .quick-actions {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 12px;
             margin-bottom: 28px;
         }
@@ -564,9 +616,14 @@
     <!-- Header -->
     <header class="header">
         <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_3x.png" alt="CREATE" class="header-logo">
-        <div class="header-action" onclick="showNotifications()">
-            <i class="fas fa-bell"></i>
-            <span class="notification-badge">3</span>
+        <div style="display: flex; gap: 12px; align-items: center;">
+            <div class="header-action" onclick="toggleDarkMode()" title="Toggle Dark Mode">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </div>
+            <div class="header-action" onclick="showNotifications()">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </div>
         </div>
     </header>
 
@@ -615,17 +672,53 @@
                     </div>
                     <span class="quick-action-label">Get Support</span>
                 </div>
-                <div class="quick-action" onclick="showDirectory()">
+                <div class="quick-action" onclick="switchView('directory')">
                     <div class="quick-action-icon" style="background: #2A2760; border: 2px solid #2A2760;">
                         <i class="fas fa-users"></i>
                     </div>
                     <span class="quick-action-label">Directory</span>
                 </div>
-                <div class="quick-action" onclick="showEvents()">
+                <div class="quick-action" onclick="switchView('events')">
                     <div class="quick-action-icon" style="background: #ff6a6d; border: 2px solid #ff6a6d;">
                         <i class="fas fa-calendar-day"></i>
                     </div>
                     <span class="quick-action-label">Events</span>
+                </div>
+                <div class="quick-action" onclick="switchView('jobs')">
+                    <div class="quick-action-icon" style="background: #4ecdc4; border: 2px solid #4ecdc4;">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <span class="quick-action-label">Jobs</span>
+                </div>
+                <div class="quick-action" onclick="switchView('mentors')">
+                    <div class="quick-action-icon" style="background: #f7b731; border: 2px solid #f7b731;">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <span class="quick-action-label">Mentors</span>
+                </div>
+                <div class="quick-action" onclick="switchView('booking')">
+                    <div class="quick-action-icon" style="background: #8b5cf6; border: 2px solid #8b5cf6;">
+                        <i class="fas fa-door-open"></i>
+                    </div>
+                    <span class="quick-action-label">Book Room</span>
+                </div>
+                <div class="quick-action" onclick="switchView('artp')">
+                    <div class="quick-action-icon" style="background: #059669; border: 2px solid #059669;">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <span class="quick-action-label">ARTP</span>
+                </div>
+                <div class="quick-action" onclick="switchView('sbdc')">
+                    <div class="quick-action-icon" style="background: #dc2626; border: 2px solid #dc2626;">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <span class="quick-action-label">SBDC</span>
+                </div>
+                <div class="quick-action" onclick="switchView('news')">
+                    <div class="quick-action-icon" style="background: #0891b2; border: 2px solid #0891b2;">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <span class="quick-action-label">News</span>
                 </div>
             </div>
 
@@ -2040,6 +2133,573 @@
             </div>
         </div>
 
+        <!-- JOBS VIEW -->
+        <div id="view-jobs" class="view">
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 32px;">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">Job Board</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Opportunities from our partners</div>
+                </div>
+            </div>
+
+            <!-- Search -->
+            <div style="position: relative; margin-bottom: 16px;">
+                <i class="fas fa-search" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #9ca3af;"></i>
+                <input type="text" id="job-search" placeholder="Search jobs by title, company..." style="width: 100%; padding: 12px 16px 12px 44px; border: 1px solid #e5e7eb; border-radius: 12px; font-size: 15px;" oninput="searchJobs()">
+            </div>
+
+            <!-- Job Filters -->
+            <div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 16px;">
+                <button class="filter-btn active" onclick="filterJobs('all')">All</button>
+                <button class="filter-btn" onclick="filterJobs('engineering')">Engineering</button>
+                <button class="filter-btn" onclick="filterJobs('marketing')">Marketing</button>
+                <button class="filter-btn" onclick="filterJobs('operations')">Operations</button>
+            </div>
+
+            <!-- Job Listings -->
+            <div id="jobs-list">
+                <div class="card job-card" data-category="engineering" onclick="showJobDetails('holley')">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                        <div>
+                            <div style="font-weight: 700; font-size: 16px; color: #1f2937;">R&D Engineer</div>
+                            <div style="font-size: 13px; color: #6b7280;">Holley Performance Products</div>
+                        </div>
+                        <button onclick="event.stopPropagation(); saveJob('holley')" style="background: none; border: none; cursor: pointer; color: #9ca3af;">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                    <div style="font-size: 13px; color: #6b7280; margin-bottom: 10px;">
+                        <i class="fas fa-map-marker-alt"></i> Bowling Green, KY · <i class="fas fa-dollar-sign"></i> $75K-$95K
+                    </div>
+                    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                        <span style="padding: 4px 10px; background: #dbeafe; border-radius: 12px; font-size: 11px; color: #1e40af;">Full-time</span>
+                        <span style="padding: 4px 10px; background: #dbeafe; border-radius: 12px; font-size: 11px; color: #1e40af;">Engineering</span>
+                        <span style="padding: 4px 10px; background: #dbeafe; border-radius: 12px; font-size: 11px; color: #1e40af;">On-site</span>
+                    </div>
+                </div>
+
+                <div class="card job-card" data-category="operations" onclick="showJobDetails('mi2')">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                        <div>
+                            <div style="font-weight: 700; font-size: 16px; color: #1f2937;">Program Coordinator</div>
+                            <div style="font-size: 13px; color: #6b7280;">Metals Innovation Initiative</div>
+                        </div>
+                        <button onclick="event.stopPropagation(); saveJob('mi2')" style="background: none; border: none; cursor: pointer; color: #9ca3af;">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                    <div style="font-size: 13px; color: #6b7280; margin-bottom: 10px;">
+                        <i class="fas fa-map-marker-alt"></i> Bowling Green, KY · <i class="fas fa-dollar-sign"></i> $55K-$70K
+                    </div>
+                    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                        <span style="padding: 4px 10px; background: #ede9fe; border-radius: 12px; font-size: 11px; color: #5b21b6;">Full-time</span>
+                        <span style="padding: 4px 10px; background: #ede9fe; border-radius: 12px; font-size: 11px; color: #5b21b6;">Operations</span>
+                        <span style="padding: 4px 10px; background: #ede9fe; border-radius: 12px; font-size: 11px; color: #5b21b6;">Hybrid</span>
+                    </div>
+                </div>
+
+                <div class="card job-card" data-category="marketing" onclick="showJobDetails('create')">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                        <div>
+                            <div style="font-weight: 700; font-size: 16px; color: #1f2937;">Marketing Intern</div>
+                            <div style="font-size: 13px; color: #6b7280;">CREATE</div>
+                        </div>
+                        <button onclick="event.stopPropagation(); saveJob('create')" style="background: none; border: none; cursor: pointer; color: #9ca3af;">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                    <div style="font-size: 13px; color: #6b7280; margin-bottom: 10px;">
+                        <i class="fas fa-map-marker-alt"></i> Bowling Green, KY · <i class="fas fa-dollar-sign"></i> $15/hr
+                    </div>
+                    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                        <span style="padding: 4px 10px; background: #dcfce7; border-radius: 12px; font-size: 11px; color: #166534;">Internship</span>
+                        <span style="padding: 4px 10px; background: #dcfce7; border-radius: 12px; font-size: 11px; color: #166534;">Marketing</span>
+                        <span style="padding: 4px 10px; background: #dcfce7; border-radius: 12px; font-size: 11px; color: #166534;">Part-time</span>
+                    </div>
+                </div>
+
+                <div class="card job-card" data-category="marketing" onclick="showJobDetails('ktw')">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                        <div>
+                            <div style="font-weight: 700; font-size: 16px; color: #1f2937;">Community Manager</div>
+                            <div style="font-size: 13px; color: #6b7280;">Kentucky to the World</div>
+                        </div>
+                        <button onclick="event.stopPropagation(); saveJob('ktw')" style="background: none; border: none; cursor: pointer; color: #9ca3af;">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                    <div style="font-size: 13px; color: #6b7280; margin-bottom: 10px;">
+                        <i class="fas fa-map-marker-alt"></i> Bowling Green, KY · <i class="fas fa-dollar-sign"></i> $50K-$65K
+                    </div>
+                    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                        <span style="padding: 4px 10px; background: #d1fae5; border-radius: 12px; font-size: 11px; color: #065f46;">Full-time</span>
+                        <span style="padding: 4px 10px; background: #d1fae5; border-radius: 12px; font-size: 11px; color: #065f46;">Community</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MENTORS VIEW -->
+        <div id="view-mentors" class="view">
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 32px;">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">Mentor Matching</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Connect with experienced mentors</div>
+                </div>
+            </div>
+
+            <!-- Search -->
+            <div style="position: relative; margin-bottom: 16px;">
+                <i class="fas fa-search" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #9ca3af;"></i>
+                <input type="text" placeholder="Search by expertise..." style="width: 100%; padding: 12px 16px 12px 44px; border: 1px solid #e5e7eb; border-radius: 12px; font-size: 15px;">
+            </div>
+
+            <!-- Mentor Filters -->
+            <div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 16px;">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Entrepreneurship</button>
+                <button class="filter-btn">Technology</button>
+                <button class="filter-btn">Finance</button>
+            </div>
+
+            <!-- Mentors -->
+            <div class="card" style="padding: 16px; margin-bottom: 12px; cursor: pointer;" onclick="requestMentor('buddy')">
+                <div style="display: flex; gap: 12px;">
+                    <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #2A2760, #ff6a6d); display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: 700; flex-shrink: 0;">BS</div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; font-size: 15px; color: #1f2937;">Buddy Steen</div>
+                        <div style="font-size: 12px; color: #6b7280; margin-bottom: 6px;">President, WKU Research Foundation</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                            <span style="padding: 3px 8px; background: rgba(78, 205, 196, 0.15); color: #4ecdc4; border-radius: 10px; font-size: 10px; font-weight: 600;">Economic Development</span>
+                            <span style="padding: 3px 8px; background: rgba(78, 205, 196, 0.15); color: #4ecdc4; border-radius: 10px; font-size: 10px; font-weight: 600;">Startups</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color: #9ca3af; align-self: center;"></i>
+                </div>
+            </div>
+
+            <div class="card" style="padding: 16px; margin-bottom: 12px; cursor: pointer;" onclick="requestMentor('sam')">
+                <div style="display: flex; gap: 12px;">
+                    <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #2563eb, #4ecdc4); display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: 700; flex-shrink: 0;">SF</div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; font-size: 15px; color: #1f2937;">Sam Ford</div>
+                        <div style="font-size: 12px; color: #6b7280; margin-bottom: 6px;">Executive Director, AccelerateKY</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                            <span style="padding: 3px 8px; background: rgba(78, 205, 196, 0.15); color: #4ecdc4; border-radius: 10px; font-size: 10px; font-weight: 600;">Innovation</span>
+                            <span style="padding: 3px 8px; background: rgba(78, 205, 196, 0.15); color: #4ecdc4; border-radius: 10px; font-size: 10px; font-weight: 600;">MIT REAP</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color: #9ca3af; align-self: center;"></i>
+                </div>
+            </div>
+
+            <div class="card" style="padding: 16px; margin-bottom: 12px; cursor: pointer;" onclick="requestMentor('jeff')">
+                <div style="display: flex; gap: 12px;">
+                    <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #7c3aed, #ec4899); display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: 700; flex-shrink: 0;">JH</div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; font-size: 15px; color: #1f2937;">Jeff Hook</div>
+                        <div style="font-size: 12px; color: #6b7280; margin-bottom: 6px;">Executive Director, CREATE</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                            <span style="padding: 3px 8px; background: rgba(78, 205, 196, 0.15); color: #4ecdc4; border-radius: 10px; font-size: 10px; font-weight: 600;">Leadership</span>
+                            <span style="padding: 3px 8px; background: rgba(78, 205, 196, 0.15); color: #4ecdc4; border-radius: 10px; font-size: 10px; font-weight: 600;">Strategy</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color: #9ca3af; align-self: center;"></i>
+                </div>
+            </div>
+
+            <div class="card" style="padding: 16px; margin-bottom: 12px; cursor: pointer;" onclick="requestMentor('brittanie')">
+                <div style="display: flex; gap: 12px;">
+                    <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #dc2626, #f59e0b); display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: 700; flex-shrink: 0;">BD</div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; font-size: 15px; color: #1f2937;">Brittanie Dawson</div>
+                        <div style="font-size: 12px; color: #6b7280; margin-bottom: 6px;">SBDC Director</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                            <span style="padding: 3px 8px; background: rgba(78, 205, 196, 0.15); color: #4ecdc4; border-radius: 10px; font-size: 10px; font-weight: 600;">Small Business</span>
+                            <span style="padding: 3px 8px; background: rgba(78, 205, 196, 0.15); color: #4ecdc4; border-radius: 10px; font-size: 10px; font-weight: 600;">Finance</span>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color: #9ca3af; align-self: center;"></i>
+                </div>
+            </div>
+
+            <div class="card" style="text-align: center; padding: 30px; margin-top: 20px;">
+                <i class="fas fa-user-plus" style="font-size: 40px; color: #2A2760; margin-bottom: 12px;"></i>
+                <h3 style="font-weight: 700; margin-bottom: 8px;">Become a Mentor</h3>
+                <p style="font-size: 14px; color: #6b7280; margin-bottom: 16px;">Share your expertise with the next generation of innovators.</p>
+                <button style="padding: 12px 24px; background: #ff6a6d; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;" onclick="applyToBeMentor()">Apply Now</button>
+            </div>
+        </div>
+
+        <!-- ARTP VIEW -->
+        <div id="view-artp" class="view">
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 32px;">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">ARTP Centers</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Applied Research & Technology</div>
+                </div>
+            </div>
+
+            <div class="card" style="background: linear-gradient(135deg, rgba(42, 39, 96, 0.05), rgba(255, 106, 109, 0.05)); border: 1px solid #e5e7eb;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <div style="width: 48px; height: 48px; background: #2A2760; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <div style="font-weight: 700; font-size: 15px; color: #1f2937;">Center for Robotics & Automation</div>
+                        <div style="font-size: 12px; color: #6b7280;">Industrial robotics & AI</div>
+                    </div>
+                </div>
+                <div style="font-size: 13px; color: #6b7280; line-height: 1.5;">Develops robotic solutions for manufacturing, agriculture, and healthcare industries. Student-faculty collaboration on real-world projects.</div>
+            </div>
+
+            <div class="card" style="background: linear-gradient(135deg, rgba(42, 39, 96, 0.05), rgba(255, 106, 109, 0.05)); border: 1px solid #e5e7eb;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <div style="width: 48px; height: 48px; background: #4ecdc4; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div>
+                        <div style="font-weight: 700; font-size: 15px; color: #1f2937;">Center for Energy Systems</div>
+                        <div style="font-size: 12px; color: #6b7280;">Renewable energy & efficiency</div>
+                    </div>
+                </div>
+                <div style="font-size: 13px; color: #6b7280; line-height: 1.5;">Research on solar, wind, and battery technologies. Partners with Envision AESC and regional utilities on energy innovation.</div>
+            </div>
+
+            <div class="card" style="background: linear-gradient(135deg, rgba(42, 39, 96, 0.05), rgba(255, 106, 109, 0.05)); border: 1px solid #e5e7eb;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <div style="width: 48px; height: 48px; background: #f7b731; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <div>
+                        <div style="font-weight: 700; font-size: 15px; color: #1f2937;">Center for Materials Science</div>
+                        <div style="font-size: 12px; color: #6b7280;">Advanced materials research</div>
+                    </div>
+                </div>
+                <div style="font-size: 13px; color: #6b7280; line-height: 1.5;">Works with MI2 partners on aluminum, steel, and composite materials. Testing and characterization facilities available.</div>
+            </div>
+
+            <div class="card" style="background: linear-gradient(135deg, rgba(42, 39, 96, 0.05), rgba(255, 106, 109, 0.05)); border: 1px solid #e5e7eb;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                    <div style="width: 48px; height: 48px; background: #8b5cf6; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div>
+                        <div style="font-weight: 700; font-size: 15px; color: #1f2937;">Center for Software Development</div>
+                        <div style="font-size: 12px; color: #6b7280;">App & system development</div>
+                    </div>
+                </div>
+                <div style="font-size: 13px; color: #6b7280; line-height: 1.5;">Custom software solutions for regional businesses. Student teams work on real client projects under faculty supervision.</div>
+            </div>
+
+            <div class="card" style="text-align: center; padding: 30px; margin-top: 20px;">
+                <i class="fas fa-flask" style="font-size: 40px; color: #2A2760; margin-bottom: 12px;"></i>
+                <h3 style="font-weight: 700; margin-bottom: 8px;">12 ARTP Centers</h3>
+                <p style="font-size: 14px; color: #6b7280; margin-bottom: 16px;">Collaborative research opportunities for students and industry partners.</p>
+                <button style="padding: 12px 24px; background: #ff6a6d; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">View All Centers</button>
+            </div>
+        </div>
+
+        <!-- SBDC VIEW -->
+        <div id="view-sbdc" class="view">
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 32px;">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">SBDC Services</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Small Business Development Center</div>
+                </div>
+            </div>
+
+            <div class="card" style="background: linear-gradient(135deg, #dc2626, #991b1b); color: white;">
+                <h3 style="font-weight: 700; margin-bottom: 12px; font-size: 20px;">Free Business Counseling</h3>
+                <p style="font-size: 14px; opacity: 0.9; margin-bottom: 16px;">Expert guidance for starting, growing, or sustaining your business. Confidential and at no cost.</p>
+                <button style="padding: 12px 24px; background: white; color: #dc2626; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;" onclick="requestSBDC()">Schedule Consultation</button>
+            </div>
+
+            <h3 style="font-weight: 700; margin: 24px 0 12px;">Services Offered</h3>
+
+            <div class="card" style="padding: 0;">
+                <div style="padding: 20px; border-bottom: 1px solid #e5e7eb;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                        <div style="width: 40px; height: 40px; background: #dbeafe; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #2563eb;">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div style="font-weight: 700;">Business Plan Development</div>
+                    </div>
+                    <p style="font-size: 13px; color: #6b7280; padding-left: 52px;">Create comprehensive business plans with market research and financial projections.</p>
+                </div>
+                <div style="padding: 20px; border-bottom: 1px solid #e5e7eb;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                        <div style="width: 40px; height: 40px; background: #dcfce7; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #16a34a;">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div style="font-weight: 700;">Financial Analysis</div>
+                    </div>
+                    <p style="font-size: 13px; color: #6b7280; padding-left: 52px;">Cash flow management, funding strategies, and financial modeling support.</p>
+                </div>
+                <div style="padding: 20px; border-bottom: 1px solid #e5e7eb;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                        <div style="width: 40px; height: 40px; background: #fef3c7; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #d97706;">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div style="font-weight: 700;">Marketing Strategy</div>
+                    </div>
+                    <p style="font-size: 13px; color: #6b7280; padding-left: 52px;">Digital marketing, branding, customer acquisition, and market positioning.</p>
+                </div>
+                <div style="padding: 20px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                        <div style="width: 40px; height: 40px; background: #ede9fe; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #7c3aed;">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <div style="font-weight: 700;">Funding Assistance</div>
+                    </div>
+                    <p style="font-size: 13px; color: #6b7280; padding-left: 52px;">Loan packaging, investor pitch preparation, and grant application support.</p>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 20px;">
+                <h3 style="font-weight: 700; margin-bottom: 16px;">Upcoming SBDC Workshops</h3>
+                <div style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
+                    <div style="font-weight: 600; margin-bottom: 4px;">QuickBooks Basics</div>
+                    <div style="font-size: 13px; color: #6b7280;">May 15 · 9:00 AM - 12:00 PM</div>
+                </div>
+                <div style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
+                    <div style="font-weight: 600; margin-bottom: 4px;">Social Media Marketing</div>
+                    <div style="font-size: 13px; color: #6b7280;">May 22 · 1:00 PM - 4:00 PM</div>
+                </div>
+                <div style="padding: 12px 0;">
+                    <div style="font-weight: 600; margin-bottom: 4px;">Business Plan Writing</div>
+                    <div style="font-size: 13px; color: #6b7280;">May 29 · 9:00 AM - 3:00 PM</div>
+                </div>
+                <button style="width: 100%; margin-top: 12px; padding: 12px; background: #2A2760; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">View All Workshops</button>
+            </div>
+        </div>
+
+        <!-- NEWS VIEW -->
+        <div id="view-news" class="view">
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 32px;">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">News Feed</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Updates from across the ecosystem</div>
+                </div>
+            </div>
+
+            <!-- News Filter -->
+            <div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 16px;">
+                <button class="filter-btn active" onclick="filterNews('all')">All News</button>
+                <button class="filter-btn" onclick="filterNews('partners')">Partners</button>
+                <button class="filter-btn" onclick="filterNews('create')">CREATE</button>
+            </div>
+
+            <div class="card" data-news="create">
+                <div style="display: flex; gap: 12px; padding: 16px 0; border-bottom: 1px solid #e5e7eb;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #2A2760; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px; flex-shrink: 0;">CR</div>
+                    <div style="flex: 1;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="font-weight: 700; font-size: 14px; color: #1f2937;">CREATE Team</span>
+                            <span style="font-size: 12px; color: #9ca3af;">2h ago</span>
+                        </div>
+                        <div style="font-size: 14px; color: #6b7280; line-height: 1.5;">Launch Kentucky Idea Challenge deadline extended! Submit your innovative ideas by March 15th for a chance to win $10,000.</div>
+                        <div style="margin-top: 8px;">
+                            <span style="font-size: 12px; color: #ff6a6d; font-weight: 600;">#LaunchKY #Entrepreneurship</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-news="partners">
+                <div style="display: flex; gap: 12px; padding: 16px 0; border-bottom: 1px solid #e5e7eb;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #dc2626; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px; flex-shrink: 0;">MI</div>
+                    <div style="flex: 1;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="font-weight: 700; font-size: 14px; color: #1f2937;">MI2</span>
+                            <span style="font-size: 12px; color: #9ca3af;">5h ago</span>
+                        </div>
+                        <div style="font-size: 14px; color: #6b7280; line-height: 1.5;">Metals Innovation Initiative announces new pilot program for sustainable aluminum processing. Applications now open.</div>
+                        <div style="margin-top: 8px;">
+                            <span style="font-size: 12px; color: #0891b2; font-weight: 600;">#Sustainability #Metals</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-news="partners">
+                <div style="display: flex; gap: 12px; padding: 16px 0; border-bottom: 1px solid #e5e7eb;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #2563eb; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px; flex-shrink: 0;">AK</div>
+                    <div style="flex: 1;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="font-weight: 700; font-size: 14px; color: #1f2937;">AccelerateKY</span>
+                            <span style="font-size: 12px; color: #9ca3af;">1d ago</span>
+                        </div>
+                        <div style="font-size: 14px; color: #6b7280; line-height: 1.5;">MIT REAP Kentucky cohort applications are live! Join 30 entrepreneurs for the 8-week acceleration program starting June 1st.</div>
+                        <div style="margin-top: 8px;">
+                            <span style="font-size: 12px; color: #2563eb; font-weight: 600;">#MITREAP #Innovation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-news="partners">
+                <div style="display: flex; gap: 12px; padding: 16px 0;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #059669; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px; flex-shrink: 0;">KT</div>
+                    <div style="flex: 1;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="font-weight: 700; font-size: 14px; color: #1f2937;">Kentucky to the World</span>
+                            <span style="font-size: 12px; color: #9ca3af;">2d ago</span>
+                        </div>
+                        <div style="font-size: 14px; color: #6b7280; line-height: 1.5;">Proud to host the Civic Imagination Incubator with USC! Six Kentucky media creators selected for 8-month program.</div>
+                        <div style="margin-top: 8px;">
+                            <span style="font-size: 12px; color: #059669; font-weight: 600;">#Storytelling #Media</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button style="width: 100%; margin-top: 20px; padding: 14px; background: #2A2760; color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer;">
+                <i class="fas fa-plus"></i> Create Post
+            </button>
+        </div>
+
+        <!-- BOOKING VIEW -->
+        <div id="view-booking" class="view">
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 32px;">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">Room Booking</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Reserve meeting rooms and spaces</div>
+                </div>
+            </div>
+
+            <!-- Date Selector -->
+            <div style="margin-bottom: 20px;">
+                <label style="font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 8px; display: block;">Select Date</label>
+                <input type="date" id="booking-date" value="2026-05-06" style="width: 100%; padding: 12px 16px; border: 1px solid #e5e7eb; border-radius: 10px; font-size: 15px;">
+            </div>
+
+            <h3 style="font-weight: 700; margin: 20px 0 12px;">Conference Room A</h3>
+            <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">Seats 12 • Video conferencing • Whiteboard</p>
+            <div style="margin-bottom: 20px;">
+                <div class="booking-slot" onclick="selectBookingSlot(this)" style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f9fafb; border-radius: 10px; margin-bottom: 8px; cursor: pointer;">
+                    <span>9:00 AM - 10:00 AM</span>
+                    <span style="color: #10b981; font-weight: 600;">Available</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f3f4f6; border-radius: 10px; margin-bottom: 8px; opacity: 0.6;">
+                    <span>10:00 AM - 11:00 AM</span>
+                    <span style="color: #6b7280;">Booked</span>
+                </div>
+                <div class="booking-slot" onclick="selectBookingSlot(this)" style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f9fafb; border-radius: 10px; margin-bottom: 8px; cursor: pointer;">
+                    <span>11:00 AM - 12:00 PM</span>
+                    <span style="color: #10b981; font-weight: 600;">Available</span>
+                </div>
+                <div class="booking-slot" onclick="selectBookingSlot(this)" style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f9fafb; border-radius: 10px; margin-bottom: 8px; cursor: pointer;">
+                    <span>1:00 PM - 2:00 PM</span>
+                    <span style="color: #10b981; font-weight: 600;">Available</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f3f4f6; border-radius: 10px; margin-bottom: 8px; opacity: 0.6;">
+                    <span>2:00 PM - 3:00 PM</span>
+                    <span style="color: #6b7280;">Booked</span>
+                </div>
+                <div class="booking-slot" onclick="selectBookingSlot(this)" style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f9fafb; border-radius: 10px; cursor: pointer;">
+                    <span>3:00 PM - 4:00 PM</span>
+                    <span style="color: #10b981; font-weight: 600;">Available</span>
+                </div>
+            </div>
+
+            <h3 style="font-weight: 700; margin: 20px 0 12px;">Narrative Network Studio</h3>
+            <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">Recording studio • Podcast equipment • Seats 4</p>
+            <div style="margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f3f4f6; border-radius: 10px; margin-bottom: 8px; opacity: 0.6;">
+                    <span>9:00 AM - 11:00 AM</span>
+                    <span style="color: #6b7280;">Booked</span>
+                </div>
+                <div class="booking-slot" onclick="selectBookingSlot(this)" style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f9fafb; border-radius: 10px; margin-bottom: 8px; cursor: pointer;">
+                    <span>11:00 AM - 1:00 PM</span>
+                    <span style="color: #10b981; font-weight: 600;">Available</span>
+                </div>
+                <div class="booking-slot" onclick="selectBookingSlot(this)" style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f9fafb; border-radius: 10px; cursor: pointer;">
+                    <span>1:00 PM - 3:00 PM</span>
+                    <span style="color: #10b981; font-weight: 600;">Available</span>
+                </div>
+            </div>
+
+            <button style="width: 100%; margin-top: 20px; padding: 14px; background: #ff6a6d; color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer;" onclick="confirmBooking()">
+                <i class="fas fa-calendar-check"></i> Confirm Booking
+            </button>
+        </div>
+
+        <!-- EVENTS VIEW -->
+        <div id="view-events" class="view">
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 32px;">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">Campus Events</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Connect, learn, and grow</div>
+                </div>
+            </div>
+
+            <!-- Event Tabs -->
+            <div style="display: flex; gap: 8px; margin-bottom: 20px; background: #f3f4f6; padding: 4px; border-radius: 12px;">
+                <button style="flex: 1; padding: 10px; background: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; color: #2A2760; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Upcoming</button>
+                <button style="flex: 1; padding: 10px; background: transparent; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; color: #6b7280; cursor: pointer;">Registered</button>
+                <button style="flex: 1; padding: 10px; background: transparent; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; color: #6b7280; cursor: pointer;">Past</button>
+            </div>
+
+            <!-- Featured Event -->
+            <div class="card" style="padding: 0; overflow: hidden; margin-bottom: 20px;">
+                <div style="height: 140px; background: linear-gradient(135deg, #2A2760, #ff6a6d); display: flex; align-items: center; justify-content: center; color: white; font-size: 48px;">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div style="padding: 20px;">
+                    <span style="display: inline-block; padding: 4px 12px; background: #ff6a6d; color: white; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 10px;">MAR 15 DEADLINE</span>
+                    <h3 style="font-weight: 700; font-size: 18px; margin-bottom: 8px; color: #1f2937;">Launch Kentucky: Idea Challenge</h3>
+                    <div style="display: flex; gap: 16px; font-size: 13px; color: #6b7280; margin-bottom: 12px;">
+                        <span><i class="fas fa-clock"></i> 11:59 PM</span>
+                        <span><i class="fas fa-laptop"></i> Online</span>
+                    </div>
+                    <p style="font-size: 13px; color: #6b7280; margin-bottom: 16px;">Submit your innovative business ideas for a chance to win $10,000 in funding.</p>
+                    <div style="display: flex; gap: 8px;">
+                        <button style="flex: 1; padding: 12px; background: #ff6a6d; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;" onclick="registerEvent('launch')">Register</button>
+                        <button style="flex: 1; padding: 12px; background: white; color: #2A2760; border: 2px solid #2A2760; border-radius: 10px; font-weight: 600; cursor: pointer;">Add to Calendar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More Events -->
+            <div class="card" style="padding: 0; overflow: hidden; margin-bottom: 16px;">
+                <div style="height: 120px; background: linear-gradient(135deg, #f7b731, #ff6a6d); display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">
+                    <i class="fas fa-store"></i>
+                </div>
+                <div style="padding: 16px;">
+                    <span style="display: inline-block; padding: 4px 12px; background: #f7b731; color: white; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 8px;">APR 12</span>
+                    <h3 style="font-weight: 700; font-size: 16px; margin-bottom: 8px; color: #1f2937;">4th Annual Small Business Summit</h3>
+                    <div style="display: flex; gap: 16px; font-size: 13px; color: #6b7280; margin-bottom: 12px;">
+                        <span><i class="fas fa-clock"></i> 9:00 AM - 4:00 PM</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Atrium</span>
+                    </div>
+                    <button style="width: 100%; padding: 12px; background: #ff6a6d; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">Register ($25)</button>
+                </div>
+            </div>
+
+            <div class="card" style="padding: 0; overflow: hidden;">
+                <div style="height: 120px; background: linear-gradient(135deg, #8b5cf6, #ec4899); display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">
+                    <i class="fas fa-child"></i>
+                </div>
+                <div style="padding: 16px;">
+                    <span style="display: inline-block; padding: 4px 12px; background: #8b5cf6; color: white; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 8px;">MAY 4</span>
+                    <h3 style="font-weight: 700; font-size: 16px; margin-bottom: 8px; color: #1f2937;">Children's Entrepreneur Market</h3>
+                    <div style="display: flex; gap: 16px; font-size: 13px; color: #6b7280; margin-bottom: 12px;">
+                        <span><i class="fas fa-clock"></i> 10:00 AM - 2:00 PM</span>
+                        <span><i class="fas fa-map-marker-alt"></i> SmartSpace</span>
+                    </div>
+                    <button style="width: 100%; padding: 12px; background: #ff6a6d; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">Register Free</button>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- Floating Action Button -->
@@ -2230,17 +2890,121 @@
     }
 
     function showEvents() {
-        alert('Upcoming WKU Innovation Campus Events\n\n• Launch Kentucky: Idea Challenge Deadline\n• 4th Annual Small Business Summit and Expo\n• Children\'s Entrepreneur Market (Ages 5-17)\n• Narrative Network Regional Meetup');
+        switchView('events');
     }
 
     function showNewPost() {
         alert('Create New Post\n\nShare updates, ask questions, or post opportunities with the CREATE community.');
     }
 
+    // Dark Mode
+    function toggleDarkMode() {
+        const body = document.body;
+        const isDark = body.getAttribute('data-theme') === 'dark';
+        const icon = document.getElementById('theme-icon');
+        
+        if (isDark) {
+            body.removeAttribute('data-theme');
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+            localStorage.setItem('theme', 'light');
+        } else {
+            body.setAttribute('data-theme', 'dark');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+
+    // Load saved theme
+    if (localStorage.getItem('theme') === 'dark') {
+        document.body.setAttribute('data-theme', 'dark');
+        const icon = document.getElementById('theme-icon');
+        if (icon) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+    }
+
+    // Job Functions
+    function filterJobs(category) {
+        document.querySelectorAll('#view-jobs .filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        const cards = document.querySelectorAll('.job-card');
+        cards.forEach(card => {
+            if (category === 'all' || card.dataset.category === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    function searchJobs() {
+        const query = document.getElementById('job-search').value.toLowerCase();
+        const cards = document.querySelectorAll('.job-card');
+        cards.forEach(card => {
+            const text = card.textContent.toLowerCase();
+            card.style.display = text.includes(query) ? 'block' : 'none';
+        });
+    }
+
+    function showJobDetails(jobId) {
+        alert('📄 Opening job details...');
+    }
+
+    function saveJob(jobId) {
+        alert('💾 Job saved to your list!');
+    }
+
+    // Mentor Functions
+    function requestMentor(mentorId) {
+        alert('📩 Mentor request sent! They will be notified and can accept or decline.');
+    }
+
+    function applyToBeMentor() {
+        alert('📝 Mentor application form sent to your email!');
+    }
+
+    // Booking Functions
+    function selectBookingSlot(element) {
+        if (element.style.opacity === '0.6') return;
+        
+        document.querySelectorAll('.booking-slot').forEach(s => {
+            if (s.style.opacity !== '0.6') {
+                s.style.background = '#f9fafb';
+                s.style.color = '';
+            }
+        });
+        element.style.background = '#2A2760';
+        element.style.color = 'white';
+    }
+
+    function confirmBooking() {
+        alert('✅ Room booked successfully! Check your email for confirmation.');
+    }
+
+    // Event Functions
+    function registerEvent(eventId) {
+        alert('✅ Registered for event! Check your email for confirmation.');
+    }
+
+    // News Functions
+    function filterNews(category) {
+        document.querySelectorAll('#view-news .filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    // SBDC
+    function requestSBDC() {
+        alert('📅 SBDC consultation requested! We\'ll contact you within 24 hours.');
+    }
+
     // Swipe detection for view switching
     let touchStartX = 0;
     let touchEndX = 0;
-    const views = ['home', 'map', 'directory', 'info'];
+    const views = ['home', 'events', 'jobs', 'directory', 'info'];
     let currentViewIndex = 0;
 
     document.addEventListener('touchstart', e => {
