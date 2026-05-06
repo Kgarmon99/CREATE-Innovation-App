@@ -656,6 +656,23 @@
                 </div>
             </div>
 
+            <!-- Search Bar -->
+            <div style="position: relative; margin-bottom: 24px;">
+                <i class="fas fa-search" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #9ca3af;"></i>
+                <input type="text" id="global-search" placeholder="Search events, jobs, mentors, resources..." 
+                    style="width: 100%; padding: 14px 16px 14px 44px; border: 1px solid #e5e7eb; border-radius: 12px; font-size: 14px; outline: none;"
+                    onkeyup="handleSearch(this.value)">
+            </div>
+
+            <!-- Search Results Container -->
+            <div id="search-results" style="display: none; margin-bottom: 24px;">
+                <div class="section-header">
+                    <h2 class="section-title">Search Results</h2>
+                    <span class="section-action" onclick="clearSearch()">Clear</span>
+                </div>
+                <div id="search-results-content"></div>
+            </div>
+
             <!-- CREATE Mission Statement -->
             <div style="background: #2A2760; border-radius: 16px; padding: 20px; margin-bottom: 24px; border-left: 4px solid #ff6a6d;">
                 <div style="color: rgba(255,255,255,0.9); font-size: 13px; line-height: 1.6; font-style: italic;">
@@ -4253,6 +4270,83 @@
             currentViewIndex--;
             switchView(views[currentViewIndex]);
         }
+    }
+
+    // Search functionality
+    const searchData = [
+        { type: 'event', title: 'Launch Kentucky: Idea Challenge', desc: 'Submit your innovative business idea for a chance to win $10,000', view: 'events' },
+        { type: 'event', title: 'Tech Mixer', desc: 'Networking event for tech founders and developers', view: 'events' },
+        { type: 'event', title: 'Small Business Summit', desc: 'Annual expo with 200+ attendees', view: 'events' },
+        { type: 'event', title: 'Metals Innovation Summit', desc: 'Two days of industry insights and networking', view: 'events' },
+        { type: 'job', title: 'R&D Engineer - Holley Performance', desc: 'Automotive performance parts R&D', view: 'jobs' },
+        { type: 'job', title: 'Materials Scientist - MI2', desc: 'Metals research and development', view: 'jobs' },
+        { type: 'job', title: 'Program Coordinator - CREATE', desc: 'Event coordination and community management', view: 'jobs' },
+        { type: 'job', title: 'Communications Director - KTW', desc: 'Storytelling and content strategy', view: 'jobs' },
+        { type: 'mentor', title: 'Buddy Steen', desc: 'Expertise: SBDC counseling, business planning', view: 'mentors' },
+        { type: 'mentor', title: 'Sam Ford', desc: 'Expertise: Marketing, communications', view: 'mentors' },
+        { type: 'mentor', title: 'Jeff Hook', desc: 'Expertise: AgTech, sustainability', view: 'mentors' },
+        { type: 'mentor', title: 'Brittanie Dawson', desc: 'Expertise: Finance, operations', view: 'mentors' },
+        { type: 'resource', title: 'Business Plan Template', desc: 'Google Doc template for creating your business plan', view: 'resources' },
+        { type: 'resource', title: 'Financial Model Template', desc: 'Excel template for startup financials', view: 'resources' },
+        { type: 'resource', title: 'Pitch Deck Template', desc: 'Keynote/PowerPoint pitch deck template', view: 'resources' },
+        { type: 'resource', title: 'Launch Kentucky Funding', desc: '$10,000 for innovative ideas', view: 'resources' },
+        { type: 'resource', title: 'Bluegrass Angels', desc: 'Early-stage investment network', view: 'resources' }
+    ];
+
+    function handleSearch(query) {
+        if (!query || query.length < 2) {
+            document.getElementById('search-results').style.display = 'none';
+            return;
+        }
+
+        const lowerQuery = query.toLowerCase();
+        const results = searchData.filter(item => 
+            item.title.toLowerCase().includes(lowerQuery) || 
+            item.desc.toLowerCase().includes(lowerQuery)
+        );
+
+        displaySearchResults(results);
+    }
+
+    function displaySearchResults(results) {
+        const container = document.getElementById('search-results');
+        const content = document.getElementById('search-results-content');
+
+        if (results.length === 0) {
+            content.innerHTML = '<p style="text-align: center; color: #6b7280; padding: 20px;">No results found</p>';
+        } else {
+            content.innerHTML = results.map(item => `
+                <div class="card" style="margin-bottom: 12px; cursor: pointer;" onclick="switchView('${item.view}')">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div style="flex: 1;">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                                <span style="padding: 2px 8px; background: ${getTypeColor(item.type)}; border-radius: 4px; font-size: 10px; text-transform: uppercase; color: white; font-weight: 600;">${item.type}</span>
+                                <span style="font-weight: 600; color: #1f2937;">${item.title}</span>
+                            </div>
+                            <p style="font-size: 13px; color: #6b7280;">${item.desc}</p>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #9ca3af; margin-left: 8px;"></i>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        container.style.display = 'block';
+    }
+
+    function getTypeColor(type) {
+        const colors = {
+            'event': '#ff6a6d',
+            'job': '#2A2760',
+            'mentor': '#4ecdc4',
+            'resource': '#f7b731'
+        };
+        return colors[type] || '#6b7280';
+    }
+
+    function clearSearch() {
+        document.getElementById('global-search').value = '';
+        document.getElementById('search-results').style.display = 'none';
     }
 </script>
 
