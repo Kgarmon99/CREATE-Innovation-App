@@ -240,7 +240,7 @@
         /* Quick Actions */
         .quick-actions {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 12px;
             margin-bottom: 28px;
         }
@@ -719,6 +719,18 @@
                         <i class="fas fa-newspaper"></i>
                     </div>
                     <span class="quick-action-label">News</span>
+                </div>
+                <div class="quick-action" onclick="switchView('social')">
+                    <div class="quick-action-icon" style="background: #ec4899; border: 2px solid #ec4899;">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <span class="quick-action-label">Social</span>
+                </div>
+                <div class="quick-action" onclick="switchView('resources')">
+                    <div class="quick-action-icon" style="background: #14b8a6; border: 2px solid #14b8a6;">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <span class="quick-action-label">Resources</span>
                 </div>
             </div>
 
@@ -2700,6 +2712,493 @@
             </div>
         </div>
 
+        <!-- SOCIAL VIEW -->
+        <div id="view-social" class="view">
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 32px;">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">Social Network</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Connect with the community</div>
+                </div>
+            </div>
+
+            <!-- Social Tabs -->
+            <div style="display: flex; gap: 8px; margin-bottom: 20px; background: #f3f4f6; padding: 4px; border-radius: 12px;">
+                <button onclick="switchSocialTab('feed')" id="social-tab-feed" style="flex: 1; padding: 10px; background: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; color: #2A2760; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Feed</button>
+                <button onclick="switchSocialTab('projects')" id="social-tab-projects" style="flex: 1; padding: 10px; background: transparent; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; color: #6b7280; cursor: pointer;">Projects</button>
+                <button onclick="switchSocialTab('cofounder')" id="social-tab-cofounder" style="flex: 1; padding: 10px; background: transparent; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; color: #6b7280; cursor: pointer;">Co-Founder</button>
+                <button onclick="switchSocialTab('messages')" id="social-tab-messages" style="flex: 1; padding: 10px; background: transparent; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; color: #6b7280; cursor: pointer;">Messages</button>
+            </div>
+
+            <!-- Feed Tab -->
+            <div id="social-feed">
+                <!-- Create Post -->
+                <div class="card" style="margin-bottom: 16px;">
+                    <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: #2A2760; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">KG</div>
+                        <input type="text" placeholder="Share an update..." style="flex: 1; border: 1px solid #e5e7eb; border-radius: 20px; padding: 10px 16px; font-size: 14px;">
+                    </div>
+                    <div style="display: flex; gap: 8px; justify-content: flex-end;">
+                        <button style="padding: 8px 16px; background: #f3f4f6; border: none; border-radius: 8px; font-size: 13px; color: #6b7280; cursor: pointer;"><i class="fas fa-image"></i> Photo</button>
+                        <button style="padding: 8px 16px; background: #f3f4f6; border: none; border-radius: 8px; font-size: 13px; color: #6b7280; cursor: pointer;"><i class="fas fa-link"></i> Link</button>
+                        <button style="padding: 8px 16px; background: #ff6a6d; color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;">Post</button>
+                    </div>
+                </div>
+
+                <!-- Feed Posts -->
+                <div class="card" style="margin-bottom: 16px;">
+                    <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+                        <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #2A2760, #ff6a6d); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 16px;">JJ</div>
+                        <div>
+                            <div style="font-weight: 700; color: #1f2937;">Jeremy Jacobs</div>
+                            <div style="font-size: 12px; color: #6b7280;">Founder & CEO at UnDesked • 2h ago</div>
+                        </div>
+                    </div>
+                    <div style="font-size: 14px; color: #374151; line-height: 1.6; margin-bottom: 12px;">
+                        Excited to announce that UnDesked just hit $3M in funding! 🚀 Thanks to CREATE and the amazing support from the Innovation Campus community. Looking to hire 3 more developers - DM me if interested! #PropTech #StartupLife
+                    </div>
+                    <div style="display: flex; gap: 16px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+                        <button style="background: none; border: none; color: #6b7280; font-size: 13px; cursor: pointer;"><i class="far fa-heart"></i> 24</button>
+                        <button style="background: none; border: none; color: #6b7280; font-size: 13px; cursor: pointer;"><i class="far fa-comment"></i> 8</button>
+                        <button style="background: none; border: none; color: #6b7280; font-size: 13px; cursor: pointer;"><i class="far fa-share-square"></i> Share</button>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 16px;">
+                    <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+                        <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #dc2626, #f59e0b); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 16px;">MI</div>
+                        <div>
+                            <div style="font-weight: 700; color: #1f2937;">Metals Innovation Initiative</div>
+                            <div style="font-size: 12px; color: #6b7280;">Industry Consortium • 5h ago</div>
+                        </div>
+                    </div>
+                    <div style="font-size: 14px; color: #374151; line-height: 1.6; margin-bottom: 12px;">
+                        Join us for the MI2 Innovation Summit next month! We're bringing together industry leaders from Logan Aluminum, Kobe, and Novelis to discuss sustainable metals processing. Registration is now open. 🔧♻️
+                    </div>
+                    <div style="background: #f3f4f6; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+                        <div style="font-weight: 600; color: #1f2937; margin-bottom: 4px;">MI2 Innovation Summit 2026</div>
+                        <div style="font-size: 12px; color: #6b7280;">June 15-16 • WKU Innovation Campus</div>
+                    </div>
+                    <div style="display: flex; gap: 16px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+                        <button style="background: none; border: none; color: #6b7280; font-size: 13px; cursor: pointer;"><i class="far fa-heart"></i> 56</button>
+                        <button style="background: none; border: none; color: #6b7280; font-size: 13px; cursor: pointer;"><i class="far fa-comment"></i> 12</button>
+                        <button style="background: none; border: none; color: #6b7280; font-size: 13px; cursor: pointer;"><i class="far fa-share-square"></i> Share</button>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 16px;">
+                    <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+                        <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #0891b2, #4ecdc4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 16px;">SF</div>
+                        <div>
+                            <div style="font-weight: 700; color: #1f2937;">Sam Ford</div>
+                            <div style="font-size: 12px; color: #6b7280;">Executive Director at AccelerateKY • 1d ago</div>
+                        </div>
+                    </div>
+                    <div style="font-size: 14px; color: #374151; line-height: 1.6; margin-bottom: 12px;">
+                        Just finished an amazing session with our MIT REAP Kentucky cohort! These entrepreneurs are building incredible things. From EV battery tech to sustainable agriculture solutions - Kentucky's future is bright! 💡
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
+                        <span style="padding: 4px 10px; background: #dbeafe; border-radius: 12px; font-size: 11px; color: #1e40af;">#MITREAP</span>
+                        <span style="padding: 4px 10px; background: #dbeafe; border-radius: 12px; font-size: 11px; color: #1e40af;">#Entrepreneurship</span>
+                        <span style="padding: 4px 10px; background: #dbeafe; border-radius: 12px; font-size: 11px; color: #1e40af;">#Kentucky</span>
+                    </div>
+                    <div style="display: flex; gap: 16px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+                        <button style="background: none; border: none; color: #6b7280; font-size: 13px; cursor: pointer;"><i class="far fa-heart"></i> 89</button>
+                        <button style="background: none; border: none; color: #6b7280; font-size: 13px; cursor: pointer;"><i class="far fa-comment"></i> 23</button>
+                        <button style="background: none; border: none; color: #6b7280; font-size: 13px; cursor: pointer;"><i class="far fa-share-square"></i> Share</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Tab -->
+            <div id="social-projects" style="display: none;">
+                <div class="card" style="margin-bottom: 16px;">
+                    <div style="height: 160px; background: linear-gradient(135deg, #2A2760, #4ecdc4); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; margin-bottom: 16px;">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                        <div>
+                            <h3 style="font-weight: 700; font-size: 18px; color: #1f2937; margin-bottom: 4px;">UnDesked</h3>
+                            <div style="font-size: 13px; color: #6b7280;">by Jeremy Jacobs</div>
+                        </div>
+                        <span style="padding: 4px 12px; background: #dcfce7; border-radius: 12px; font-size: 11px; color: #166534; font-weight: 600;">$3M Raised</span>
+                    </div>
+                    <p style="font-size: 14px; color: #6b7280; line-height: 1.6; margin-bottom: 16px;">Workspace optimization platform helping companies maximize their office space utilization through AI-powered analytics.</p>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;">
+                        <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 10px; font-size: 11px; color: #4b5563;">PropTech</span>
+                        <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 10px; font-size: 11px; color: #4b5563;">AI/ML</span>
+                        <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 10px; font-size: 11px; color: #4b5563;">SaaS</span>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button style="flex: 1; padding: 10px; background: #2A2760; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">View Project</button>
+                        <button style="padding: 10px 14px; background: #f3f4f6; border: none; border-radius: 8px; cursor: pointer;"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 16px;">
+                    <div style="height: 160px; background: linear-gradient(135deg, #dc2626, #f59e0b); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; margin-bottom: 16px;">
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                        <div>
+                            <h3 style="font-weight: 700; font-size: 18px; color: #1f2937; margin-bottom: 4px;">EcoCharge</h3>
+                            <div style="font-size: 13px; color: #6b7280;">by Sarah Chen</div>
+                        </div>
+                        <span style="padding: 4px 12px; background: #dbeafe; border-radius: 12px; font-size: 11px; color: #1e40af; font-weight: 600;">Seed Stage</span>
+                    </div>
+                    <p style="font-size: 14px; color: #6b7280; line-height: 1.6; margin-bottom: 16px;">Sustainable battery recycling technology for EV batteries. Partnered with Envision AESC for pilot program.</p>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;">
+                        <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 10px; font-size: 11px; color: #4b5563;">CleanTech</span>
+                        <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 10px; font-size: 11px; color: #4b5563;">Circular Economy</span>
+                        <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 10px; font-size: 11px; color: #4b5563;">Manufacturing</span>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button style="flex: 1; padding: 10px; background: #2A2760; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">View Project</button>
+                        <button style="padding: 10px 14px; background: #f3f4f6; border: none; border-radius: 8px; cursor: pointer;"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 16px;">
+                    <div style="height: 160px; background: linear-gradient(135deg, #8b5cf6, #ec4899); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; margin-bottom: 16px;">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                        <div>
+                            <h3 style="font-weight: 700; font-size: 18px; color: #1f2937; margin-bottom: 4px;">LearnLocal</h3>
+                            <div style="font-size: 13px; color: #6b7280;">by Jessica Chen</div>
+                        </div>
+                        <span style="padding: 4px 12px; background: #fef3c7; border-radius: 12px; font-size: 11px; color: #92400e; font-weight: 600;">Beta</span>
+                    </div>
+                    <p style="font-size: 14px; color: #6b7280; line-height: 1.6; margin-bottom: 16px;">Marketplace connecting students with local tutors and skill-sharing workshops. 500+ active users in Bowling Green.</p>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;">
+                        <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 10px; font-size: 11px; color: #4b5563;">EdTech</span>
+                        <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 10px; font-size: 11px; color: #4b5563;">Marketplace</span>
+                        <span style="padding: 4px 10px; background: #f3f4f6; border-radius: 10px; font-size: 11px; color: #4b5563;">Community</span>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button style="flex: 1; padding: 10px; background: #2A2760; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">View Project</button>
+                        <button style="padding: 10px 14px; background: #f3f4f6; border: none; border-radius: 8px; cursor: pointer;"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+
+                <button style="width: 100%; padding: 14px; background: #ff6a6d; color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; margin-top: 20px;">
+                    <i class="fas fa-plus"></i> Submit Your Project
+                </button>
+            </div>
+
+            <!-- Co-Founder Tab -->
+            <div id="social-cofounder" style="display: none;">
+                <div class="card" style="background: linear-gradient(135deg, #2A2760, #1e1c45); color: white; margin-bottom: 20px;">
+                    <h3 style="font-weight: 700; font-size: 18px; margin-bottom: 8px;">Find Your Co-Founder</h3>
+                    <p style="font-size: 14px; opacity: 0.9; margin-bottom: 16px;">Looking for a technical co-founder, business partner, or industry expert? Browse profiles and connect with potential teammates.</p>
+                    <button style="padding: 10px 20px; background: #ff6a6d; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Create Profile</button>
+                </div>
+
+                <h3 style="font-weight: 700; margin: 20px 0 12px;">Looking for Co-Founders</h3>
+
+                <div class="card" style="margin-bottom: 16px;">
+                    <div style="display: flex; gap: 12px;">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #2A2760, #4ecdc4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 20px; flex-shrink: 0;">AL</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; font-size: 16px; color: #1f2937; margin-bottom: 4px;">Alex Lawson</div>
+                            <div style="font-size: 13px; color: #6b7280; margin-bottom: 8px;">Looking for: Technical Co-Founder</div>
+                            <div style="font-size: 14px; color: #374151; line-height: 1.5; margin-bottom: 10px;">I have 10 years in agribusiness and a validated concept for farm-to-table logistics. Need a technical partner to build the platform.</div>
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">
+                                <span style="padding: 3px 8px; background: #dbeafe; border-radius: 8px; font-size: 10px; color: #1e40af;">Agriculture</span>
+                                <span style="padding: 3px 8px; background: #dbeafe; border-radius: 8px; font-size: 10px; color: #1e40af;">Logistics</span>
+                                <span style="padding: 3px 8px; background: #dbeafe; border-radius: 8px; font-size: 10px; color: #1e40af;">Full-time</span>
+                            </div>
+                            <button style="padding: 8px 16px; background: #2A2760; color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;">Connect</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 16px;">
+                    <div style="display: flex; gap: 12px;">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #dc2626, #f59e0b); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 20px; flex-shrink: 0;">MP</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; font-size: 16px; color: #1f2937; margin-bottom: 4px;">Maria Patel</div>
+                            <div style="font-size: 13px; color: #6b7280; margin-bottom: 8px;">Looking for: Business Co-Founder</div>
+                            <div style="font-size: 14px; color: #374151; line-height: 1.5; margin-bottom: 10px;">Full-stack developer with experience in healthcare tech. Built an MVP for patient scheduling. Need a business/sales partner.</div>
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">
+                                <span style="padding: 3px 8px; background: #dcfce7; border-radius: 8px; font-size: 10px; color: #166534;">Healthcare</span>
+                                <span style="padding: 3px 8px; background: #dcfce7; border-radius: 8px; font-size: 10px; color: #166534;">SaaS</span>
+                                <span style="padding: 3px 8px; background: #dcfce7; border-radius: 8px; font-size: 10px; color: #166534;">Part-time</span>
+                            </div>
+                            <button style="padding: 8px 16px; background: #2A2760; color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;">Connect</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 16px;">
+                    <div style="display: flex; gap: 12px;">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #0891b2, #4ecdc4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 20px; flex-shrink: 0;">DJ</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; font-size: 16px; color: #1f2937; margin-bottom: 4px;">David Johnson</div>
+                            <div style="font-size: 13px; color: #6b7280; margin-bottom: 8px;">Looking for: Industry Advisor</div>
+                            <div style="font-size: 14px; color: #374151; line-height: 1.5; margin-bottom: 10px;">Building AI-powered quality control for manufacturing. Need an advisor with metals industry experience and connections.</div>
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">
+                                <span style="padding: 3px 8px; background: #cffafe; border-radius: 8px; font-size: 10px; color: #155e75;">AI/ML</span>
+                                <span style="padding: 3px 8px; background: #cffafe; border-radius: 8px; font-size: 10px; color: #155e75;">Manufacturing</span>
+                                <span style="padding: 3px 8px; background: #cffafe; border-radius: 8px; font-size: 10px; color: #155e75;">Advisory</span>
+                            </div>
+                            <button style="padding: 8px 16px; background: #2A2760; color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;">Connect</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Messages Tab -->
+            <div id="social-messages" style="display: none;">
+                <div class="card" style="padding: 0; margin-bottom: 16px;">
+                    <div style="display: flex; gap: 12px; padding: 16px; border-bottom: 1px solid #e5e7eb; cursor: pointer;" onclick="openChat('jeremy')">
+                        <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #2A2760, #ff6a6d); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 18px; flex-shrink: 0;">JJ</div>
+                        <div style="flex: 1;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                <span style="font-weight: 700; color: #1f2937;">Jeremy Jacobs</span>
+                                <span style="font-size: 12px; color: #6b7280;">2m</span>
+                            </div>
+                            <div style="font-size: 13px; color: #374151;">Thanks for connecting! Would love to chat about potential collaboration...</div>
+                        </div>
+                        <div style="width: 10px; height: 10px; background: #ff6a6d; border-radius: 50%; flex-shrink: 0; margin-top: 8px;"></div>
+                    </div>
+                    <div style="display: flex; gap: 12px; padding: 16px; border-bottom: 1px solid #e5e7eb; cursor: pointer;" onclick="openChat('brittanie')">
+                        <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #dc2626, #f59e0b); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 18px; flex-shrink: 0;">BD</div>
+                        <div style="flex: 1;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                <span style="font-weight: 700; color: #1f2937;">Brittanie Dawson</span>
+                                <span style="font-size: 12px; color: #6b7280;">1h</span>
+                            </div>
+                            <div style="font-size: 13px; color: #6b7280;">Your SBDC workshop registration is confirmed for next week.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 12px; padding: 16px; cursor: pointer;" onclick="openChat('sam')">
+                        <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #0891b2, #4ecdc4); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 18px; flex-shrink: 0;">SF</div>
+                        <div style="flex: 1;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                <span style="font-weight: 700; color: #1f2937;">Sam Ford</span>
+                                <span style="font-size: 12px; color: #6b7280;">2d</span>
+                            </div>
+                            <div style="font-size: 13px; color: #6b7280;">Great meeting you at the last event! Let's grab coffee sometime.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESOURCES VIEW -->
+        <div id="view-resources" class="view">
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <img src="https://create-ic.com/wp-content/uploads/thegem/logos/logo_40ab4d1e6c79e85d24cee1383e72c1fb_1x.png" style="height: 32px;">
+                <div>
+                    <h2 class="section-title" style="margin: 0;">Resources</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Templates, guides & opportunities</div>
+                </div>
+            </div>
+
+            <!-- Resource Tabs -->
+            <div style="display: flex; gap: 8px; margin-bottom: 20px; background: #f3f4f6; padding: 4px; border-radius: 12px;">
+                <button onclick="switchResourceTab('templates')" id="resource-tab-templates" style="flex: 1; padding: 10px; background: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; color: #2A2760; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Templates</button>
+                <button onclick="switchResourceTab('funding')" id="resource-tab-funding" style="flex: 1; padding: 10px; background: transparent; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; color: #6b7280; cursor: pointer;">Funding</button>
+                <button onclick="switchResourceTab('media')" id="resource-tab-media" style="flex: 1; padding: 10px; background: transparent; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; color: #6b7280; cursor: pointer;">Media</button>
+            </div>
+
+            <!-- Templates Tab -->
+            <div id="resource-templates">
+                <div class="card" style="padding: 0; margin-bottom: 16px;">
+                    <div style="padding: 16px; border-bottom: 1px solid #e5e7eb;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                            <div style="width: 40px; height: 40px; background: #dbeafe; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #2563eb;">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; color: #1f2937;">Business Plan Template</div>
+                                <div style="font-size: 12px; color: #6b7280;">PDF • 12 pages</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px; padding-left: 52px;">Comprehensive template with market analysis, financial projections, and executive summary sections.</p>
+                        <button style="margin-left: 52px; padding: 8px 16px; background: #2A2760; color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;"><i class="fas fa-download"></i> Download</button>
+                    </div>
+                    <div style="padding: 16px; border-bottom: 1px solid #e5e7eb;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                            <div style="width: 40px; height: 40px; background: #dcfce7; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #16a34a;">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; color: #1f2937;">Financial Model Spreadsheet</div>
+                                <div style="font-size: 12px; color: #6b7280;">Excel • 8 sheets</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px; padding-left: 52px;">3-year financial projections with P&L, cash flow, and balance sheet templates.</p>
+                        <button style="margin-left: 52px; padding: 8px 16px; background: #2A2760; color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;"><i class="fas fa-download"></i> Download</button>
+                    </div>
+                    <div style="padding: 16px; border-bottom: 1px solid #e5e7eb;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                            <div style="width: 40px; height: 40px; background: #fef3c7; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #d97706;">
+                                <i class="fas fa-presentation"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; color: #1f2937;">Pitch Deck Template</div>
+                                <div style="font-size: 12px; color: #6b7280;">PowerPoint • 15 slides</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px; padding-left: 52px;">Investor-ready pitch deck format used by successful CREATE startups.</p>
+                        <button style="margin-left: 52px; padding: 8px 16px; background: #2A2760; color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;"><i class="fas fa-download"></i> Download</button>
+                    </div>
+                    <div style="padding: 16px;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                            <div style="width: 40px; height: 40px; background: #ede9fe; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #7c3aed;">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; color: #1f2937;">Co-Founder Agreement</div>
+                                <div style="font-size: 12px; color: #6b7280;">Word • 5 pages</div>
+                            </div>
+                        </div>
+                        <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px; padding-left: 52px;">Legal template for defining roles, equity split, and vesting schedules.</p>
+                        <button style="margin-left: 52px; padding: 8px 16px; background: #2A2760; color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;"><i class="fas fa-download"></i> Download</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Funding Tab -->
+            <div id="resource-funding" style="display: none;">
+                <div class="card" style="background: linear-gradient(135deg, #2A2760, #1e1c45); color: white; margin-bottom: 20px;">
+                    <h3 style="font-weight: 700; font-size: 18px; margin-bottom: 8px;">💡 Launch Kentucky</h3>
+                    <p style="font-size: 14px; opacity: 0.9; margin-bottom: 12px;">Submit your innovative business idea for a chance to win $10,000 in funding.</p>
+                    <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                        <span style="padding: 4px 10px; background: rgba(255,255,255,0.2); border-radius: 8px; font-size: 12px;">Deadline: Mar 15</span>
+                        <span style="padding: 4px 10px; background: rgba(255,255,255,0.2); border-radius: 8px; font-size: 12px;">$10,000 Prize</span>
+                    </div>
+                    <button style="padding: 10px 20px; background: #ff6a6d; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Apply Now</button>
+                </div>
+
+                <h3 style="font-weight: 700; margin: 20px 0 12px;">Active Opportunities</h3>
+
+                <div class="card" style="margin-bottom: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                        <div>
+                            <div style="font-weight: 700; color: #1f2937;">Bluegrass Angels Pitch Night</div>
+                            <div style="font-size: 13px; color: #6b7280;">Monthly startup pitch event</div>
+                        </div>
+                        <span style="padding: 4px 10px; background: #dbeafe; border-radius: 8px; font-size: 11px; color: #1e40af; font-weight: 600;">Mar 28</span>
+                    </div>
+                    <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">Present to local angel investors. $25K-$100K typical investment range.</p>
+                    <button style="padding: 8px 16px; background: #2A2760; color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;">Apply to Pitch</button>
+                </div>
+
+                <div class="card" style="margin-bottom: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                        <div>
+                            <div style="font-weight: 700; color: #1f2937;">KY Innovation SBIR Match</div>
+                            <div style="font-size: 13px; color: #6b7280;">Federal grant matching program</div>
+                        </div>
+                        <span style="padding: 4px 10px; background: #dcfce7; border-radius: 8px; font-size: 11px; color: #166534; font-weight: 600;">Rolling</span>
+                    </div>
+                    <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">Get up to $150K in matching funds for SBIR/STTR grant recipients.</p>
+                    <button style="padding: 8px 16px; background: #2A2760; color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;">Learn More</button>
+                </div>
+
+                <div class="card" style="margin-bottom: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                        <div>
+                            <div style="font-weight: 700; color: #1f2937;">SOAR Innovation Fund</div>
+                            <div style="font-size: 13px; color: #6b7280;">Eastern KY region</div>
+                        </div>
+                        <span style="padding: 4px 10px; background: #fef3c7; border-radius: 8px; font-size: 11px; color: #92400e; font-weight: 600;">Apr 30</span>
+                    </div>
+                    <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">$50K grants for tech startups in Appalachian Kentucky counties.</p>
+                    <button style="padding: 8px 16px; background: #2A2760; color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;">Learn More</button>
+                </div>
+
+                <h3 style="font-weight: 700; margin: 24px 0 12px;">Grants Database</h3>
+                <div class="card" style="padding: 0;">
+                    <div style="padding: 16px; border-bottom: 1px solid #e5e7eb;">
+                        <div style="font-weight: 600; color: #1f2937;">Small Business Innovation Research (SBIR)</div>
+                        <div style="font-size: 13px; color: #6b7280; margin-top: 4px;">Federal R&D funding • $150K-$1M</div>
+                    </div>
+                    <div style="padding: 16px; border-bottom: 1px solid #e5e7eb;">
+                        <div style="font-weight: 600; color: #1f2937;">Kentucky Enterprise Fund</div>
+                        <div style="font-size: 13px; color: #6b7280; margin-top: 4px;">State matching grants • Up to $200K</div>
+                    </div>
+                    <div style="padding: 16px;">
+                        <div style="font-weight: 600; color: #1f2937;">USDA Rural Development Grants</div>
+                        <div style="font-size: 13px; color: #6b7280; margin-top: 4px;">Agtech & rural businesses • Varies</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Media Tab -->
+            <div id="resource-media" style="display: none;">
+                <div class="card" style="background: linear-gradient(135deg, #dc2626, #991b1b); color: white; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <i class="fas fa-microphone" style="font-size: 32px;"></i>
+                        <div>
+                            <h3 style="font-weight: 700; font-size: 18px;">Narrative Network Podcast</h3>
+                            <p style="font-size: 14px; opacity: 0.9;">Stories from Kentucky innovators</p>
+                        </div>
+                    </div>
+                    <button style="padding: 10px 20px; background: white; color: #dc2626; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;"><i class="fas fa-headphones"></i> Listen Now</button>
+                </div>
+
+                <h3 style="font-weight: 700; margin: 20px 0 12px;">Latest Episodes</h3>
+
+                <div class="card" style="margin-bottom: 16px;">
+                    <div style="display: flex; gap: 12px;">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #2A2760, #4ecdc4); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; flex-shrink: 0;">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; color: #1f2937; margin-bottom: 4px;">Ep. 42: From Idea to $3M</div>
+                            <div style="font-size: 12px; color: #6b7280; margin-bottom: 8px;">With Jeremy Jacobs, UnDesked</div>
+                            <div style="display: flex; gap: 8px;">
+                                <span style="font-size: 12px; color: #6b7280;"><i class="fas fa-clock"></i> 45 min</span>
+                                <span style="font-size: 12px; color: #6b7280;"><i class="fas fa-calendar"></i> Feb 15</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-bottom: 16px;">
+                    <div style="display: flex; gap: 12px;">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #f7b731, #ff6a6d); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; flex-shrink: 0;">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; color: #1f2937; margin-bottom: 4px;">Ep. 41: The Future of Metals</div>
+                            <div style="font-size: 12px; color: #6b7280; margin-bottom: 8px;">With MI2 Leadership Team</div>
+                            <div style="display: flex; gap: 8px;">
+                                <span style="font-size: 12px; color: #6b7280;"><i class="fas fa-clock"></i> 38 min</span>
+                                <span style="font-size: 12px; color: #6b7280;"><i class="fas fa-calendar"></i> Feb 8</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="font-weight: 700; margin: 24px 0 12px;">Video Content</h3>
+
+                <div class="card" style="margin-bottom: 16px; padding: 0; overflow: hidden;">
+                    <div style="height: 140px; background: linear-gradient(135deg, #0891b2, #4ecdc4); display: flex; align-items: center; justify-content: center; color: white; font-size: 48px;">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div style="padding: 16px;">
+                        <div style="font-weight: 700; color: #1f2937; margin-bottom: 4px;">MIT REAP Kentucky Documentary</div>
+                        <div style="font-size: 13px; color: #6b7280;">How Kentucky became the first state in MIT's Regional Entrepreneurship Acceleration Program</div>
+                    </div>
+                </div>
+
+                <div class="card" style="padding: 0; overflow: hidden;">
+                    <div style="height: 140px; background: linear-gradient(135deg, #8b5cf6, #ec4899); display: flex; align-items: center; justify-content: center; color: white; font-size: 48px;">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div style="padding: 16px;">
+                        <div style="font-weight: 700; color: #1f2937; margin-bottom: 4px;">Startup Workshop Series</div>
+                        <div style="font-size: 13px; color: #6b7280;">Recorded sessions from SBDC workshops on business planning, marketing, and fundraising</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- Floating Action Button -->
@@ -2999,6 +3498,47 @@
     // SBDC
     function requestSBDC() {
         alert('📅 SBDC consultation requested! We\'ll contact you within 24 hours.');
+    }
+
+    // Social Functions
+    function switchSocialTab(tab) {
+        // Update tab buttons
+        document.querySelectorAll('[id^="social-tab-"]').forEach(btn => {
+            btn.style.background = 'transparent';
+            btn.style.color = '#6b7280';
+            btn.style.boxShadow = 'none';
+        });
+        document.getElementById('social-tab-' + tab).style.background = 'white';
+        document.getElementById('social-tab-' + tab).style.color = '#2A2760';
+        document.getElementById('social-tab-' + tab).style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+
+        // Show/hide content
+        document.getElementById('social-feed').style.display = tab === 'feed' ? 'block' : 'none';
+        document.getElementById('social-projects').style.display = tab === 'projects' ? 'block' : 'none';
+        document.getElementById('social-cofounder').style.display = tab === 'cofounder' ? 'block' : 'none';
+        document.getElementById('social-messages').style.display = tab === 'messages' ? 'block' : 'none';
+    }
+
+    function openChat(userId) {
+        alert('💬 Opening chat...');
+    }
+
+    // Resource Functions
+    function switchResourceTab(tab) {
+        // Update tab buttons
+        document.querySelectorAll('[id^="resource-tab-"]').forEach(btn => {
+            btn.style.background = 'transparent';
+            btn.style.color = '#6b7280';
+            btn.style.boxShadow = 'none';
+        });
+        document.getElementById('resource-tab-' + tab).style.background = 'white';
+        document.getElementById('resource-tab-' + tab).style.color = '#2A2760';
+        document.getElementById('resource-tab-' + tab).style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+
+        // Show/hide content
+        document.getElementById('resource-templates').style.display = tab === 'templates' ? 'block' : 'none';
+        document.getElementById('resource-funding').style.display = tab === 'funding' ? 'block' : 'none';
+        document.getElementById('resource-media').style.display = tab === 'media' ? 'block' : 'none';
     }
 
     // Swipe detection for view switching
