@@ -778,49 +778,10 @@
                 </div>
             </div>
 
-            <!-- EASTER EGG: MoneyBot -->
-            <div class="card" style="background: linear-gradient(135deg, #ecfdf5, #d1fae5); border: 1px solid #a7f3d0; cursor: pointer;" onclick="showMoneyBotEasterEgg()">
-                <div class="announcement-card">
-                    <div class="announcement-avatar" style="background: linear-gradient(135deg, #10b981, #059669); font-size: 20px;">🤖</div>
-                    <div class="announcement-content">
-                        <div class="announcement-meta">
-                            <span class="announcement-author">MoneyBot <span style="font-size: 11px; color: #6b7280;">🥚 Easter Egg</span></span>
-                            <span class="announcement-time">Just now</span>
-                        </div>
-                        <p class="announcement-text" style="color: #065f46;">Breaking: MoneyBot just hit $1,000,000,000,000,000 in theoretical revenue! That's one gazillion dollars. Don't ask us how we calculated it. 💰🚀</p>
-                        <span class="announcement-tag" style="background: #10b981; color: white;">Legendary</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- EASTER EGG: Enoengine -->
-            <div class="card" style="background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #93c5fd; cursor: pointer;" onclick="showEnoengineEasterEgg()">
-                <div class="announcement-card">
-                    <div class="announcement-avatar" style="background: linear-gradient(135deg, #1e3a5f, #2563eb); font-size: 20px;">🇺🇸</div>
-                    <div class="announcement-content">
-                        <div class="announcement-meta">
-                            <span class="announcement-author">Enoengine <span style="font-size: 11px; color: #6b7280;">🥚 Easter Egg</span></span>
-                            <span class="announcement-time">Top Secret</span>
-                        </div>
-                        <p class="announcement-text" style="color: #1e40af;">CLASSIFIED: Enoengine just completed an exclusive partnership with the US Government on the US 2050 initiative. Launching soon* (*probably). Clearance level: Jedi 🦅</p>
-                        <span class="announcement-tag" style="background: #2563eb; color: white;">🇺🇸 Gov Partner</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- EASTER EGG: Muuvwell -->
-            <div class="card" style="background: linear-gradient(135deg, #fff7ed, #ffedd5); border: 1px solid #fdba74; cursor: pointer;" onclick="showMuuvwellEasterEgg()">
-                <div class="announcement-card">
-                    <div class="announcement-avatar" style="background: linear-gradient(135deg, #f97316, #ea580c); font-size: 20px;">🏃</div>
-                    <div class="announcement-content">
-                        <div class="announcement-meta">
-                            <span class="announcement-author">Muuvwell <span style="font-size: 11px; color: #6b7280;">🥚 Easter Egg</span></span>
-                            <span class="announcement-time">Featured</span>
-                        </div>
-                        <p class="announcement-text" style="color: #9a3412;">Muuvwell is now officially featured! Why two U's and two V's? Because regular spelling is too mainstream. M-U-U-V-V-E-L-L is just right. ⭐</p>
-                        <span class="announcement-tag" style="background: #f97316; color: white;">⭐ Featured</span>
-                    </div>
-                </div>
+            <div style="text-align: center; padding: 20px;">
+                <button onclick="switchView('allupdates')" style="padding: 12px 24px; background: #2A2760; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">
+                    <i class="fas fa-list"></i> View All Updates
+                </button>
             </div>
 
             <div class="card">
@@ -3804,6 +3765,110 @@
             </button>
         </div>
 
+        <!-- ALL UPDATES VIEW (with Easter Eggs) -->
+        <div id="view-allupdates" class="view">
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <button onclick="switchView('home')" style="width: 40px; height: 40px; background: #f3f4f6; border: none; border-radius: 50%; cursor: pointer;">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div>
+                    <h2 class="section-title" style="margin: 0;">All Updates</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Complete news feed</div>
+                </div>
+            </div>
+
+            <!-- Regular Updates -->
+            <div class="card card-highlight" style="margin-bottom: 16px;">
+                <div class="announcement-card">
+                    <div class="announcement-avatar">IC</div>
+                    <div class="announcement-content">
+                        <div class="announcement-meta">
+                            <span class="announcement-author">Innovation Campus</span>
+                            <span class="announcement-time">2h ago</span>
+                        </div>
+                        <p class="announcement-text">Applications for the Launch Kentucky: Idea Challenge are officially open! Innovators from Warren, Barren, Simpson and 9 other counties + WKU students can apply now. Let's build momentum! 🚀</p>
+                        <span class="announcement-tag">Announcement</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 16px;">
+                <div class="announcement-card">
+                    <div class="announcement-avatar" style="background: #ff6a6d;">EW</div>
+                    <div class="announcement-content">
+                        <div class="announcement-meta">
+                            <span class="announcement-author">Emma Williams</span>
+                            <span class="announcement-time">4h ago</span>
+                        </div>
+                        <p class="announcement-text">GreenRoute just secured their first enterprise client! 🌱🚛 Excited to be part of the accelerator program that made this connection possible.</p>
+                        <span class="announcement-tag" style="background: #dcfce7; color: #166534;">Milestone</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 16px;">
+                <div class="announcement-card">
+                    <div class="announcement-avatar" style="background: #2A2760;">MI</div>
+                    <div class="announcement-content">
+                        <div class="announcement-meta">
+                            <span class="announcement-author">MI2</span>
+                            <span class="announcement-time">6h ago</span>
+                        </div>
+                        <p class="announcement-text">The Metals Innovation Summit is coming up next month! Join us for two days of industry insights, networking, and innovation showcases. Registration opens Monday.</p>
+                        <span class="announcement-tag">Event</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hidden Easter Eggs (you have to scroll to find them!) -->
+            <div style="padding: 40px 20px; text-align: center; border-top: 2px dashed #e5e7eb; border-bottom: 2px dashed #e5e7eb; margin: 30px 0;">
+                <i class="fas fa-egg" style="font-size: 32px; color: #fbbf24;"></i>
+                <p style="font-size: 14px; color: #9ca3af; margin-top: 8px;">Keep scrolling for surprises... 🥚</p>
+            </div>
+
+            <!-- EASTER EGG: MoneyBot -->
+            <div class="card" style="background: linear-gradient(135deg, #ecfdf5, #d1fae5); border: 2px solid #10b981; cursor: pointer; margin-bottom: 16px; position: relative;" onclick="showMoneyBotEasterEgg()">
+                <div style="position: absolute; top: -10px; right: 20px; background: #fbbf24; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 700; color: #92400e;">🥚 EASTER EGG</div>
+                <div class="announcement-card">
+                    <div class="announcement-avatar" style="background: linear-gradient(135deg, #10b981, #059669);">
+                        <i class="fas fa-robot" style="color: white; font-size: 20px;"></i>
+                    </div>
+                    <div class="announcement-content">
+                        <div class="announcement-meta">
+                            <span class="announcement-author" style="color: #059669; font-weight: 800;">MoneyBot</span>
+                            <span class="announcement-time">Top Secret</span>
+                        </div>
+                        <p class="announcement-text" style="color: #065f46; font-weight: 600;">💰 BREAKING: MoneyBot just hit $1,000,000,000,000,000 in theoretical revenue! That's ONE GAZILLION DOLLARS. Don't ask us how we calculated it. The math checks out* (*it doesn't).</p>
+                        <span class="announcement-tag" style="background: #10b981; color: white;">🚀 Legendary Status</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EASTER EGG: Innoengine -->
+            <div class="card" style="background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 2px solid #2563eb; cursor: pointer; margin-bottom: 16px; position: relative;" onclick="showEnoengineEasterEgg()">
+                <div style="position: absolute; top: -10px; right: 20px; background: #fbbf24; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 700; color: #92400e;">🥚 EASTER EGG</div>
+                <div class="announcement-card">
+                    <div class="announcement-avatar" style="background: linear-gradient(135deg, #1e40af, #3b82f6);">
+                        <i class="fas fa-flag-usa" style="color: white; font-size: 20px;"></i>
+                    </div>
+                    <div class="announcement-content">
+                        <div class="announcement-meta">
+                            <span class="announcement-author" style="color: #2563eb; font-weight: 800;">Innoengine</span>
+                            <span class="announcement-time">CLASSIFIED</span>
+                        </div>
+                        <p class="announcement-text" style="color: #1e40af; font-weight: 600;">🇺🇸 MAJOR ANNOUNCEMENT: Innoengine just completed an exclusive partnership with the US Government on the US 2050 initiative! Launching soon* (*maybe, possibly, we're working on it). Clearance level: Jedi Master 🦅</p>
+                        <span class="announcement-tag" style="background: #2563eb; color: white;">🇺🇸 Gov Partner</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; padding: 40px 20px;">
+                <i class="fas fa-check-circle" style="font-size: 48px; color: #10b981; margin-bottom: 16px;"></i>
+                <p style="font-size: 16px; color: #6b7280;">You're all caught up!</p>
+                <p style="font-size: 13px; color: #9ca3af; margin-top: 8px;">Found all the Easter eggs? 🥚</p>
+            </div>
+        </div>
+
     </main>
 
     <!-- Floating Action Button -->
@@ -4169,25 +4234,8 @@
     }
 
     function showEnoengineEasterEgg() {
-        alert('🇺🇸 ENOENGINE EASTER EGG 🦅\n\nCLASSIFIED INFORMATION:\n\nEnoengine has partnered with the US Government on the US 2050 initiative!\n\nLaunch date: Soon™\nClearance level: Top Secret / Jedi\nStatus: Totally real and not at all made up for this demo\n\n*Any resemblance to actual government partnerships is purely coincidental and hilarious.');
+        alert('🇺🇸 INNOENGINE EASTER EGG 🦅\n\nCLASSIFIED INFORMATION:\n\nInnoengine has partnered with the US Government on the US 2050 initiative!\n\nLaunch date: Soon™\nClearance level: Top Secret / Jedi\nStatus: Totally real and not at all made up for this demo\n\n*Any resemblance to actual government partnerships is purely coincidental and hilarious.');
     }
-
-    function showMuuvwellEasterEgg() {
-        alert('🏃 MUUVWELL EASTER EGG ⭐\n\nYou found Muuvwell!\n\nWhy two U\'s and two V\'s? Because:\n- M-O-V-E was too boring\n- M-O-O-V-E was too cow-like\n- M-U-U-V-V-E-L-L is just right ✨\n\nFeatured status: Because we said so. That\'s why.\n\nRemember: It\'s not about how you spell it, it\'s about how you Muuvwell it.');
-    }
-
-    // Hidden Konami Code Easter Egg
-    let konamiCode = [];
-    const secretCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-    
-    document.addEventListener('keydown', (e) => {
-        konamiCode.push(e.key);
-        konamiCode = konamiCode.slice(-10);
-        
-        if (konamiCode.join(',') === secretCode.join(',')) {
-            alert('🎮 KONAMI CODE ACTIVATED! 🎮\n\nYou found the secret!\n\nFun facts about this app:\n- 17 quick actions\n- 20+ views\n- 1 gazillion theoretical dollars\n- Infinite awesomeness\n\n🚀 CREATE at WKU Innovation Campus rocks!');
-        }
-    });
 
     // Swipe detection for view switching
     let touchStartX = 0;
