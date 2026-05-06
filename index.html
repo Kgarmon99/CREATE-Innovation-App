@@ -779,6 +779,12 @@
                     </div>
                     <span class="quick-action-label">Tracker</span>
                 </div>
+                <div class="quick-action" onclick="switchView('notebook')">
+                    <div class="quick-action-icon" style="background: #a855f7; border: 2px solid #a855f7;">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <span class="quick-action-label">AI Video</span>
+                </div>
             </div>
 
             <!-- Latest Announcements -->
@@ -3673,6 +3679,84 @@
             </button>
         </div>
 
+        <!-- NOTEBOOK AI VIDEO VIEW -->
+        <div id="view-notebook" class="view">
+            <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0 16px;">
+                <button onclick="switchView('home')" style="width: 40px; height: 40px; background: #f3f4f6; border: none; border-radius: 50%; cursor: pointer;">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div>
+                    <h2 class="section-title" style="margin: 0;">AI Video Studio</h2>
+                    <div style="font-size: 11px; color: #9ca3af;">Turn notes into explainer videos</div>
+                </div>
+            </div>
+
+            <!-- Input Section -->
+            <div class="card" style="margin-bottom: 20px;">
+                <h3 style="font-weight: 700; margin-bottom: 12px;"><i class="fas fa-lightbulb" style="color: #a855f7; margin-right: 8px;"></i>Your Content</h3>
+                <p style="font-size: 13px; color: #6b7280; margin-bottom: 16px;">Paste any notes, ideas, or topics. Our AI will transform them into an engaging explainer video.</p>
+                
+                <textarea id="notebook-input" placeholder="Enter your notes, ideas, or topic here...&#10;&#10;Example:&#10;- Startup pitch about sustainable packaging&#10;- Product demo for new app feature&#10;- Business plan summary&#10;- Research findings on renewable energy" 
+                    style="width: 100%; height: 200px; padding: 16px; border: 1px solid #e5e7eb; border-radius: 12px; font-size: 14px; resize: vertical; font-family: inherit; margin-bottom: 16px;"></textarea>
+                
+                <div style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
+                    <button onclick="setVideoStyle('professional')" id="style-professional" class="video-style-btn" style="flex: 1; padding: 10px; border: 2px solid #2A2760; background: #2A2760; color: white; border-radius: 8px; cursor: pointer; font-size: 13px;">
+                        <i class="fas fa-briefcase"></i> Professional
+                    </button>
+                    <button onclick="setVideoStyle('casual')" id="style-casual" class="video-style-btn" style="flex: 1; padding: 10px; border: 2px solid #e5e7eb; background: white; color: #6b7280; border-radius: 8px; cursor: pointer; font-size: 13px;">
+                        <i class="fas fa-coffee"></i> Casual
+                    </button>
+                    <button onclick="setVideoStyle('energetic')" id="style-energetic" class="video-style-btn" style="flex: 1; padding: 10px; border: 2px solid #e5e7eb; background: white; color: #6b7280; border-radius: 8px; cursor: pointer; font-size: 13px;">
+                        <i class="fas fa-bolt"></i> Energetic
+                    </button>
+                </div>
+
+                <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                    <select id="video-duration" style="flex: 1; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px;">
+                        <option value="30">30 seconds</option>
+                        <option value="60" selected>1 minute</option>
+                        <option value="120">2 minutes</option>
+                        <option value="180">3 minutes</option>
+                    </select>
+                    <select id="video-voice" style="flex: 1; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px;">
+                        <option value="professional">Professional Voice</option>
+                        <option value="friendly">Friendly Voice</option>
+                        <option value="energetic">Energetic Voice</option>
+                    </select>
+                </div>
+
+                <button onclick="generateVideo()" id="generate-btn" style="width: 100%; padding: 16px; background: linear-gradient(135deg, #a855f7, #7c3aed); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer;">
+                    <i class="fas fa-magic"></i> Generate AI Video
+                </button>
+            </div>
+
+            <!-- Generated Videos Section -->
+            <div id="video-results" style="display: none;">
+                <div class="section-header">
+                    <h2 class="section-title">Your Videos</h2>
+                    <span class="section-action" onclick="clearAllVideos()">Clear All</span>
+                </div>
+                <div id="videos-list"></div>
+            </div>
+
+            <!-- Sample/Template Section -->
+            <div class="card" style="background: linear-gradient(135deg, #fef3c7, #fde68a); border: none;">
+                <h3 style="font-weight: 700; margin-bottom: 12px; color: #92400e;"><i class="fas fa-star" style="margin-right: 8px;"></i>Need Inspiration?</h3>
+                <p style="font-size: 13px; color: #78350f; margin-bottom: 16px;">Try these example prompts:</p>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <button onclick="loadExample('pitch')" style="text-align: left; padding: 12px; background: white; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; color: #4b5563;">
+                        <i class="fas fa-rocket" style="color: #a855f7; margin-right: 8px;"></i>Startup pitch deck summary
+                    </button>
+                    <button onclick="loadExample('product')" style="text-align: left; padding: 12px; background: white; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; color: #4b5563;">
+                        <i class="fas fa-box" style="color: #a855f7; margin-right: 8px;"></i>Product demo walkthrough
+                    </button>
+                    <button onclick="loadExample('training')" style="text-align: left; padding: 12px; background: white; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; color: #4b5563;">
+                        <i class="fas fa-graduation-cap" style="color: #a855f7; margin-right: 8px;"></i>Training video script
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <!-- EVENT DETAIL VIEW -->
         <div id="view-eventdetail" class="view">
             <div style="height: 200px; background: linear-gradient(135deg, #2A2760, #ff6a6d); display: flex; align-items: center; justify-content: center; color: white; margin: -20px -20px 20px; position: relative;">
@@ -4348,6 +4432,186 @@
         document.getElementById('global-search').value = '';
         document.getElementById('search-results').style.display = 'none';
     }
+
+    // Notebook AI Video Functions
+    let selectedStyle = 'professional';
+    let generatedVideos = JSON.parse(localStorage.getItem('notebookVideos') || '[]');
+
+    function setVideoStyle(style) {
+        selectedStyle = style;
+        document.querySelectorAll('.video-style-btn').forEach(btn => {
+            btn.style.background = 'white';
+            btn.style.color = '#6b7280';
+            btn.style.borderColor = '#e5e7eb';
+        });
+        const activeBtn = document.getElementById('style-' + style);
+        activeBtn.style.background = '#2A2760';
+        activeBtn.style.color = 'white';
+        activeBtn.style.borderColor = '#2A2760';
+    }
+
+    function loadExample(type) {
+        const examples = {
+            'pitch': `Startup Pitch: EcoPackage Solutions
+
+We're revolutionizing sustainable packaging for e-commerce. Our biodegradable materials cost 30% less than plastic alternatives and decompose in 90 days. 
+
+Key points:
+- $2.3B market opportunity by 2026
+- Patent-pending material formula
+- Pilot programs with 3 major retailers
+- Seeking $500K seed funding
+- Team: 2 PhDs in materials science`,
+            
+            'product': `Product Demo: TaskFlow App
+
+TaskFlow is the smart project management tool that adapts to how your team actually works.
+
+Features:
+- AI-powered task prioritization
+- Automatic deadline adjustments
+- Team workload balancing
+- Integration with Slack, GitHub, and Google Workspace
+- Real-time collaboration
+
+Perfect for remote teams of 5-50 people.`,
+            
+            'training': `Training: Customer Service Excellence
+
+Welcome to our customer service training program.
+
+Core principles:
+1. Listen actively - understand before responding
+2. Empathize genuinely - acknowledge their frustration
+3. Solve efficiently - one-touch resolution when possible
+4. Follow up proactively - ensure satisfaction
+
+Remember: Every interaction is an opportunity to build loyalty.`
+        };
+        
+        document.getElementById('notebook-input').value = examples[type];
+    }
+
+    function generateVideo() {
+        const input = document.getElementById('notebook-input').value.trim();
+        if (!input) {
+            alert('Please enter some content to generate a video.');
+            return;
+        }
+
+        const btn = document.getElementById('generate-btn');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating your video...';
+        btn.disabled = true;
+
+        // Simulate video generation
+        setTimeout(() => {
+            const duration = document.getElementById('video-duration').value;
+            const voice = document.getElementById('video-voice').options[document.getElementById('video-voice').selectedIndex].text;
+            
+            const video = {
+                id: Date.now(),
+                title: input.split('\n')[0].substring(0, 50) || 'Untitled Video',
+                content: input,
+                style: selectedStyle,
+                duration: duration,
+                voice: voice,
+                createdAt: new Date().toLocaleDateString(),
+                thumbnail: generateThumbnail(input)
+            };
+
+            generatedVideos.unshift(video);
+            localStorage.setItem('notebookVideos', JSON.stringify(generatedVideos));
+            
+            displayVideos();
+            
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            
+            alert('🎬 Video created successfully! Check "Your Videos" section below.');
+        }, 3000);
+    }
+
+    function generateThumbnail(text) {
+        // Generate a color based on text content
+        const colors = ['#a855f7', '#2A2760', '#ff6a6d', '#4ecdc4', '#f7b731', '#10b981'];
+        const hash = text.split('').reduce((a, b) => ((a << 5) - a) + b.charCodeAt(0), 0);
+        return colors[Math.abs(hash) % colors.length];
+    }
+
+    function displayVideos() {
+        const container = document.getElementById('video-results');
+        const list = document.getElementById('videos-list');
+
+        if (generatedVideos.length === 0) {
+            container.style.display = 'none';
+            return;
+        }
+
+        list.innerHTML = generatedVideos.map(video => `
+            <div class="card" style="margin-bottom: 16px; overflow: hidden;">
+                <div style="display: flex; gap: 16px;">
+                    <div style="width: 120px; height: 80px; background: ${video.thumbnail}; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <i class="fas fa-play-circle" style="font-size: 32px; color: white; opacity: 0.9;"></i>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 700; color: #1f2937; margin-bottom: 4px; font-size: 14px;">${video.title}</div>
+                        <div style="font-size: 12px; color: #6b7280; margin-bottom: 8px;">
+                            <span style="padding: 2px 8px; background: #f3f4f6; border-radius: 4px; margin-right: 4px;">${video.duration}s</span>
+                            <span style="padding: 2px 8px; background: #f3f4f6; border-radius: 4px; margin-right: 4px;">${video.style}</span>
+                            <span style="padding: 2px 8px; background: #f3f4f6; border-radius: 4px;">${video.createdAt}</span>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <button onclick="playVideo(${video.id})" style="padding: 6px 12px; background: #a855f7; color: white; border: none; border-radius: 6px; font-size: 12px; cursor: pointer;">
+                                <i class="fas fa-play"></i> Play
+                            </button>
+                            <button onclick="downloadVideo(${video.id})" style="padding: 6px 12px; background: #f3f4f6; border: none; border-radius: 6px; font-size: 12px; cursor: pointer;">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button onclick="deleteVideo(${video.id})" style="padding: 6px 12px; background: #fee2e2; border: none; border-radius: 6px; font-size: 12px; cursor: pointer; color: #dc2626;">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        container.style.display = 'block';
+    }
+
+    function playVideo(id) {
+        const video = generatedVideos.find(v => v.id === id);
+        if (video) {
+            alert(`🎬 Playing: "${video.title}"\n\nDuration: ${video.duration} seconds\nStyle: ${video.style}\nVoice: ${video.voice}\n\n[Video player would appear here with actual video playback]`);
+        }
+    }
+
+    function downloadVideo(id) {
+        const video = generatedVideos.find(v => v.id === id);
+        if (video) {
+            alert(`📥 Downloading: "${video.title}"\n\nYour video is being prepared for download...`);
+        }
+    }
+
+    function deleteVideo(id) {
+        if (confirm('Delete this video?')) {
+            generatedVideos = generatedVideos.filter(v => v.id !== id);
+            localStorage.setItem('notebookVideos', JSON.stringify(generatedVideos));
+            displayVideos();
+        }
+    }
+
+    function clearAllVideos() {
+        if (confirm('Delete all videos? This cannot be undone.')) {
+            generatedVideos = [];
+            localStorage.removeItem('notebookVideos');
+            displayVideos();
+        }
+    }
+
+    // Load saved videos on page load
+    document.addEventListener('DOMContentLoaded', displayVideos);
 </script>
 
     <!-- Service Worker Registration -->
