@@ -5,7 +5,7 @@
 
 ## Current Features
 
-### Core Views (17 total)
+### Core Views (18 total)
 1. **Home** - Dashboard with quick actions, announcements, featured spaces
 2. **Events** - Featured events, calendar, filters (Workshops/Networking/Pitch Nights)
 3. **Jobs** - Job board with search/filter, listings from real WKU tenants
@@ -23,6 +23,7 @@
 15. **Job Tracker** - Application status tracking
 16. **Event Detail** - QR check-in, live chat, attendee list
 17. **All Updates** - Complete news feed with Easter eggs
+18. **AI Video Studio** - Notebook LM-style: turn notes/ideas into explainer videos
 
 ### Working Features
 - ✅ **Global Search** - Real-time search across events, jobs, mentors, resources
@@ -31,6 +32,15 @@
 - ✅ **17 Quick Actions** - Grid layout for navigation
 - ✅ **Swipe Navigation** - Between main tabs
 - ✅ **Responsive Design** - Mobile-first, max-width 480px
+
+### AI Video Studio (Notebook LM-style)
+- **Input:** Paste any notes, ideas, or topics
+- **Style Options:** Professional, Casual, Energetic
+- **Duration:** 30s, 1min, 2min, 3min
+- **Voice Options:** Professional, Friendly, Energetic
+- **Output:** Generated video with thumbnail, playable
+- **Storage:** Videos saved to localStorage
+- **Examples:** Pre-loaded templates (Startup Pitch, Product Demo, Training)
 
 ### Easter Eggs (in All Updates view)
 - **MoneyBot** - "Milestone reached: $1,000,000,000,000,000 revenue achieved"
